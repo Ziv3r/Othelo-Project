@@ -10,8 +10,11 @@ namespace Ex02_Othelo
         {
             Board board = new Board();
             board.Init(6);
-           
+            UI userInterface = new UI(6);
 
+            userInterface.PrintMatrixP();
+
+            Console.WriteLine();
         }
     }
 
