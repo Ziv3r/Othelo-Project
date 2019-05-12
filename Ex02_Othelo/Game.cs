@@ -4,11 +4,8 @@ using System.Text;
 
 namespace Ex02_Othelo
 {
-    class Program
+    class Game
     {
-        public static void Main()
-        {
 
-        }
     }
 }
