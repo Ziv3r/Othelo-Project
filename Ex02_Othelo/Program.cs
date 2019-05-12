@@ -10,9 +10,8 @@ namespace Ex02_Othelo
         {
             Board board = new Board();
             board.Init(6);
-            board.TryUpdateMatrix(new Cell(2,4),1);
-            board.PrintMatrix();
-            Console.ReadLine();
+           
+
         }
     }
 
