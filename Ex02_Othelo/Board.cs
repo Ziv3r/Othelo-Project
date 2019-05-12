@@ -8,8 +8,8 @@ namespace Ex02_Othelo
     {
         private int m_Size = 6;
         private char[,] m_Matrix;
-        private Cell[] optional1;
-        private Cell[] optional2;
+        List<Cell> optional1 = new List<Cell>();
+        List<Cell> optional2 = new List<Cell>();
 
 
         public void Init(int i_Size)
@@ -58,7 +58,7 @@ namespace Ex02_Othelo
         private void update(Cell i_ToUpdate, char i_UserSign)
         {
             updateMatrix(i_ToUpdate, i_UserSign);
-            //updateOptionals();
+            updateOptionals(i_ToUpdate, i_UserSign);
         }
 
         private void updateMatrix(Cell i_ToUpdate, char i_UserSign)
@@ -106,6 +106,63 @@ namespace Ex02_Othelo
                 outOfBound = false;
 
             return (outOfBound && (i_toCheckIfOutOfBound.Y >= m_Size || i_toCheckIfOutOfBound.Y < 0));
+        }
+        private void updateOptionals(Cell i_ToUpdate, char i_UserSign)
+        {
+            List<Cell> optional1 = new List<Cell>();
+            List<Cell> optional2 = new List<Cell>();
+
+            for(int i=0; i < m_Size; i++)
+            {
+                for(int j=0; j<m_Size; j++)
+                {
+                    if(m_Matrix[i,j] != ' ')
+                    {
+                        updateOptionalsRec(new Cell(i+0, j+1), m_Matrix[i, j], 0, 1, 0);
+                        updateOptionalsRec(new Cell(i + 0, j -1), m_Matrix[i, j], 0, -1, 0);
+                        updateOptionalsRec(new Cell(i + 1, j + 0), m_Matrix[i, j], 1, 0, 0);
+                        updateOptionalsRec(new Cell(i + 1, j - 1), m_Matrix[i, j], 1, -1, 0);
+                        updateOptionalsRec(new Cell(i + 1, j + 1), m_Matrix[i, j], 1, 1, 0);
+                        updateOptionalsRec(new Cell(i + -1, j + 1), m_Matrix[i, j], -1, 1, 0);
+                        updateOptionalsRec(new Cell(i -1, j -1), m_Matrix[i, j], -1, -1, 0);
+                        updateOptionalsRec(new Cell(i -1, j + 0), m_Matrix[i, j], -1, 0, 0);
+                    }
+                }
+            }
+        }
+
+        private void updateOptionalsRec(Cell i_ToUpdate, char i_UserSign, int i_DirX, int i_DirY, int i_Counter)
+        {
+            char currentCell = m_Matrix[i_ToUpdate.X, i_ToUpdate.Y];
+
+            if(currentCell == i_UserSign)
+            {
+                return;
+            }
+            else if(currentCell == ' ')
+            {
+                if(i_Counter != 0)
+                {
+                    // add this cell to the optional list 
+                    if(i_UserSign == 'O')
+                    {
+                        optional1.Add(i_ToUpdate);
+                    }
+                    else
+                    {
+                        optional2.Add(i_ToUpdate);
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                Cell nextCell = new Cell(i_ToUpdate.X + i_DirX, i_ToUpdate.Y + i_DirY);
+                updateOptionals(nextCell, i_UserSign, i_DirX, i_DirY, i_Counter+1);
+            }
         }
     }
 }
