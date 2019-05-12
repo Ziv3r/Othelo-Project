@@ -4,3 +4,9 @@ C:\Users\ziv3r\OneDrive\שולחן העבודה\שנה ב' סמסטר ב\c#\B19 
 C:\Users\ziv3r\OneDrive\שולחן העבודה\שנה ב' סמסטר ב\c#\B19 Ex02 Ziv 308445949 Noam 313527822\Ex02_Othelo\bin\Debug\Ex02_Othelo.pdb
 C:\Users\ziv3r\OneDrive\שולחן העבודה\שנה ב' סמסטר ב\c#\B19 Ex02 Ziv 308445949 Noam 313527822\Ex02_Othelo\obj\Debug\Ex02_Othelo.exe
 C:\Users\ziv3r\OneDrive\שולחן העבודה\שנה ב' סמסטר ב\c#\B19 Ex02 Ziv 308445949 Noam 313527822\Ex02_Othelo\obj\Debug\Ex02_Othelo.pdb
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\C#\Othelo-Project\Ex02_Othelo\obj\Debug\Ex02_Othelo.csprojAssemblyReference.cache
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\C#\Othelo-Project\Ex02_Othelo\obj\Debug\Ex02_Othelo.csproj.CoreCompileInputs.cache
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\C#\Othelo-Project\Ex02_Othelo\obj\Debug\Ex02_Othelo.exe
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\C#\Othelo-Project\Ex02_Othelo\obj\Debug\Ex02_Othelo.pdb
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\C#\Othelo-Project\Ex02_Othelo\bin\Debug\Ex02_Othelo.exe
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\C#\Othelo-Project\Ex02_Othelo\bin\Debug\Ex02_Othelo.pdb

@@ -6,16 +6,43 @@ namespace Ex02_Othelo
 {
     class Board
     {
-        private int m_Size = 6;
+        private int m_Size;
         private char[,] m_Matrix;
-        List<Cell> optional1 = new List<Cell>();
-        List<Cell> optional2 = new List<Cell>();
-
+        List<Cell> m_Optional1 = new List<Cell>();
+        List<Cell> m_Optional2 = new List<Cell>();
 
         public void Init(int i_Size)
         {
             m_Size = i_Size; 
             m_Matrix = new char[i_Size, i_Size];
+
+            for(int row = 0 ; row < i_Size ; row++)
+            {
+                for(int col = 0 ; col < i_Size ; col++)
+                {
+                    m_Matrix[row,col] = ' ';
+                }
+            }
+
+            if(i_Size == 6)
+            {
+            m_Matrix[2,2] = m_Matrix[3,3] = 'O';
+            m_Matrix[2,3] = m_Matrix[3,2] = 'X';
+            }
+            else
+            {
+                m_Matrix[3,3] = m_Matrix[4,4] = 'O';
+                m_Matrix[3,4] = m_Matrix[4,3] = 'X';
+            }
+
+            m_Optional2.Add(new Cell(3,4));
+            m_Optional2.Add(new Cell(4,3));
+            m_Optional2.Add(new Cell(1,2));
+            m_Optional2.Add(new Cell(2,1));
+            m_Optional1.Add(new Cell(4,2));
+            m_Optional1.Add(new Cell(1,3));
+            m_Optional1.Add(new Cell(3,1));
+            m_Optional1.Add(new Cell(2,4));
         }
 
         public bool TryUpdateMatrix(Cell i_ToUpdate, int i_CurrentPlayer)
@@ -26,7 +53,7 @@ namespace Ex02_Othelo
 
             if (i_CurrentPlayer == 1)
             {
-                foreach (Cell currentCell in optional1)
+                foreach (Cell currentCell in m_Optional1)
                 {
                     if (currentCell == i_ToUpdate)
                     {
@@ -37,7 +64,7 @@ namespace Ex02_Othelo
             }
             else
             {
-                foreach (Cell currentCell in optional2)
+                foreach (Cell currentCell in m_Optional2)
                 {
                     if (currentCell == i_ToUpdate)
                     {
@@ -75,9 +102,10 @@ namespace Ex02_Othelo
 
         }
 
+        // update each cell after eacg player play
         private bool updateMatrixRec(Cell i_ToUpdate, char i_UserSign, int i_DirX, int i_DirY)
         {
-            char currentCell = m_Matrix[i_ToUpdate.X, i_ToUpdate.Y];
+            char currentCell = m_Matrix[i_ToUpdate.X + i_DirX, i_ToUpdate.Y + i_DirY];
 
             if (currentCell == i_UserSign)
             {
@@ -87,14 +115,16 @@ namespace Ex02_Othelo
             {
                 return false;
             }
-            Cell nexxtCell = new Cell(i_ToUpdate.X + i_DirX, i_ToUpdate.Y + i_DirY);
 
-            bool res = updateMatrixRec(nexxtCell, i_UserSign, i_DirX, i_DirY);
+            Cell nextCell = new Cell(i_ToUpdate.X + i_DirX, i_ToUpdate.Y + i_DirY);
+
+            bool res = updateMatrixRec(nextCell, i_UserSign, i_DirX, i_DirY);
 
             if (res)
             {
-                m_Matrix[i_ToUpdate.X, i_ToUpdate.Y] = i_UserSign;
+                m_Matrix[i_ToUpdate.X + i_DirX, i_ToUpdate.Y + i_DirY] = i_UserSign;
             }
+
             return res; 
         }
 
@@ -107,6 +137,7 @@ namespace Ex02_Othelo
 
             return (outOfBound && (i_toCheckIfOutOfBound.Y >= m_Size || i_toCheckIfOutOfBound.Y < 0));
         }
+
         private void updateOptionals(Cell i_ToUpdate, char i_UserSign)
         {
             List<Cell> optional1 = new List<Cell>();
@@ -146,11 +177,11 @@ namespace Ex02_Othelo
                     // add this cell to the optional list 
                     if(i_UserSign == 'O')
                     {
-                        optional1.Add(i_ToUpdate);
+                        m_Optional1.Add(i_ToUpdate);
                     }
                     else
                     {
-                        optional2.Add(i_ToUpdate);
+                        m_Optional2.Add(i_ToUpdate);
                     }
                 }
                 else
@@ -161,8 +192,20 @@ namespace Ex02_Othelo
             else
             {
                 Cell nextCell = new Cell(i_ToUpdate.X + i_DirX, i_ToUpdate.Y + i_DirY);
-                updateOptionals(nextCell, i_UserSign, i_DirX, i_DirY, i_Counter+1);
+                updateOptionalsRec(nextCell, i_UserSign, i_DirX, i_DirY, i_Counter+1);
             }
         }
+
+        public void PrintMatrix(){
+            for(int i = 0; i < m_Size ; i++)
+            {
+                for(int j = 0 ; j < m_Size ; j++)
+                {
+                    Console.Write("{0} ",m_Matrix[i,j]);
+                }
+                Console.WriteLine();
+            }
+        }   
+
     }
 }
