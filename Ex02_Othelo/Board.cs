@@ -6,6 +6,9 @@ namespace Ex02_Othelo
 {
     class Board
     {
+        private const char k_FirstPlayerSign = 'X';
+        private const char k_SecPlayerSign = 'O';
+        private const char k_EmptyCellSign = ' ';
         private int m_Size;
         private char[,] m_Matrix;
         List<Cell> m_Optional1 = new List<Cell>();
@@ -20,19 +23,23 @@ namespace Ex02_Othelo
             {
                 for (int col = 0; col < i_Size; col++)
                 {
-                    m_Matrix[row, col] = ' ';
+                    m_Matrix[row, col] = k_EmptyCellSign;
                 }
             }
+            
+            addDefaults();
+        }
 
-            if (i_Size == 6)
+        private void addDefaults(){
+             if (m_Size == 6)
             {
-                m_Matrix[2, 2] = m_Matrix[3, 3] = 'O';
-                m_Matrix[2, 3] = m_Matrix[3, 2] = 'X';
+                m_Matrix[2, 2] = m_Matrix[3, 3] = k_FirstPlayerSign;
+                m_Matrix[2, 3] = m_Matrix[3, 2] = k_SecPlayerSign;
             }
             else
             {
-                m_Matrix[3, 3] = m_Matrix[4, 4] = 'O';
-                m_Matrix[3, 4] = m_Matrix[4, 3] = 'X';
+                m_Matrix[3, 3] = m_Matrix[4, 4] = k_FirstPlayerSign;
+                m_Matrix[3, 4] = m_Matrix[4, 3] = k_SecPlayerSign;
             }
 
             m_Optional2.Add(new Cell(3, 4));
@@ -47,43 +54,42 @@ namespace Ex02_Othelo
 
         public bool TryUpdateMatrix(Cell i_ToUpdate, int i_CurrentPlayer)
         {
-            bool isUpdateSuccess = false;
-            if (m_Matrix[i_ToUpdate.X, i_ToUpdate.Y] != ' ')
-            {
-                return false;
-            }
-
-            char userSign = i_CurrentPlayer == 1 ? 'O' : 'X';
+            bool isUpdateSuccess;
+            char userSign = i_CurrentPlayer == 1 ? k_FirstPlayerSign : k_SecPlayerSign;
 
             if (i_CurrentPlayer == 1)
             {
-                foreach (Cell currentCell in m_Optional1)
-                {
-                    if (currentCell.X == i_ToUpdate.X && currentCell.Y == i_ToUpdate.Y)
-                    {
-                        m_Matrix[i_ToUpdate.X, i_ToUpdate.Y] = 'O';
-                        isUpdateSuccess = true;
-                    }
-                }
+                isUpdateSuccess = validateCell(m_Optional1, i_ToUpdate);
             }
             else
             {
-                foreach (Cell currentCell in m_Optional2)
-                {
-                    if (currentCell.X == i_ToUpdate.X && currentCell.Y == i_ToUpdate.Y)
-                    {
-                        m_Matrix[i_ToUpdate.X, i_ToUpdate.Y] = 'X';
-                        isUpdateSuccess = true;
-                    }
-                    isUpdateSuccess = true;
-                }
-
+               isUpdateSuccess = validateCell(m_Optional2, i_ToUpdate);
             }
+
             if (isUpdateSuccess)
             {
                 update(i_ToUpdate, userSign);
             }
+
             return isUpdateSuccess;
+        }
+
+        private bool validateCell(List<Cell> io_OptionsArr, Cell i_ToCheck)
+        {
+            bool isValid = m_Matrix[i_ToCheck.X, i_ToCheck.Y] != k_EmptyCellSign;
+
+            if(isValid)     // if toChecks is an empty cell
+            {
+                foreach (Cell currentCell in io_OptionsArr)
+                {
+                    if (currentCell.X == i_ToCheck.X && currentCell.Y == i_ToCheck.Y)
+                    {
+                        isValid = true;
+                        break;
+                    }
+                }
+            }
+            return isValid;
         }
 
         private void update(Cell i_ToUpdate, char i_UserSign)
@@ -115,7 +121,7 @@ namespace Ex02_Othelo
             {
                 return true;
             }
-            else if (currentCell == ' ' || isOutOfBound(i_ToUpdate))
+            else if (currentCell == k_EmptyCellSign || isOutOfBound(i_ToUpdate))
             {
                 return false;
             }
@@ -137,7 +143,9 @@ namespace Ex02_Othelo
             bool outOfBound = true;
 
             if (i_toCheckIfOutOfBound.X >= m_Size || i_toCheckIfOutOfBound.X < 0)
-                outOfBound = false;
+            {
+                    outOfBound = false;
+            }
 
             return (outOfBound && (i_toCheckIfOutOfBound.Y >= m_Size || i_toCheckIfOutOfBound.Y < 0));
         }
@@ -151,7 +159,7 @@ namespace Ex02_Othelo
             {
                 for (int j = 0; j < m_Size; j++)
                 {
-                    if (m_Matrix[i, j] != ' ')
+                    if (m_Matrix[i, j] != k_EmptyCellSign)
                     {
                         updateOptionalsRec(new Cell(i + 0, j + 1), m_Matrix[i, j], 0, 1, 0);
                         updateOptionalsRec(new Cell(i + 0, j - 1), m_Matrix[i, j], 0, -1, 0);
@@ -174,12 +182,12 @@ namespace Ex02_Othelo
             {
                 return;
             }
-            else if (currentCell == ' ')
+            else if (currentCell == k_EmptyCellSign)
             {
                 if (i_Counter != 0)
                 {
                     // add this cell to the optional list 
-                    if (i_UserSign == 'O')
+                    if (i_UserSign == k_FirstPlayerSign)
                     {
                         m_Optional1.Add(i_ToUpdate);
                     }
