@@ -47,15 +47,9 @@ namespace Ex02_Othelo
                 m_Matrix[3, 3] = m_Matrix[4, 4] = k_FirstPlayerSign;
                 m_Matrix[3, 4] = m_Matrix[4, 3] = k_SecPlayerSign;
             }
+            this.updateOptionals();
+            PrintOptionals();
 
-            m_Optional2.Add(new Cell(3, 4));
-            m_Optional2.Add(new Cell(4, 3));
-            m_Optional2.Add(new Cell(1, 2));
-            m_Optional2.Add(new Cell(2, 1));
-            m_Optional1.Add(new Cell(4, 2));
-            m_Optional1.Add(new Cell(1, 3));
-            m_Optional1.Add(new Cell(3, 1));
-            m_Optional1.Add(new Cell(2, 4));
         }
 
         public bool TryUpdateMatrix(Cell i_ToUpdate, int i_CurrentPlayer)
@@ -102,7 +96,7 @@ namespace Ex02_Othelo
         private void update(Cell i_ToUpdate, char i_UserSign)
         {
             updateMatrix(i_ToUpdate, i_UserSign);
-            updateOptionals(i_ToUpdate, i_UserSign);
+            updateOptionals();
         }
 
         private void updateMatrix(Cell i_ToUpdate, char i_UserSign)
@@ -156,7 +150,7 @@ namespace Ex02_Othelo
             return outOfBound && (i_toCheckIfOutOfBound.Y >= m_Size || i_toCheckIfOutOfBound.Y < 0);
         }
 
-        private void updateOptionals(Cell i_ToUpdate, char i_UserSign)
+        private void updateOptionals()
         {
             m_Optional1.Clear(); 
             m_Optional2.Clear();
