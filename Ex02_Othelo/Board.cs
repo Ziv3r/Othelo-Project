@@ -4,15 +4,15 @@ using System.Text;
 
 namespace Ex02_Othelo
 {
-    class Board
+    public class Board
     {
         private const char k_FirstPlayerSign = 'X';
         private const char k_SecPlayerSign = 'O';
         private const char k_EmptyCellSign = ' ';
         private int m_Size;
         private char[,] m_Matrix;
-        List<Cell> m_Optional1 = new List<Cell>();
-        List<Cell> m_Optional2 = new List<Cell>();
+        private List<Cell> m_Optional1 = new List<Cell>();
+        private List<Cell> m_Optional2 = new List<Cell>();
 
         public void Init(int i_Size)
         {
@@ -30,7 +30,13 @@ namespace Ex02_Othelo
             addDefaults();
         }
 
-        private void addDefaults(){
+        public char[,] Matrix
+        {
+            get { return m_Matrix; }
+        }
+
+        private void addDefaults()
+        {
              if (m_Size == 6)
             {
                 m_Matrix[2, 2] = m_Matrix[3, 3] = k_FirstPlayerSign;
@@ -77,8 +83,8 @@ namespace Ex02_Othelo
         private bool validateCell(List<Cell> io_OptionsArr, Cell i_ToCheck)
         {
             bool isValid = m_Matrix[i_ToCheck.X, i_ToCheck.Y] != k_EmptyCellSign;
-
-            if(isValid)     // if toChecks is an empty cell
+            //// if toChecks is an empty cell
+            if (isValid)
             {
                 foreach (Cell currentCell in io_OptionsArr)
                 {
@@ -89,6 +95,7 @@ namespace Ex02_Othelo
                     }
                 }
             }
+
             return isValid;
         }
 
@@ -109,7 +116,6 @@ namespace Ex02_Othelo
             updateMatrixRec(i_ToUpdate, i_UserSign, -1, -1);
             updateMatrixRec(i_ToUpdate, i_UserSign, 1, 0);
             updateMatrixRec(i_ToUpdate, i_UserSign, -1, 0);
-
         }
 
         // update each cell after eacg player play
@@ -147,7 +153,7 @@ namespace Ex02_Othelo
                     outOfBound = false;
             }
 
-            return (outOfBound && (i_toCheckIfOutOfBound.Y >= m_Size || i_toCheckIfOutOfBound.Y < 0));
+            return outOfBound && (i_toCheckIfOutOfBound.Y >= m_Size || i_toCheckIfOutOfBound.Y < 0);
         }
 
         private void updateOptionals(Cell i_ToUpdate, char i_UserSign)
@@ -216,6 +222,7 @@ namespace Ex02_Othelo
                 {
                     Console.Write("{0} ", m_Matrix[i, j]);
                 }
+
                 Console.WriteLine();
             }
         }
@@ -226,14 +233,14 @@ namespace Ex02_Othelo
             {
                 Console.Write("({0} , {1}) ", c1.X, c1.Y);
             }
+
             Console.WriteLine();
             foreach (Cell c1 in m_Optional2)
             {
                 Console.Write("({0} , {1}) ", c1.X, c1.Y);
             }
+
             Console.WriteLine();
-
-
         }
     }
 }

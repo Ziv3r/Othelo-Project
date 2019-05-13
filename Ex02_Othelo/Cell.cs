@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ex02_Othelo
 {
-    class Cell
+    public class Cell
     {
         private int m_X;
         private int m_Y;
