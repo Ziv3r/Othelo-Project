@@ -11,7 +11,7 @@ namespace Ex02_Othelo
         int m_SizeOfLogicMatrix;
         private char[,] m_MatrixPrint;
 
-        public UI(int i_Size)
+        public UI(int i_Size = 6)
         {
             if (i_Size == 6)
             {
@@ -27,6 +27,53 @@ namespace Ex02_Othelo
             }
             m_MatrixPrint = new char[m_Height, m_Width];
         }
+
+        public Cell GetCellFromPlayer(string i_PlayerName)
+        {
+            string input;
+            int row = 0;
+            int col = 0;
+            do
+            {
+                Console.WriteLine("{0} choose cell:", i_PlayerName);
+                input = Console.ReadLine();
+                row = int.Parse(input[0].ToString());
+                row--;                                  //// to take row to range 0-size-1
+                col = char.ToUpper(input[1]) - 'A';
+            } while (!isInBoard(row) || !isInBoard(col));
+
+            return new Cell(row, col);
+        }
+
+        private bool isInBoard(int i_Num)
+        {
+            return i_Num >= 0 && i_Num < m_SizeOfLogicMatrix;
+        }
+
+        public string[] GetGameData(out int io_Size)
+        {
+            string[] names = new string[2];
+
+            Console.WriteLine("Enter number of players: ");
+            int numOfPlayers = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter {0}player name: ", numOfPlayers == 2 ? "first " : "");
+            names[0] = Console.ReadLine();
+            if(numOfPlayers == 2)
+            {
+                Console.WriteLine("Enter second player name: ");
+                names[1] = Console.ReadLine();
+            }
+            else
+            {
+                names[1] = "";
+            }
+
+            Console.WriteLine("Choose Board size (type 8 for 8x8 and 6 for 6x6):");
+            io_Size = int.Parse(Console.ReadLine());
+
+            return names;
+        }
+
         public void FillUpMatrixP(char[,] i_MatrixLogic)
         {
             int counter = 0;
