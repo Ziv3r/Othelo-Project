@@ -10,9 +10,7 @@ namespace Ex02_Othelo
 
         int m_Width;
         int m_Height;
-
         private char[,] m_MatrixPrint;
-
 
         public UI(int i_Size)
         {
@@ -21,9 +19,26 @@ namespace Ex02_Othelo
                 m_Width = 27;
                 m_Height = 14;
             }
+            else
+            {
+                m_Width = 35;
+                m_Height = 18;
+            }
             m_MatrixPrint = new char[m_Height, m_Width];
         }
-        public void PrintMatrixP()
+
+        private void printMatirxP()
+        {
+            for (int i = 0; i < m_Height; i++)
+            {
+                for (int j = 0; j < m_Width; j++)
+                {
+                    Console.Write(m_MatrixPrint[i, j]);
+                }
+                Console.WriteLine();
+            }
+        }
+        public void FillUpMatrixP()
         {
             int counter = 0;
             int countNumber = 0;
@@ -58,16 +73,9 @@ namespace Ex02_Othelo
                 }
 
             }
-            for (int i = 0; i < m_Height; i++)
-            {
-                for (int j = 0; j < m_Width; j++)
-                {
-                    Console.Write(m_MatrixPrint[i, j]);
-                }
-                Console.WriteLine();
-            }
+            printMatirxP();
         }
-
+       
         //public void ConvertMatrixLogicToMatrixPrint(char[,] i_MatrixLogic)
         //{
         //    for(int row= 0; row <i_MatrixLogic; row++)
