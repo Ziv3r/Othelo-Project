@@ -11,7 +11,7 @@ namespace Ex02_Othelo
         int m_SizeOfLogicMatrix;
         private char[,] m_MatrixPrint;
 
-        public UI(int i_Size = 6)
+        public void InitUI(int i_Size = 6)
         {
             if (i_Size == 6)
             {

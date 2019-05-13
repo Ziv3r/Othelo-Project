@@ -57,9 +57,9 @@ namespace Ex02_Othelo
         public bool TryUpdateMatrix(Cell i_ToUpdate, int i_CurrentPlayer)
         {
             bool isUpdateSuccess;
-            char userSign = i_CurrentPlayer == 1 ? k_FirstPlayerSign : k_SecPlayerSign;
+            char userSign = i_CurrentPlayer == 0 ? k_FirstPlayerSign : k_SecPlayerSign;
 
-            if (i_CurrentPlayer == 1)
+            if (i_CurrentPlayer == 0)
             {
                 isUpdateSuccess = validateCell(m_Optional1, i_ToUpdate);
             }
@@ -78,10 +78,8 @@ namespace Ex02_Othelo
 
         private bool validateCell(List<Cell> io_OptionsArr, Cell i_ToCheck)
         {
-            bool isValid = m_Matrix[i_ToCheck.X, i_ToCheck.Y] == k_EmptyCellSign;
+            bool isValid = false; 
             //// if toChecks is an empty cell
-            if (isValid)
-            {
                 foreach (Cell currentCell in io_OptionsArr)
                 {
                     if (currentCell.X == i_ToCheck.X && currentCell.Y == i_ToCheck.Y)
@@ -90,7 +88,6 @@ namespace Ex02_Othelo
                         break;
                     }
                 }
-            }
 
             return isValid;
         }
@@ -117,6 +114,10 @@ namespace Ex02_Othelo
         // update each cell after eacg player play
         private bool updateMatrixRec(Cell i_ToUpdate, char i_UserSign, int i_DirX, int i_DirY)
         {
+            if(isOutOfBound(new Cell(i_ToUpdate.X + i_DirX, i_ToUpdate.Y + i_DirY)))
+            {
+                return false;
+            }
             char currentCell = m_Matrix[i_ToUpdate.X + i_DirX, i_ToUpdate.Y + i_DirY];
 
             if (currentCell == i_UserSign)
@@ -178,6 +179,10 @@ namespace Ex02_Othelo
 
         private void updateOptionalsRec(Cell i_ToUpdate, char i_UserSign, int i_DirX, int i_DirY, int i_Counter)
         {
+            if(isOutOfBound(i_ToUpdate))
+            {
+                return; 
+            }
             char currentCell = m_Matrix[i_ToUpdate.X, i_ToUpdate.Y];
 
             if (currentCell == i_UserSign)

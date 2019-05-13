@@ -9,6 +9,7 @@ namespace Ex02_Othelo
         public static void Main()
         {
             Game gamer = new Game();
+            gamer.Start();
         }
     }
 

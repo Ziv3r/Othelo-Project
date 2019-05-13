@@ -6,18 +6,19 @@ namespace Ex02_Othelo
 {
     class Game
     {
-            int m_CurrentPlayer = 0;
+            int m_CurrentPlayer = 1;
             Board m_Board = new Board();
-            UI m_UserInterface = new UI(6);
+            UI m_UserInterface = new UI();
             String[] m_Players = new String[2]; 
 
         public void Start()
         {
             int matrixSize;
-            m_UserInterface.GetGameData(out matrixSize);
-            m_Board.Size = matrixSize; 
-
+            m_Players = m_UserInterface.GetGameData(out matrixSize);
+            m_Board.Size = matrixSize;
+            m_UserInterface.InitUI(m_Board.Size);
             m_Board.Init(m_Board.Size);
+            m_Board.PrintOptionals();
             run();
 
         }
@@ -31,8 +32,8 @@ namespace Ex02_Othelo
             {
                     do
                     {
-                         choosenCell = m_UserInterface.GetCellFromPlayer(m_Players.GetValue(m_CurrentPlayer));
-                    } while (m_Board.TryUpdateMatrix(choosenCell, m_CurrentPlayer));
+                      choosenCell = m_UserInterface.GetCellFromPlayer(m_Players[m_CurrentPlayer]);
+                    } while (!m_Board.TryUpdateMatrix(choosenCell, m_CurrentPlayer));
             }
             }
         }
