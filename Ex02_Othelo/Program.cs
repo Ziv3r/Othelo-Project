@@ -8,13 +8,7 @@ namespace Ex02_Othelo
     {
         public static void Main()
         {
-            Board board = new Board();
-            board.Init(6);
-            UI userInterface = new UI(6);
-            board.TryUpdateMatrix(new Cell(2, 4), 1);
-            board.PrintMatrix();
-            userInterface.FillUpMatrixP(board.Matrix);
-            Console.WriteLine();
+            Game gamer = new Game();
         }
     }
 

@@ -26,7 +26,7 @@ namespace Ex02_Othelo
                     m_Matrix[row, col] = k_EmptyCellSign;
                 }
             }
-            
+
             addDefaults();
         }
 
@@ -34,7 +34,11 @@ namespace Ex02_Othelo
         {
             get { return m_Matrix; }
         }
-
+        public int  Size 
+        {
+            get { return m_Size; }
+            set { m_Size = value; }
+        }
         private void addDefaults()
         {
              if (m_Size == 6)
@@ -47,9 +51,7 @@ namespace Ex02_Othelo
                 m_Matrix[3, 3] = m_Matrix[4, 4] = k_FirstPlayerSign;
                 m_Matrix[3, 4] = m_Matrix[4, 3] = k_SecPlayerSign;
             }
-            this.updateOptionals();
-            PrintOptionals();
-
+            updateOptionals();
         }
 
         public bool TryUpdateMatrix(Cell i_ToUpdate, int i_CurrentPlayer)
@@ -76,7 +78,7 @@ namespace Ex02_Othelo
 
         private bool validateCell(List<Cell> io_OptionsArr, Cell i_ToCheck)
         {
-            bool isValid = m_Matrix[i_ToCheck.X, i_ToCheck.Y] != k_EmptyCellSign;
+            bool isValid = m_Matrix[i_ToCheck.X, i_ToCheck.Y] == k_EmptyCellSign;
             //// if toChecks is an empty cell
             if (isValid)
             {
@@ -235,6 +237,10 @@ namespace Ex02_Othelo
             }
 
             Console.WriteLine();
+        }
+        public bool HasOption()
+        {
+            return (m_Optional1.Count != 0 || m_Optional2.Count != 0);
         }
     }
 }
