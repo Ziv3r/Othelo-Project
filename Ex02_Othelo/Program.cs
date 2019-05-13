@@ -10,10 +10,10 @@ namespace Ex02_Othelo
         {
             Board board = new Board();
             board.Init(6);
-            UI userInterface = new UI(8);
+            UI userInterface = new UI(6);
             board.TryUpdateMatrix(new Cell(2, 4), 1);
-            userInterface.FillUpMatrixP();
-
+            board.PrintMatrix();
+            userInterface.FillUpMatrixP(board.Matrix);
             Console.WriteLine();
         }
     }
