@@ -39,6 +39,10 @@ namespace Ex02_Othelo
             get { return m_Size; }
             set { m_Size = value; }
         }
+        public List<Cell> Optionals
+        {
+            get { return m_Optional2; }
+        }
         private void addDefaults()
         {
              if (m_Size == 6)
@@ -247,5 +251,6 @@ namespace Ex02_Othelo
         {
             return (m_Optional1.Count != 0 || m_Optional2.Count != 0);
         }
+
     }
 }
