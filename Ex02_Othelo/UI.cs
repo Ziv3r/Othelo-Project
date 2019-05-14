@@ -28,14 +28,14 @@ namespace Ex02_Othelo
             m_MatrixPrint = new char[m_Height, m_Width];
         }
 
-        public Cell GetCellFromPlayer(string i_PlayerName)
+        public Cell GetCellFromPlayer(string i_PlayerName, bool i_FirstTry)
         {
             string input;
             int row = 0;
             int col = 0;
             do
             {
-                Console.WriteLine("{0} choose cell:", i_PlayerName);
+                Console.WriteLine("{0} choose cell:", i_PlayerName, i_FirstTry ? "valid" : "");
                 input = Console.ReadLine();
                 row = int.Parse(input[0].ToString());
                 row--;                                  //// to take row to range 0-size-1
@@ -50,12 +50,18 @@ namespace Ex02_Othelo
             return i_Num >= 0 && i_Num < m_SizeOfLogicMatrix;
         }
 
-        public string[] GetGameData(out int io_Size)
+        public string[] GetGameData(out int i_Size)
         {
             string[] names = new string[2];
 
             Console.WriteLine("Enter number of players: ");
-            int numOfPlayers = int.Parse(Console.ReadLine());
+            string numAsString = Console.ReadLine();
+            int numOfPlayers = 0;
+            while (!int.TryParse(numAsString, out numOfPlayers) || !isNumOfPlayersValid(numOfPlayers))
+            {
+                Console.WriteLine("Please Enter 1 or 2:");
+                numAsString = Console.ReadLine();
+            }
             Console.WriteLine("Enter {0}player name: ", numOfPlayers == 2 ? "first " : "");
             names[0] = Console.ReadLine();
             if(numOfPlayers == 2)
@@ -68,17 +74,45 @@ namespace Ex02_Othelo
                 names[1] = "";
             }
 
-            Console.WriteLine("Choose Board size (type 8 for 8x8 and 6 for 6x6):");
-            io_Size = int.Parse(Console.ReadLine());
+            i_Size = getBoardSize();
 
             return names;
         }
 
+        public void NoOptionsMessage(string i_Name)
+        {
+            Console.WriteLine("{0} have no move to make", i_Name);
+        }
+
+        private int getBoardSize()
+        {
+            int boardSize = 0;
+            Console.WriteLine("Choose Board size (type 8 for 8x8 and 6 for 6x6):");
+            string boardSizeString = Console.ReadLine();
+            
+            while(!int.TryParse(boardSizeString, out boardSize) || !isBoardSizeValid(boardSize))
+            {
+                Console.WriteLine("Please choose 6 or 8:");
+                boardSizeString = Console.ReadLine();
+            }
+
+            return boardSize;
+        }
+
+        private bool isBoardSizeValid(int i_Size)
+        {
+            return i_Size == 6 || i_Size == 8;
+        }
+        private bool isNumOfPlayersValid(int i_NumOfPlayers)
+        {
+            return i_NumOfPlayers == 1 || i_NumOfPlayers == 2;
+        }
         public void FillUpMatrixP(char[,] i_MatrixLogic)
         {
             int counter = 0;
             int countNumber = 0;
 
+            Ex02.ConsoleUtils.Screen.Clear();
             for (int i = 0; i < m_Height; i++)
             {
                 for (int j = 0; j < m_Width; j++)
