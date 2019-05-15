@@ -29,7 +29,7 @@ namespace Ex02_Othelo
         }
         private void run()
         {
-            bool firstChanse = true; 
+            bool firstChanse = true;
             Cell choosenCell;
             while (m_Board.HasOption())
             {
@@ -39,35 +39,24 @@ namespace Ex02_Othelo
                 {
                     do
                     {
-                        if (m_CurrentPlayer == 0 )      //to split to function .
+                        if (!checkeNoOptions())
                         {
-                            //checkNoOptions(m_CurrentPlayer);
-                            if (m_Board.Optionals1.Count == 0)
-                            {
-                                m_UserInterface.NoOptionsMessage(m_Players[m_CurrentPlayer]); 
-                                break;
-                            }
+                            break;
                         }
-                        else
-                        {
-                            if (m_Board.Optionals2.Count == 0)
-                            {
-                                m_UserInterface.NoOptionsMessage(m_Players[m_CurrentPlayer]);
-                                break;
-                            }
-                        }
+
                         if (m_Players[m_CurrentPlayer] == string.Empty)
                         {
                             choosenCell = m_compPlayer.ChooseCell(m_Board.Optionals2);
                         }
                         else
                         {
-                            choosenCell = m_UserInterface.GetCellFromPlayer(m_Players[m_CurrentPlayer],firstChanse);
+                            choosenCell = m_UserInterface.GetCellFromPlayer(m_Players[m_CurrentPlayer], firstChanse);
                         }
                         firstChanse = false;
                     } while (!m_Board.TryUpdateMatrix(choosenCell, m_CurrentPlayer));
                 }
             }
+            //m_UserInterface.checkWinner();
         }
         private void alocatePlayers()
         {
@@ -84,6 +73,29 @@ namespace Ex02_Othelo
             }
         }
 
+        private bool checkeNoOptions()
+        {
+            bool isPossibleOption = true;
+
+            if (m_CurrentPlayer == 0)      //to split to function .
+            {
+                //checkNoOptions(m_CurrentPlayer);
+                if (m_Board.Optionals1.Count == 0)
+                {
+                    m_UserInterface.NoOptionsMessage(m_Players[m_CurrentPlayer]);
+                    isPossibleOption = false;
+                }
+            }
+            else
+            {
+                if (m_Board.Optionals2.Count == 0)
+                {
+                    m_UserInterface.NoOptionsMessage(m_Players[m_CurrentPlayer]);
+                    isPossibleOption = false;
+                }
+            }
+            return isPossibleOption;
+        }
     }
 }
 
