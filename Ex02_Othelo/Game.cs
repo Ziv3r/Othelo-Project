@@ -65,11 +65,11 @@ namespace Ex02_Othelo
             updateScore();
             if (m_PlayersNames[1] == string.Empty)
             {
-                startNewGame =m_UserInterface.FinishGame(m_PlayersNames,m_Player1.Score ,m_compPlayer.Score);
+                startNewGame =m_UserInterface.GameFinished(m_PlayersNames,m_Player1.Score ,m_compPlayer.Score);
             }
             else
             {
-               startNewGame = m_UserInterface.FinishGame(m_PlayersNames, m_Player1.Score, m_Player2.Score);
+               startNewGame = m_UserInterface.GameFinished(m_PlayersNames, m_Player1.Score, m_Player2.Score);
             }
             return startNewGame;
         }
@@ -84,7 +84,7 @@ namespace Ex02_Othelo
             else
             {
                 m_Player2 = new Player();
-                m_Player2.Name = m_PlayersNames[2];
+                m_Player2.Name = m_PlayersNames[1];
             }
         }
 

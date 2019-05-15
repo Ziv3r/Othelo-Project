@@ -171,14 +171,14 @@ namespace Ex02_Othelo
 
         private bool isOutOfBound(Cell i_toCheckIfOutOfBound)
         {
-            bool outOfBound = true;
+            bool outOfBound = false;
 
             if (i_toCheckIfOutOfBound.X >= m_Size || i_toCheckIfOutOfBound.X < 0)
             {
-                    outOfBound = false;
+                    outOfBound = true;
             }
 
-            return outOfBound && (i_toCheckIfOutOfBound.Y >= m_Size || i_toCheckIfOutOfBound.Y < 0);
+            return outOfBound || (i_toCheckIfOutOfBound.Y >= m_Size || i_toCheckIfOutOfBound.Y < 0);
         }
 
         private void updateOptionals()

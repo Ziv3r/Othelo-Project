@@ -31,16 +31,27 @@ namespace Ex02_Othelo
         public Cell GetCellFromPlayer(string i_PlayerName, bool i_FirstTry)
         {
             string input;
-            int row = 0;
-            int col = 0;
+            int row = -1;
+            int col = -1;
             do
             {
                 Console.WriteLine("{0} choose {1}cell:", i_PlayerName, !i_FirstTry ? "valid " : "");
                 input = Console.ReadLine();
-                row = int.Parse(input[0].ToString());
-                row--;                                  //// to take row to range 0-size-1
-                col = char.ToUpper(input[1]) - 'A';
-            } while (!isInBoard(row) || !isInBoard(col));
+                if (input.Length < 2)
+                {
+                    col = -1;
+                    if(char.ToUpper(input[0]) == 'Q')
+                    {
+                        row = -1;
+                        break;
+                    }
+                }
+                else
+                {
+                    col = char.ToUpper(input[1]) - 'A';
+                }
+                i_FirstTry = false;
+            } while (!int.TryParse(input[0].ToString(), out row) ||!isInBoard(--row) || !isInBoard(col));
 
             return new Cell(row, col);
         }
