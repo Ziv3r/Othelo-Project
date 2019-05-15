@@ -35,7 +35,7 @@ namespace Ex02_Othelo
             int col = 0;
             do
             {
-                Console.WriteLine("{0} choose {1} cell:", i_PlayerName, !i_FirstTry ? "valid" : "");
+                Console.WriteLine("{0} choose {1}cell:", i_PlayerName, !i_FirstTry ? "valid " : "");
                 input = Console.ReadLine();
                 row = int.Parse(input[0].ToString());
                 row--;                                  //// to take row to range 0-size-1

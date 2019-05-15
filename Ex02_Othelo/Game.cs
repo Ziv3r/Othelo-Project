@@ -9,7 +9,7 @@ namespace Ex02_Othelo
         int m_CurrentPlayer = 1;
         Board m_Board = new Board();
         UI m_UserInterface = new UI();
-        String[] m_Players = new String[2];
+        String[] m_PlayersNames = new String[2];
         Player m_Player1 = new Player();
         Player m_Player2 = null;
         ComputerPlayer m_compPlayer = null;
@@ -18,41 +18,41 @@ namespace Ex02_Othelo
         public void Start()
         {
             int matrixSize;
-            m_Players = m_UserInterface.GetGameData(out matrixSize);
+            m_PlayersNames = m_UserInterface.GetGameData(out matrixSize);
             alocatePlayers();
             m_Board.Size = matrixSize;
             m_UserInterface.InitUI(m_Board.Size);
             m_Board.Init(m_Board.Size);
-            //m_Board.PrintOptionals();         just for check - delete . 
             run();
 
         }
         private void run()
         {
-            bool firstChanse = true;
+            bool firstChance = true;
             Cell choosenCell;
             while (m_Board.HasOption())
             {
-                firstChanse = true;
+                firstChance = true;
+                //updateScore();
                 m_UserInterface.FillUpMatrixP(m_Board.Matrix);
-                m_CurrentPlayer = m_CurrentPlayer * -1 + 1;
+                m_CurrentPlayer = m_CurrentPlayer * -1 + 1;         ////switch players 0=>1 ,1=>0
                 {
                     do
                     {
-                        if (!checkeNoOptions())
+                        if (!checkeNoOptionsForPlayer())
                         {
                             break;
                         }
 
-                        if (m_Players[m_CurrentPlayer] == string.Empty)
+                        if (m_PlayersNames[m_CurrentPlayer] == string.Empty)
                         {
                             choosenCell = m_compPlayer.ChooseCell(m_Board.Optionals2);
                         }
                         else
                         {
-                            choosenCell = m_UserInterface.GetCellFromPlayer(m_Players[m_CurrentPlayer], firstChanse);
+                            choosenCell = m_UserInterface.GetCellFromPlayer(m_PlayersNames[m_CurrentPlayer], firstChance);
                         }
-                        firstChanse = false;
+                        firstChance = false;
                     } while (!m_Board.TryUpdateMatrix(choosenCell, m_CurrentPlayer));
                 }
             }
@@ -60,20 +60,20 @@ namespace Ex02_Othelo
         }
         private void alocatePlayers()
         {
-            m_Player1.Name = m_Players[0];
+            m_Player1.Name = m_PlayersNames[0];
 
-            if (m_Players[1] == string.Empty)
+            if (m_PlayersNames[1] == string.Empty)
             {
                 m_compPlayer = new ComputerPlayer();
             }
             else
             {
                 m_Player2 = new Player();
-                m_Player2.Name = m_Players[2];
+                m_Player2.Name = m_PlayersNames[2];
             }
         }
 
-        private bool checkeNoOptions()
+        private bool checkeNoOptionsForPlayer()
         {
             bool isPossibleOption = true;
 
@@ -82,7 +82,7 @@ namespace Ex02_Othelo
                 //checkNoOptions(m_CurrentPlayer);
                 if (m_Board.Optionals1.Count == 0)
                 {
-                    m_UserInterface.NoOptionsMessage(m_Players[m_CurrentPlayer]);
+                    m_UserInterface.NoOptionsMessage(m_PlayersNames[m_CurrentPlayer]);
                     isPossibleOption = false;
                 }
             }
@@ -90,12 +90,18 @@ namespace Ex02_Othelo
             {
                 if (m_Board.Optionals2.Count == 0)
                 {
-                    m_UserInterface.NoOptionsMessage(m_Players[m_CurrentPlayer]);
+                    m_UserInterface.NoOptionsMessage(m_PlayersNames[m_CurrentPlayer]);
                     isPossibleOption = false;
                 }
             }
             return isPossibleOption;
         }
+
+        //private void updateScore()
+        //{
+        //    int score1, score2;
+        //    Board.
+        //}
     }
 }
 
