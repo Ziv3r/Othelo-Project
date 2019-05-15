@@ -100,6 +100,26 @@ namespace Ex02_Othelo
             return isValid;
         }
 
+        public void GetScores(out int o_Score1, out int o_Score2)
+        {
+            o_Score1 = 0;
+            o_Score2 = 0;
+
+            for (int i = 0; i < m_Size; i++)
+            {
+                for (int j = 0; j < m_Size; j++)
+                {
+                    if(m_Matrix[i,j] == '0')
+                    {
+                        o_Score1++;
+                    }
+                    else
+                    {
+                        o_Score2++;
+                    }
+                }
+            }
+        }
         private void update(Cell i_ToUpdate, char i_UserSign)
         {
             updateMatrix(i_ToUpdate, i_UserSign);

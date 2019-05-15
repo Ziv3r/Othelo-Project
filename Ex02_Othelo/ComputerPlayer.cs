@@ -17,5 +17,10 @@ namespace Ex02_Othelo
             return Optionals[indexChoosenCell];
 
         }
+        public int Score
+        {
+            get { return m_Score; }
+            set { m_Score = value; }
+        }
     }
 }
