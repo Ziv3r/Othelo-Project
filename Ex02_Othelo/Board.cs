@@ -109,11 +109,11 @@ namespace Ex02_Othelo
             {
                 for (int j = 0; j < m_Size; j++)
                 {
-                    if(m_Matrix[i,j] == '0')
+                    if(m_Matrix[i,j] == 'O')
                     {
                         o_Score1++;
                     }
-                    else
+                    else if(m_Matrix[i, j] == 'X')
                     {
                         o_Score2++;
                     }

@@ -40,7 +40,7 @@ namespace Ex02_Othelo
                 if (input.Length < 2)
                 {
                     col = -1;
-                    if(char.ToUpper(input[0]) == 'Q')
+                    if (char.ToUpper(input[0]) == 'Q')
                     {
                         row = -1;
                         break;
@@ -51,7 +51,7 @@ namespace Ex02_Othelo
                     col = char.ToUpper(input[1]) - 'A';
                 }
                 i_FirstTry = false;
-            } while (!int.TryParse(input[0].ToString(), out row) ||!isInBoard(--row) || !isInBoard(col));
+            } while (!int.TryParse(input[0].ToString(), out row) || !isInBoard(--row) || !isInBoard(col));
 
             return new Cell(row, col);
         }
@@ -75,7 +75,7 @@ namespace Ex02_Othelo
             }
 
             names[0] = getValidName("first");
-            if(numOfPlayers == 2)
+            if (numOfPlayers == 2)
             {
                 names[1] = getValidName("second");
             }
@@ -93,7 +93,7 @@ namespace Ex02_Othelo
         {
             Console.WriteLine("Enter {0} player name:", i_Player);
             string name = Console.ReadLine();
-            while(name.Length < 2 )
+            while (name.Length < 2)
             {
                 Console.WriteLine("Name must contain 2 or more letters");
                 name = Console.ReadLine();
@@ -104,14 +104,17 @@ namespace Ex02_Othelo
 
         public bool GameFinished(string[] i_Names, int i_FirstPlayerScore, int i_SecScore)
         {
-            Ex02.ConsoleUtils.Screen.Clear();
+            string secondPlayer = String.IsNullOrEmpty(i_Names[1]) ? "Computer" : i_Names[1];
+
+            Console.WriteLine("{0} covered {1} cells and {2} covered {3} cells!", i_Names[0], i_FirstPlayerScore, secondPlayer, i_SecScore);
+
             if (i_FirstPlayerScore > i_SecScore)
             {
                 Console.WriteLine("{0} won!", i_Names[0]);
             }
-            else if(i_SecScore > i_FirstPlayerScore)
+            else if (i_SecScore > i_FirstPlayerScore)
             {
-                Console.WriteLine("{0} won", String.IsNullOrEmpty(i_Names[1]) ? "Computer" : i_Names[1]);
+                Console.WriteLine("{0} won", secondPlayer);
             }
             else
             {
@@ -120,7 +123,7 @@ namespace Ex02_Othelo
 
             Console.WriteLine("Would you like to play again?\ny for yes q to exit");
             string toContinue = Console.ReadLine();
-            while(toContinue.ToLower() != "y" && toContinue.ToLower() != "q")
+            while (toContinue.ToLower() != "y" && toContinue.ToLower() != "q")
             {
                 Console.WriteLine("y for yes q to exit");
                 toContinue = Console.ReadLine();
@@ -139,8 +142,8 @@ namespace Ex02_Othelo
             int boardSize = 0;
             Console.WriteLine("Choose Board size (type 8 for 8x8 and 6 for 6x6):");
             string boardSizeString = Console.ReadLine();
-            
-            while(!int.TryParse(boardSizeString, out boardSize) || !isBoardSizeValid(boardSize))
+
+            while (!int.TryParse(boardSizeString, out boardSize) || !isBoardSizeValid(boardSize))
             {
                 Console.WriteLine("Please choose 6 or 8:");
                 boardSizeString = Console.ReadLine();
@@ -157,8 +160,9 @@ namespace Ex02_Othelo
         {
             return i_NumOfPlayers == 1 || i_NumOfPlayers == 2;
         }
-        public void FillUpMatrixP(char[,] i_MatrixLogic)
+        public void FillUpMatrixP(string[] PlayersNames, char[,] i_MatrixLogic, int i_FirstScore, int i_SecondScore)
         {
+
             int counter = 0;
             int countNumber = 0;
 
@@ -167,22 +171,22 @@ namespace Ex02_Othelo
             {
                 for (int j = 0; j < m_Width; j++)
                 {
-                    if (i %2 ==1 && j>1)
+                    if (i % 2 == 1 && j > 1)
                     {
                         m_MatrixPrint[i, j] = '=';
 
                     }
-                   else if (i == 0 && j % 4 == 0 && j!=0)
+                    else if (i == 0 && j % 4 == 0 && j != 0)
                     {
-                        m_MatrixPrint[i,j] = (char)(65 + counter);
+                        m_MatrixPrint[i, j] = (char)(65 + counter);
                         counter++;
                     }
-                    else if(i!= 0 && i%2 ==0 && j==0)
+                    else if (i != 0 && i % 2 == 0 && j == 0)
                     {
-                        m_MatrixPrint[i, j] = (char)('1'+countNumber);
-                        countNumber++; 
+                        m_MatrixPrint[i, j] = (char)('1' + countNumber);
+                        countNumber++;
                     }
-                    else if (i%2 == 0 && j % 4 ==2 && i!= 0)
+                    else if (i % 2 == 0 && j % 4 == 2 && i != 0)
                     {
                         m_MatrixPrint[i, j] = '|';
                     }
@@ -192,11 +196,15 @@ namespace Ex02_Othelo
                     }
                 }
             }
-                convertMatrixLogicToMatrixPrint(i_MatrixLogic);
-                printMatirxP();
+            convertMatrixLogicToMatrixPrint(i_MatrixLogic);
+            printMatirxP(PlayersNames, i_FirstScore, i_SecondScore);
         }
-        private void printMatirxP()
+        private void printMatirxP(string [] PlayersNames ,int i_FirstScore, int i_SecondScore)
         {
+            string secondPyaer = string.IsNullOrEmpty(PlayersNames[1]) ? "computer" : PlayersNames[1];
+
+            Console.WriteLine("{0} {1} \t\t\t {2} {3}", PlayersNames[0] , i_FirstScore,secondPyaer, i_SecondScore);
+
             for (int i = 0; i < m_Height; i++)
             {
                 for (int j = 0; j < m_Width; j++)
@@ -210,9 +218,9 @@ namespace Ex02_Othelo
         {
             for (int row = 0; row < m_SizeOfLogicMatrix; row++)
             {
-                for(int col =0;col < m_SizeOfLogicMatrix; col++)
+                for (int col = 0; col < m_SizeOfLogicMatrix; col++)
                 {
-                    if(i_MatrixLogic[row,col] == 'O')
+                    if (i_MatrixLogic[row, col] == 'O')
                     {
                         m_MatrixPrint[row * 2 + 2, col * 4 + 4] = 'O';
                     }

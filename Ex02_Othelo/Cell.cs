@@ -25,5 +25,14 @@ namespace Ex02_Othelo
             get { return m_Y; }
             set { m_Y = value; }
         }
+        public static bool operator ==(Cell c1, Cell c2)
+        {
+            return (c1.X == c2.X && c1.Y == c2.Y);
+        }
+        public static bool operator !=(Cell c1, Cell c2)
+        {
+            return !(c1.X == c2.X && c1.Y == c2.Y);
+        }
     }
 }
+

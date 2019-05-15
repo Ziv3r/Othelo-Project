@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Ex02_Othelo
 {
@@ -17,61 +18,74 @@ namespace Ex02_Othelo
 
         public void Start()
         {
-            do
-            {
-                int matrixSize;
-                m_PlayersNames = m_UserInterface.GetGameData(out matrixSize);
-                alocatePlayers();
-                m_Board.Size = matrixSize;
-                m_UserInterface.InitUI(m_Board.Size);
-                m_Board.Init(m_Board.Size);
-            } while (run());            ///change run to bool . 
-
+            int matrixSize;
+            m_PlayersNames = m_UserInterface.GetGameData(out matrixSize);
+            alocatePlayers();
+            m_Board.Size = matrixSize;
+            m_UserInterface.InitUI(m_Board.Size);
+            m_Board.Init(m_Board.Size);
+            run();            ///change run to bool . 
         }
-        private bool run()
+
+        private void run()
         {
-            bool startNewGame = true; 
+            bool startNewGame = true;
             bool firstChance = true;
             Cell choosenCell;
-            while (m_Board.HasOption())
+            while (startNewGame)
             {
-                firstChance = true;
-                updateScore();
-                m_UserInterface.FillUpMatrixP(m_Board.Matrix);
-                m_CurrentPlayer = m_CurrentPlayer * -1 + 1;         ////switch players 0=>1 ,1=>0
+                while (m_Board.HasOption())
                 {
-                    do
+                    firstChance = true;
+                    updateScore();
+                    m_UserInterface.FillUpMatrixP(m_PlayersNames, m_Board.Matrix,m_Player1.Score ,m_Player2.Score); // if computer!!!!!!!
+                    m_CurrentPlayer = m_CurrentPlayer * -1 + 1;         ////switch players 0=>1 ,1=>0
                     {
-                        if (!checkeNoOptionsForPlayer())
+                        do
                         {
-                            m_UserInterface.NoOptionsMessage(m_PlayersNames[m_CurrentPlayer]);
-                            break;
-                        }
+                            if (!checkeNoOptionsForPlayer())
+                            {
+                                m_UserInterface.NoOptionsMessage(m_PlayersNames[m_CurrentPlayer]);
+                                System.Threading.Thread.Sleep(3000);
+                                break;
+                            }
 
-                        if (m_PlayersNames[m_CurrentPlayer] == string.Empty)
-                        {
-                            m_UserInterface.NoOptionsMessage(m_PlayersNames[m_CurrentPlayer]);
-                            choosenCell = m_compPlayer.ChooseCell(m_Board.Optionals2);
-                        }
+                            if (m_PlayersNames[m_CurrentPlayer] == string.Empty)
+                            {
+                                m_UserInterface.NoOptionsMessage(m_PlayersNames[m_CurrentPlayer]);
+                                choosenCell = m_compPlayer.ChooseCell(m_Board.Optionals2);
+                            }
 
-                        else
-                        {
-                            choosenCell = m_UserInterface.GetCellFromPlayer(m_PlayersNames[m_CurrentPlayer], firstChance);
-                        }
-                        firstChance = false;
-                    } while (!m_Board.TryUpdateMatrix(choosenCell, m_CurrentPlayer));
+                            else
+                            {
+                                choosenCell = m_UserInterface.GetCellFromPlayer(m_PlayersNames[m_CurrentPlayer], firstChance);
+                            }
+
+                            firstChance = false;
+                            if (choosenCell == new Cell(-1, -1))
+                            {
+                                return;
+                            }
+                        } while (!m_Board.TryUpdateMatrix(choosenCell, m_CurrentPlayer));
+                    }
+                }
+
+                updateScore();
+                if (m_PlayersNames[1] == string.Empty)
+                {
+                    startNewGame = m_UserInterface.GameFinished(m_PlayersNames, m_Player1.Score, m_compPlayer.Score);
+                }
+                else
+                {
+                    startNewGame = m_UserInterface.GameFinished(m_PlayersNames, m_Player1.Score, m_Player2.Score);
+                }
+
+                if (startNewGame)
+                {
+                    m_UserInterface.InitUI(m_Board.Size);
+                    m_Board.Init(m_Board.Size);
                 }
             }
-            updateScore();
-            if (m_PlayersNames[1] == string.Empty)
-            {
-                startNewGame =m_UserInterface.GameFinished(m_PlayersNames,m_Player1.Score ,m_compPlayer.Score);
-            }
-            else
-            {
-               startNewGame = m_UserInterface.GameFinished(m_PlayersNames, m_Player1.Score, m_Player2.Score);
-            }
-            return startNewGame;
         }
         private void alocatePlayers()
         {
@@ -116,7 +130,7 @@ namespace Ex02_Othelo
         {
             int score1, score2;
 
-            m_Board.GetScores(out score1,out  score2);
+            m_Board.GetScores(out score1, out score2);
 
             if (m_PlayersNames[1] == string.Empty)
             {
