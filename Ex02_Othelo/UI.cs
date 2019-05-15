@@ -6,9 +6,12 @@ namespace Ex02_Othelo
 {
     class UI
     {
-        int m_Width;
-        int m_Height;
-        int m_SizeOfLogicMatrix;
+        private const char k_FirstPlayerSign = 'X';
+        private const char k_SecPlayerSign = 'O';
+
+        private int m_Width;
+        private int m_Height;
+        private int m_SizeOfLogicMatrix;
         private char[,] m_MatrixPrint;
 
         public void InitUI(int i_Size = 6)
@@ -61,7 +64,7 @@ namespace Ex02_Othelo
             return i_Num >= 0 && i_Num < m_SizeOfLogicMatrix;
         }
 
-        public string[] GetGameData(out int i_Size)
+        public string[] GetGameData(out int o_Size)
         {
             string[] names = new string[2];
 
@@ -84,7 +87,7 @@ namespace Ex02_Othelo
                 names[1] = "";
             }
 
-            i_Size = getBoardSize();
+            o_Size = getBoardSize();
 
             return names;
         }
@@ -129,12 +132,13 @@ namespace Ex02_Othelo
                 toContinue = Console.ReadLine();
             }
 
-            return toContinue == "y" ? true : false;
+            return toContinue == "y";
         }
 
         public void NoOptionsMessage(string i_Name)
         {
             Console.WriteLine("{0} have no move to make", i_Name);
+            System.Threading.Thread.Sleep(3000);
         }
 
         private int getBoardSize()
@@ -160,6 +164,7 @@ namespace Ex02_Othelo
         {
             return i_NumOfPlayers == 1 || i_NumOfPlayers == 2;
         }
+
         public void FillUpMatrixP(string[] PlayersNames, char[,] i_MatrixLogic, int i_FirstScore, int i_SecondScore)
         {
 
@@ -199,11 +204,11 @@ namespace Ex02_Othelo
             convertMatrixLogicToMatrixPrint(i_MatrixLogic);
             printMatirxP(PlayersNames, i_FirstScore, i_SecondScore);
         }
-        private void printMatirxP(string [] PlayersNames ,int i_FirstScore, int i_SecondScore)
+        private void printMatirxP(string[] PlayersNames, int i_FirstScore, int i_SecondScore)
         {
             string secondPyaer = string.IsNullOrEmpty(PlayersNames[1]) ? "computer" : PlayersNames[1];
 
-            Console.WriteLine("{0} {1} \t\t\t {2} {3}", PlayersNames[0] , i_FirstScore,secondPyaer, i_SecondScore);
+            Console.WriteLine("{0} {1} \t\t\t {2} {3}", PlayersNames[0], i_FirstScore, secondPyaer, i_SecondScore);
 
             for (int i = 0; i < m_Height; i++)
             {
@@ -220,13 +225,13 @@ namespace Ex02_Othelo
             {
                 for (int col = 0; col < m_SizeOfLogicMatrix; col++)
                 {
-                    if (i_MatrixLogic[row, col] == 'O')
+                    if (i_MatrixLogic[row, col] == k_SecPlayerSign)
                     {
-                        m_MatrixPrint[row * 2 + 2, col * 4 + 4] = 'O';
+                        m_MatrixPrint[row * 2 + 2, col * 4 + 4] = k_SecPlayerSign;
                     }
-                    else if (i_MatrixLogic[row, col] == 'X')
+                    else if (i_MatrixLogic[row, col] == k_FirstPlayerSign)
                     {
-                        m_MatrixPrint[row * 2 + 2, col * 4 + 4] = 'X';
+                        m_MatrixPrint[row * 2 + 2, col * 4 + 4] = k_FirstPlayerSign;
                     }
                 }
             }

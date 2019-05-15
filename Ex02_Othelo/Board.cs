@@ -17,11 +17,11 @@ namespace Ex02_Othelo
         public void Init(int i_Size)
         {
             m_Size = i_Size;
-            m_Matrix = new char[i_Size, i_Size];
+            m_Matrix = new char[m_Size, m_Size];
 
-            for (int row = 0; row < i_Size; row++)
+            for (int row = 0; row < m_Size; row++)
             {
-                for (int col = 0; col < i_Size; col++)
+                for (int col = 0; col < m_Size; col++)
                 {
                     m_Matrix[row, col] = k_EmptyCellSign;
                 }
@@ -64,7 +64,7 @@ namespace Ex02_Othelo
 
         public bool TryUpdateMatrix(Cell i_ToUpdate, int i_CurrentPlayer)
         {
-            bool isUpdateSuccess;
+            bool isUpdateSuccess = false ;
             char userSign = i_CurrentPlayer == 0 ? k_FirstPlayerSign : k_SecPlayerSign;
 
             if (i_CurrentPlayer == 0)
@@ -84,14 +84,12 @@ namespace Ex02_Othelo
             return isUpdateSuccess;
         }
 
-        private bool validateCell(List<Cell> io_OptionsArr, Cell i_ToCheck)
+        private bool validateCell(List<Cell> i_OptionsArr, Cell i_ToCheck)
         {
             bool isValid = false; 
-            //// if toChecks is an empty cell
-                foreach (Cell currentCell in io_OptionsArr)
+                foreach (Cell currentCell in i_OptionsArr)
                 {
-                    if (currentCell.X == i_ToCheck.X && currentCell.Y == i_ToCheck.Y)
-                    {
+                    if (currentCell == i_ToCheck)                    {
                         isValid = true;
                         break;
                     }
@@ -139,10 +137,11 @@ namespace Ex02_Othelo
             updateMatrixRec(i_ToUpdate, i_UserSign, -1, 0);
         }
 
-        // update each cell after eacg player play
         private bool updateMatrixRec(Cell i_ToUpdate, char i_UserSign, int i_DirX, int i_DirY)
         {
-            if(isOutOfBound(new Cell(i_ToUpdate.X + i_DirX, i_ToUpdate.Y + i_DirY)))
+            Cell nextCell = new Cell(i_ToUpdate.X + i_DirX, i_ToUpdate.Y + i_DirY);
+
+            if (isOutOfBound(nextCell))
             {
                 return false;
             }
@@ -152,12 +151,10 @@ namespace Ex02_Othelo
             {
                 return true;
             }
-            else if (currentCell == k_EmptyCellSign || isOutOfBound(i_ToUpdate))
+            else if (currentCell == k_EmptyCellSign )
             {
                 return false;
             }
-
-            Cell nextCell = new Cell(i_ToUpdate.X + i_DirX, i_ToUpdate.Y + i_DirY);
 
             bool res = updateMatrixRec(nextCell, i_UserSign, i_DirX, i_DirY);
 
@@ -185,6 +182,7 @@ namespace Ex02_Othelo
         {
             m_Optional1.Clear(); 
             m_Optional2.Clear();
+            int counter = 0; 
 
             for (int i = 0; i < m_Size; i++)
             {
@@ -192,14 +190,14 @@ namespace Ex02_Othelo
                 {
                     if (m_Matrix[i, j] != k_EmptyCellSign)
                     {
-                        updateOptionalsRec(new Cell(i + 0, j + 1), m_Matrix[i, j], 0, 1, 0);
-                        updateOptionalsRec(new Cell(i + 0, j - 1), m_Matrix[i, j], 0, -1, 0);
-                        updateOptionalsRec(new Cell(i + 1, j + 0), m_Matrix[i, j], 1, 0, 0);
-                        updateOptionalsRec(new Cell(i + 1, j - 1), m_Matrix[i, j], 1, -1, 0);
-                        updateOptionalsRec(new Cell(i + 1, j + 1), m_Matrix[i, j], 1, 1, 0);
-                        updateOptionalsRec(new Cell(i + -1, j + 1), m_Matrix[i, j], -1, 1, 0);
-                        updateOptionalsRec(new Cell(i - 1, j - 1), m_Matrix[i, j], -1, -1, 0);
-                        updateOptionalsRec(new Cell(i - 1, j + 0), m_Matrix[i, j], -1, 0, 0);
+                        updateOptionalsRec(new Cell(i , j ), m_Matrix[i, j], 0, 1, counter);
+                        updateOptionalsRec(new Cell(i , j ), m_Matrix[i, j], 0, -1, counter);
+                        updateOptionalsRec(new Cell(i , j ), m_Matrix[i, j], 1, 0, counter);
+                        updateOptionalsRec(new Cell(i , j ), m_Matrix[i, j], 1, -1, counter);
+                        updateOptionalsRec(new Cell(i , j), m_Matrix[i, j], 1, 1, counter);
+                        updateOptionalsRec(new Cell(i , j), m_Matrix[i, j], -1, 1, counter);
+                        updateOptionalsRec(new Cell(i , j), m_Matrix[i, j], -1, -1, counter);
+                        updateOptionalsRec(new Cell(i , j), m_Matrix[i, j], -1, 0, counter);
                     }
                 }
             }
@@ -207,17 +205,19 @@ namespace Ex02_Othelo
 
         private void updateOptionalsRec(Cell i_ToUpdate, char i_UserSign, int i_DirX, int i_DirY, int i_Counter)
         {
-            if(isOutOfBound(i_ToUpdate))
+            Cell nextCell = new Cell(i_ToUpdate.X + i_DirX, i_ToUpdate.Y + i_DirY);
+
+            if (isOutOfBound(nextCell))
             {
                 return; 
             }
-            char currentCell = m_Matrix[i_ToUpdate.X, i_ToUpdate.Y];
+            char nextCellSign = m_Matrix[nextCell.X,nextCell.Y];
 
-            if (currentCell == i_UserSign)
+            if (nextCellSign == i_UserSign)
             {
                 return;
             }
-            else if (currentCell == k_EmptyCellSign)
+            else if (nextCellSign == k_EmptyCellSign)
             {
                 if (i_Counter != 0)
                 {
@@ -238,8 +238,8 @@ namespace Ex02_Othelo
             }
             else
             {
-                Cell nextCell = new Cell(i_ToUpdate.X + i_DirX, i_ToUpdate.Y + i_DirY);
-                updateOptionalsRec(nextCell, i_UserSign, i_DirX, i_DirY, i_Counter + 1);
+                Cell PostCell = new Cell(nextCell.X + i_DirX, nextCell.Y + i_DirY);
+                updateOptionalsRec(PostCell, i_UserSign, i_DirX, i_DirY, i_Counter + 1);
             }
         }
 

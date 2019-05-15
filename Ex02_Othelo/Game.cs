@@ -7,13 +7,13 @@ namespace Ex02_Othelo
 {
     class Game
     {
-        int m_CurrentPlayer = 1;
-        Board m_Board = new Board();
-        UI m_UserInterface = new UI();
-        String[] m_PlayersNames = new String[2];
-        Player m_Player1 = new Player();
-        Player m_Player2 = null;
-        ComputerPlayer m_compPlayer = null;
+        private int m_CurrentPlayer = 1;
+        private Board m_Board = new Board();
+        private UI m_UserInterface = new UI();
+        private Player m_Player1 = new Player();
+        private Player m_Player2 = null;
+        private ComputerPlayer m_compPlayer = null;
+        private String[] m_PlayersNames;
 
 
         public void Start()
@@ -24,7 +24,8 @@ namespace Ex02_Othelo
             m_Board.Size = matrixSize;
             m_UserInterface.InitUI(m_Board.Size);
             m_Board.Init(m_Board.Size);
-            run();            ///change run to bool . 
+            m_Board.PrintOptionals();
+            run();
         }
 
         private void run()
@@ -37,41 +38,28 @@ namespace Ex02_Othelo
                 while (m_Board.HasOption())
                 {
                     firstChance = true;
-                    updateScore();
-                    m_UserInterface.FillUpMatrixP(m_PlayersNames, m_Board.Matrix,m_Player1.Score ,m_Player2.Score); // if computer!!!!!!!
+                    FillUpAndPrintMatrix();
                     m_CurrentPlayer = m_CurrentPlayer * -1 + 1;         ////switch players 0=>1 ,1=>0
+                    do
                     {
-                        do
+                        if (!checkeOptionsForPlayer())
                         {
-                            if (!checkeNoOptionsForPlayer())
-                            {
-                                m_UserInterface.NoOptionsMessage(m_PlayersNames[m_CurrentPlayer]);
-                                System.Threading.Thread.Sleep(3000);
-                                break;
-                            }
+                            m_UserInterface.NoOptionsMessage(m_PlayersNames[m_CurrentPlayer]);
+                            break;
+                        }
 
-                            if (m_PlayersNames[m_CurrentPlayer] == string.Empty)
-                            {
-                                m_UserInterface.NoOptionsMessage(m_PlayersNames[m_CurrentPlayer]);
-                                choosenCell = m_compPlayer.ChooseCell(m_Board.Optionals2);
-                            }
+                        choosenCell = getCellFromCureentPlayer(firstChance);
+                        firstChance = false;
 
-                            else
-                            {
-                                choosenCell = m_UserInterface.GetCellFromPlayer(m_PlayersNames[m_CurrentPlayer], firstChance);
-                            }
-
-                            firstChance = false;
-                            if (choosenCell == new Cell(-1, -1))
-                            {
-                                return;
-                            }
-                        } while (!m_Board.TryUpdateMatrix(choosenCell, m_CurrentPlayer));
-                    }
+                        if (choosenCell == new Cell(-1, -1))
+                        {
+                            return;
+                        }
+                    } while (!m_Board.TryUpdateMatrix(choosenCell, m_CurrentPlayer));
                 }
 
                 updateScore();
-                if (m_PlayersNames[1] == string.Empty)
+                if (IsComputerPlaying())
                 {
                     startNewGame = m_UserInterface.GameFinished(m_PlayersNames, m_Player1.Score, m_compPlayer.Score);
                 }
@@ -91,7 +79,7 @@ namespace Ex02_Othelo
         {
             m_Player1.Name = m_PlayersNames[0];
 
-            if (m_PlayersNames[1] == string.Empty)
+            if (IsComputerPlaying())
             {
                 m_compPlayer = new ComputerPlayer();
             }
@@ -101,14 +89,44 @@ namespace Ex02_Othelo
                 m_Player2.Name = m_PlayersNames[1];
             }
         }
+        private bool IsComputerPlaying()
+        {
+            return m_PlayersNames[1] == string.Empty;
+        }
+        private Cell getCellFromCureentPlayer(bool i_IsFirstChance)
+        {
+            Cell choosenCell = null;
 
-        private bool checkeNoOptionsForPlayer()
+            if (m_PlayersNames[m_CurrentPlayer] == string.Empty)
+            {
+                choosenCell = m_compPlayer.ChooseCell(m_Board.Optionals2);
+            }
+
+            else
+            {
+                choosenCell = m_UserInterface.GetCellFromPlayer(m_PlayersNames[m_CurrentPlayer], i_IsFirstChance);
+            }
+
+            return choosenCell;
+        }
+        private void FillUpAndPrintMatrix()
+        {
+            if (IsComputerPlaying())
+            {
+                m_UserInterface.FillUpMatrixP(m_PlayersNames, m_Board.Matrix, m_Player1.Score, m_compPlayer.Score); // if computer!!!!!!!
+            }
+            else
+            {
+                m_UserInterface.FillUpMatrixP(m_PlayersNames, m_Board.Matrix, m_Player1.Score, m_Player2.Score); // if computer!!!!!!!
+            }
+            updateScore();
+        }
+        private bool checkeOptionsForPlayer()
         {
             bool isPossibleOption = true;
 
-            if (m_CurrentPlayer == 0)      //to split to function .
+            if (m_CurrentPlayer == 0)
             {
-                //checkNoOptions(m_CurrentPlayer);
                 if (m_Board.Optionals1.Count == 0)
                 {
                     m_UserInterface.NoOptionsMessage(m_PlayersNames[m_CurrentPlayer]);
@@ -132,7 +150,7 @@ namespace Ex02_Othelo
 
             m_Board.GetScores(out score1, out score2);
 
-            if (m_PlayersNames[1] == string.Empty)
+            if (IsComputerPlaying())
             {
                 m_Player1.Score = score1;
                 m_compPlayer.Score = score2;
@@ -146,4 +164,3 @@ namespace Ex02_Othelo
     }
 }
 
-//board.TryUpdateMatrix(new Cell(2, 3), 1);
