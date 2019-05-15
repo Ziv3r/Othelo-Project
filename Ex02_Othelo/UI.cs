@@ -62,12 +62,11 @@ namespace Ex02_Othelo
                 Console.WriteLine("Please Enter 1 or 2:");
                 numAsString = Console.ReadLine();
             }
-            Console.WriteLine("Enter {0}player name: ", numOfPlayers == 2 ? "first " : "");
-            names[0] = Console.ReadLine();
+
+            names[0] = getValidName("first");
             if(numOfPlayers == 2)
             {
-                Console.WriteLine("Enter second player name: ");
-                names[1] = Console.ReadLine();
+                names[1] = getValidName("second");
             }
             else
             {
@@ -77,6 +76,46 @@ namespace Ex02_Othelo
             i_Size = getBoardSize();
 
             return names;
+        }
+
+        private string getValidName(string i_Player)
+        {
+            Console.WriteLine("Enter {0} player name:", i_Player);
+            string name = Console.ReadLine();
+            while(name.Length < 2 )
+            {
+                Console.WriteLine("Name must contain 2 or more letters");
+                name = Console.ReadLine();
+            }
+
+            return name;
+        }
+
+        public bool GameFinished(string[] i_Names, int i_FirstPlayerScore, int i_SecScore)
+        {
+            Ex02.ConsoleUtils.Screen.Clear();
+            if (i_FirstPlayerScore > i_SecScore)
+            {
+                Console.WriteLine("{0} won!", i_Names[0]);
+            }
+            else if(i_SecScore > i_FirstPlayerScore)
+            {
+                Console.WriteLine("{0} won", String.IsNullOrEmpty(i_Names[1]) ? "Computer" : i_Names[1]);
+            }
+            else
+            {
+                Console.WriteLine("No one won!");
+            }
+
+            Console.WriteLine("Would you like to play again?\ny for yes q to exit");
+            string toContinue = Console.ReadLine();
+            while(toContinue.ToLower() != "y" && toContinue.ToLower() != "q")
+            {
+                Console.WriteLine("y for yes q to exit");
+                toContinue = Console.ReadLine();
+            }
+
+            return toContinue == "y" ? true : false;
         }
 
         public void NoOptionsMessage(string i_Name)
