@@ -39,7 +39,11 @@ namespace Ex02_Othelo
             get { return m_Size; }
             set { m_Size = value; }
         }
-        public List<Cell> Optionals
+        public List<Cell> Optionals1
+        {
+            get { return m_Optional1; }
+        }
+        public List<Cell> Optionals2
         {
             get { return m_Optional2; }
         }

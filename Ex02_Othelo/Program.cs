@@ -17,8 +17,8 @@ namespace Ex02_Othelo
 
 /*
  To-Do:
- 1. correct message after mistake - not valid cell . 
- 2. message for no options for current player.
+ 1. correct message after mistake - not valid cell .                (fixed) . 
+ 2. message for no options for current player.                      (fixed) . 
  3. game finished - who wins and option to start a new game . 
  4. computer Player . 
  5. exit game with pressing Q .
