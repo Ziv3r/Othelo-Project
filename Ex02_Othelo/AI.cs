@@ -4,21 +4,7 @@
 
     public class AI
     {
-        private readonly char m_Sign;
-        private int m_Score = 2;
-
-        public AI(char i_Sign)
-        {
-            m_Sign = i_Sign;
-        }
-
-        public int Score
-        {
-            get { return m_Score; }
-            set { m_Score = value; }
-        }
-
-        public Cell ComputerMove(Board i_Board)
+        public Cell AIMove(Board i_Board, char i_Sign)
         {
             Cell bestMove = null;
             int maxVal = int.MinValue;
@@ -28,7 +14,7 @@
                 Board child = i_Board.Clone();
                 child.TryUpdateMatrix(option, 1);
                 child.GetScores(out score1, out score2);
-                int valOfMove = minMax(false, 5, child, score1, score2);
+                int valOfMove = minMax(false, 5, child, score1, score2, i_Sign);
 
                 if (valOfMove > maxVal)
                 {
@@ -40,7 +26,7 @@
             return bestMove;
         }
 
-        private int getCornersHeuristic(Board i_Board)
+        private int getCornersHeuristic(Board i_Board, char i_Sign)
         {
             int res = 0;
             int edge = i_Board.Size - 1;
@@ -54,7 +40,7 @@
 
             foreach(char corner in corners)
             {
-                if(corner == m_Sign)
+                if(corner == i_Sign)
                 {
                     res += 20;
                 }
@@ -63,18 +49,18 @@
             return res;
         }
 
-        private int heuristic(int i_Score1, int i_Score2, Board i_Board)
+        private int heuristic(int i_Score1, int i_Score2, Board i_Board, char i_Sign)
         {
             int res = 0;
-            res += getCornersHeuristic(i_Board);
+            res += getCornersHeuristic(i_Board, i_Sign);
             return res + i_Score2 - i_Score1;
         }
 
-        private int minMax(bool i_isComputer, int i_depth, Board i_Board, int i_Score1, int i_Score2)
+        private int minMax(bool i_isComputer, int i_depth, Board i_Board, int i_Score1, int i_Score2, char i_Sign)
         {
             if (i_depth == 0 || i_Board.Optionals2.Count.Equals(0))
             {
-                return heuristic(i_Score1, i_Score2, i_Board);
+                return heuristic(i_Score1, i_Score2, i_Board, i_Sign);
             }
 
             int bestVal = int.MaxValue;
@@ -85,7 +71,7 @@
                     Board child = i_Board.Clone();
                     child.TryUpdateMatrix(option, 0);
                     child.GetScores(out i_Score1, out i_Score2);
-                    bestVal = Math.Min(bestVal, minMax(!i_isComputer, i_depth - 1, child, i_Score1, i_Score2));
+                    bestVal = Math.Min(bestVal, minMax(!i_isComputer, i_depth - 1, child, i_Score1, i_Score2, i_Sign));
                 }
             }
             else
@@ -98,7 +84,7 @@
                     child.TryUpdateMatrix(option, 1);
 
                     child.GetScores(out i_Score1, out i_Score2);
-                    bestVal = Math.Max(bestVal, minMax(!i_isComputer, i_depth - 1, child, i_Score1, i_Score2));
+                    bestVal = Math.Max(bestVal, minMax(!i_isComputer, i_depth - 1, child, i_Score1, i_Score2, i_Sign));
                 }
             }
 

@@ -14,7 +14,7 @@ namespace Ex02_Othelo
         private UI m_UserInterface = new UI();
         private Player m_Player1 = new Player();
         private Player m_Player2 = null;
-        private AI m_compPlayer = null;
+        private ComputerPlayer m_compPlayer = null;
         private string[] m_PlayersNames;
 
         public void Start()
@@ -82,7 +82,7 @@ namespace Ex02_Othelo
 
             if (IsComputerPlaying())
             {
-                m_compPlayer = new AI(k_FirstPlayerSign);
+                m_compPlayer = new ComputerPlayer(k_FirstPlayerSign);
             }
             else
             {

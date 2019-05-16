@@ -39,7 +39,7 @@ namespace Ex02_Othelo
             int col = -1;
             do
             {
-                Console.WriteLine("{0} please choose {1}cell:", i_PlayerName, !i_FirstTry ? "valid " : string.Empty);
+                Console.WriteLine("\n{0} please choose {1}cell, in the following form(5e) ", i_PlayerName, !i_FirstTry ? "valid " : string.Empty);
                 input = Console.ReadLine();
                 if (input.Length < 2)
                 {
@@ -242,9 +242,9 @@ namespace Ex02_Othelo
 
             Console.WriteLine(Title);
 
-            string secondPyaer = string.IsNullOrEmpty(PlayersNames[1]) ? "computer" : PlayersNames[1];
+            string secondPlayer = string.IsNullOrEmpty(PlayersNames[1]) ? "computer" : PlayersNames[1];
 
-            Console.WriteLine("{0} {1} \t\t\t {2} {3}", PlayersNames[0], i_FirstScore, secondPyaer, i_SecondScore);
+            Console.WriteLine("{0} {1} \t\t{2} {3} {4}", PlayersNames[0], i_FirstScore, m_SizeOfLogicMatrix == 8 ? "\t" : string.Empty, secondPlayer, i_SecondScore);
 
             for (int i = 0; i < m_Height; i++)
             {
