@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ex02_Othelo
 {
-    class Program
+    public class Program
     {
         public static void Main()
         {
@@ -12,9 +12,7 @@ namespace Ex02_Othelo
             gamer.Start();
         }
     }
-
 }
-
 
 /* New TO do :
  delete utils / chekcer - print Optionals , ptint logic matrix 

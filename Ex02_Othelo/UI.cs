@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ex02_Othelo
 {
-    class UI
+    public class UI
     {
         private const char k_FirstPlayerSign = 'X';
         private const char k_SecPlayerSign = 'O';
@@ -28,8 +28,10 @@ namespace Ex02_Othelo
                 m_Width = 35;
                 m_Height = 18;
             }
+
             m_MatrixPrint = new char[m_Height, m_Width];
         }
+
         public Cell GetCellFromPlayer(string i_PlayerName, bool i_FirstTry)
         {
             string input;
@@ -37,7 +39,7 @@ namespace Ex02_Othelo
             int col = -1;
             do
             {
-                Console.WriteLine("{0} please choose {1}cell:", i_PlayerName, !i_FirstTry ? "valid " : "");
+                Console.WriteLine("{0} please choose {1}cell:", i_PlayerName, !i_FirstTry ? "valid " : string.Empty);
                 input = Console.ReadLine();
                 if (input.Length < 2)
                 {
@@ -52,8 +54,10 @@ namespace Ex02_Othelo
                 {
                     col = char.ToUpper(input[1]) - 'A';
                 }
+
                 i_FirstTry = false;
-            } while (!int.TryParse(input[0].ToString(), out row) || !isInBoard(--row) || !isInBoard(col));
+            }
+            while (!int.TryParse(input[0].ToString(), out row) || !isInBoard(--row) || !isInBoard(col));
 
             return new Cell(row, col);
         }
@@ -71,7 +75,6 @@ namespace Ex02_Othelo
             Console.WriteLine("1.Human vs Computer ");
             Console.WriteLine("2.Human vs Human ");
 
-            //Console.WriteLine("Enter number of players: ");
             string numAsString = Console.ReadLine();
             int numOfPlayers = 0;
             while (!int.TryParse(numAsString, out numOfPlayers) || !isNumOfPlayersValid(numOfPlayers))
@@ -87,7 +90,7 @@ namespace Ex02_Othelo
             }
             else
             {
-                names[1] = "";
+                names[1] = string.Empty;
             }
 
             o_Size = getBoardSize();
@@ -110,7 +113,7 @@ namespace Ex02_Othelo
 
         public bool GameFinished(string[] i_Names, int i_FirstPlayerScore, int i_SecScore)
         {
-            string secondPlayer = String.IsNullOrEmpty(i_Names[1]) ? "Computer" : i_Names[1];
+            string secondPlayer = string.IsNullOrEmpty(i_Names[1]) ? "Computer" : i_Names[1];
 
             Console.WriteLine("{0} covered {1} cells and {2} covered {3} cells!", i_Names[0], i_FirstPlayerScore, secondPlayer, i_SecScore);
 
@@ -140,7 +143,7 @@ namespace Ex02_Othelo
 
         public void NoOptionsMessage(string i_Name)
         {
-            if (i_Name != "")
+            if (i_Name != string.Empty)
             {
                 Console.WriteLine("{0} have no move to make", i_Name);
                 System.Threading.Thread.Sleep(3000);
@@ -165,9 +168,10 @@ namespace Ex02_Othelo
                 Console.WriteLine("2. 8-8 board ");
                 choosenOption = Console.ReadLine();
             }
+
             if (chosen == 1)
             {
-                boardSize = 6; ;
+                boardSize = 6;
             }
             else if (chosen == 2)
             {
@@ -181,6 +185,7 @@ namespace Ex02_Othelo
         {
             return i_Size == 1 || i_Size == 2;
         }
+
         private bool isNumOfPlayersValid(int i_NumOfPlayers)
         {
             return i_NumOfPlayers == 1 || i_NumOfPlayers == 2;
@@ -199,7 +204,6 @@ namespace Ex02_Othelo
                     if (i % 2 == 1 && j > 1)
                     {
                         m_MatrixPrint[i, j] = '=';
-
                     }
                     else if (i == 0 && j % 4 == 0 && j != 0)
                     {
@@ -221,9 +225,11 @@ namespace Ex02_Othelo
                     }
                 }
             }
+
             convertMatrixLogicToMatrixPrint(i_MatrixLogic);
             printMatirxP(PlayersNames, i_FirstScore, i_SecondScore);
         }
+
         private void printMatirxP(string[] PlayersNames, int i_FirstScore, int i_SecondScore)
         {
             string Title = string.Format(@"   ____  _   _          _       
@@ -246,9 +252,11 @@ namespace Ex02_Othelo
                 {
                     Console.Write(m_MatrixPrint[i, j]);
                 }
+
                 Console.WriteLine();
             }
         }
+
         private void convertMatrixLogicToMatrixPrint(char[,] i_MatrixLogic)
         {
             for (int row = 0; row < m_SizeOfLogicMatrix; row++)
@@ -257,11 +265,11 @@ namespace Ex02_Othelo
                 {
                     if (i_MatrixLogic[row, col] == k_SecPlayerSign)
                     {
-                        m_MatrixPrint[row * 2 + 2, col * 4 + 4] = k_SecPlayerSign;
+                        m_MatrixPrint[(row * 2) + 2, (col * 4) + 4] = k_SecPlayerSign;
                     }
                     else if (i_MatrixLogic[row, col] == k_FirstPlayerSign)
                     {
-                        m_MatrixPrint[row * 2 + 2, col * 4 + 4] = k_FirstPlayerSign;
+                        m_MatrixPrint[(row * 2) + 2, (col * 4) + 4] = k_FirstPlayerSign;
                     }
                 }
             }

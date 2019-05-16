@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Ex02_Othelo
 {
-    class Player
+    public class Player
     {
         private string m_Name;
-        private int m_Score=2 ;
+        private int m_Score = 2;
 
-        public  string Name
+        public string Name
         {
             get { return m_Name; }
             set { m_Name = value;  }

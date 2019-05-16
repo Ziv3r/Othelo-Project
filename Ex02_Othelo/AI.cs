@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ex02_Othelo
+﻿namespace Ex02_Othelo
 {
-    class AI
+    using System;
+
+    public class AI
     {
+        private readonly char m_Sign;
         private int m_Score = 2;
-        private char m_Sign;
+
         public AI(char i_Sign)
         {
             m_Sign = i_Sign;
         }
+
         public int Score
         {
             get { return m_Score; }
             set { m_Score = value; }
         }
+
         public Cell ComputerMove(Board i_Board)
         {
             Cell bestMove = null;
@@ -43,8 +44,13 @@ namespace Ex02_Othelo
         {
             int res = 0;
             int edge = i_Board.Size - 1;
-            char[] corners = { i_Board.Matrix[0, edge],
-                i_Board.Matrix[0, 0], i_Board.Matrix[edge, edge], i_Board.Matrix[edge, 0] };
+            char[] corners =
+                {
+                i_Board.Matrix[0, edge],
+                i_Board.Matrix[0, 0],
+                i_Board.Matrix[edge, edge],
+                i_Board.Matrix[edge, 0]
+            };
 
             foreach(char corner in corners)
             {
@@ -95,8 +101,8 @@ namespace Ex02_Othelo
                     bestVal = Math.Max(bestVal, minMax(!i_isComputer, i_depth - 1, child, i_Score1, i_Score2));
                 }
             }
+
             return bestVal;
         }
-
     }
 }

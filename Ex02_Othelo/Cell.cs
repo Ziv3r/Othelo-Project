@@ -9,11 +9,12 @@ namespace Ex02_Othelo
         private int m_X;
         private int m_Y;
 
-        public Cell(int i_X , int i_Y)
+        public Cell(int i_X, int i_Y)
         {
             m_X = i_X;
             m_Y = i_Y; 
         }
+
         public int X
         {
             get { return m_X; }
@@ -25,14 +26,15 @@ namespace Ex02_Othelo
             get { return m_Y; }
             set { m_Y = value; }
         }
+
         public static bool operator ==(Cell c1, Cell c2)
         {
-            return (c1.X == c2.X && c1.Y == c2.Y);
+            return c1.X == c2.X && c1.Y == c2.Y;
         }
+
         public static bool operator !=(Cell c1, Cell c2)
         {
             return !(c1.X == c2.X && c1.Y == c2.Y);
         }
     }
 }
-

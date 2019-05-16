@@ -27,10 +27,12 @@ namespace Ex02_Othelo
                     newBoard.m_Matrix[row, col] = currChar;
                 }
             }
+
             foreach (Cell option in m_Optional1)
             {
-                newBoard.m_Optional1.Add(new Cell(option.X,option.Y));
+                newBoard.m_Optional1.Add(new Cell(option.X, option.Y));
             }
+
             foreach (Cell option in m_Optional2)
             {
                 newBoard.m_Optional2.Add(new Cell(option.X, option.Y));
@@ -38,6 +40,7 @@ namespace Ex02_Othelo
 
             return newBoard;
         }
+
         public void Init(int i_Size)
         {
             m_Size = i_Size;
@@ -58,19 +61,23 @@ namespace Ex02_Othelo
         {
             get { return m_Matrix; }
         }
-        public int  Size 
+
+        public int Size
         {
             get { return m_Size; }
             set { m_Size = value; }
         }
+
         public List<Cell> Optionals1
         {
             get { return m_Optional1; }
         }
+
         public List<Cell> Optionals2
         {
             get { return m_Optional2; }
         }
+
         private void addDefaults()
         {
              if (m_Size == 6)
@@ -83,14 +90,14 @@ namespace Ex02_Othelo
                 m_Matrix[3, 3] = m_Matrix[4, 4] = k_FirstPlayerSign;
                 m_Matrix[3, 4] = m_Matrix[4, 3] = k_SecPlayerSign;
             }
+
             updateOptionals();
         }
 
         public bool TryUpdateMatrix(Cell i_ToUpdate, int i_CurrentPlayer)
         {
-            bool isUpdateSuccess = false ;
+            bool isUpdateSuccess = false;
             char userSign = i_CurrentPlayer == 0 ? k_FirstPlayerSign : k_SecPlayerSign;
-
             if (i_CurrentPlayer == 0)
             {
                 isUpdateSuccess = validateCell(m_Optional1, i_ToUpdate);
@@ -113,7 +120,8 @@ namespace Ex02_Othelo
             bool isValid = false; 
                 foreach (Cell currentCell in i_OptionsArr)
                 {
-                    if (currentCell == i_ToCheck)                    {
+                    if (currentCell == i_ToCheck)
+                    {
                         isValid = true;
                         break;
                     }
@@ -131,7 +139,7 @@ namespace Ex02_Othelo
             {
                 for (int j = 0; j < m_Size; j++)
                 {
-                    if(m_Matrix[i,j] == k_SecPlayerSign)
+                    if(m_Matrix[i, j] == k_SecPlayerSign)
                     {
                         o_Score2++;
                     }
@@ -142,6 +150,7 @@ namespace Ex02_Othelo
                 }
             }
         }
+
         private void update(Cell i_ToUpdate, char i_UserSign)
         {
             updateMatrix(i_ToUpdate, i_UserSign);
@@ -169,6 +178,7 @@ namespace Ex02_Othelo
             {
                 return false;
             }
+
             char currentCell = m_Matrix[i_ToUpdate.X + i_DirX, i_ToUpdate.Y + i_DirY];
 
             if (currentCell == i_UserSign)
@@ -229,11 +239,11 @@ namespace Ex02_Othelo
 
         private void updateOptionalsRec(Cell i_ToUpdate, char i_UserSign, int i_DirX, int i_DirY, int i_Counter)
         {
-
             if(isOutOfBound(i_ToUpdate))
             {
                 return; 
             }
+
             char currentCell = m_Matrix[i_ToUpdate.X, i_ToUpdate.Y];
             if (currentCell == i_UserSign)
             {
@@ -292,10 +302,10 @@ namespace Ex02_Othelo
 
             Console.WriteLine();
         }
+
         public bool HasOption()
         {
-            return (m_Optional1.Count != 0 || m_Optional2.Count != 0);
+            return m_Optional1.Count != 0 || m_Optional2.Count != 0;
         }
-
     }
 }

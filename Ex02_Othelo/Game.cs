@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace Ex02_Othelo
 {
-    class Game
+    public class Game
     {
         private const char k_FirstPlayerSign = 'X';
         private const char k_SecPlayerSign = 'O';
@@ -15,8 +15,7 @@ namespace Ex02_Othelo
         private Player m_Player1 = new Player();
         private Player m_Player2 = null;
         private AI m_compPlayer = null;
-        private String[] m_PlayersNames;
-
+        private string[] m_PlayersNames;
 
         public void Start()
         {
@@ -40,7 +39,7 @@ namespace Ex02_Othelo
                 {
                     firstChance = true;
                     FillUpAndPrintMatrix();
-                    m_CurrentPlayer = m_CurrentPlayer * -1 + 1;         ////switch players 0=>1 ,1=>0
+                    m_CurrentPlayer = (m_CurrentPlayer * -1) + 1;         ////switch players 0=>1 ,1=>0
                     do
                     {
                         if (!checkeOptionsForPlayer())
@@ -56,7 +55,8 @@ namespace Ex02_Othelo
                         {
                             return;
                         }
-                    } while (!m_Board.TryUpdateMatrix(choosenCell, m_CurrentPlayer));
+                    }
+                    while (!m_Board.TryUpdateMatrix(choosenCell, m_CurrentPlayer));
                 }
 
                 if (IsComputerPlaying())
@@ -75,6 +75,7 @@ namespace Ex02_Othelo
                 }
             }
         }
+
         private void alocatePlayers()
         {
             m_Player1.Name = m_PlayersNames[0];
@@ -89,10 +90,12 @@ namespace Ex02_Othelo
                 m_Player2.Name = m_PlayersNames[1];
             }
         }
+
         private bool IsComputerPlaying()
         {
             return m_PlayersNames[1] == string.Empty;
         }
+
         private Cell getCellFromCureentPlayer(bool i_IsFirstChance)
         {
             Cell choosenCell = null;
@@ -100,7 +103,6 @@ namespace Ex02_Othelo
             {
                 choosenCell = m_compPlayer.ComputerMove(m_Board.Clone());
             }
-
             else
             {
                 choosenCell = m_UserInterface.GetCellFromPlayer(m_PlayersNames[m_CurrentPlayer], i_IsFirstChance);
@@ -108,6 +110,7 @@ namespace Ex02_Othelo
 
             return choosenCell;
         }
+
         private void FillUpAndPrintMatrix()
         {
             updateScore();
@@ -119,8 +122,8 @@ namespace Ex02_Othelo
             {
                 m_UserInterface.FillUpMatrixP(m_PlayersNames, m_Board.Matrix, m_Player1.Score, m_Player2.Score);
             }
-
         }
+
         private bool checkeOptionsForPlayer()
         {
             bool isPossibleOption = true;
@@ -141,6 +144,7 @@ namespace Ex02_Othelo
                     isPossibleOption = false;
                 }
             }
+
             return isPossibleOption;
         }
 
@@ -162,4 +166,3 @@ namespace Ex02_Othelo
         }
     }
 }
-
