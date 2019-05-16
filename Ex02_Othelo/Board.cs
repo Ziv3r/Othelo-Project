@@ -214,22 +214,14 @@ namespace Ex02_Othelo
                 {
                     if (m_Matrix[i, j] != k_EmptyCellSign)
                     {
-                        updateOptionalsRec(new Cell(i + 0, j + 1), m_Matrix[i, j], 0, 1, 0);
-                        updateOptionalsRec(new Cell(i + 0, j - 1), m_Matrix[i, j], 0, -1, 0);
-                        updateOptionalsRec(new Cell(i + 1, j + 0), m_Matrix[i, j], 1, 0, 0);
-                        updateOptionalsRec(new Cell(i + 1, j - 1), m_Matrix[i, j], 1, -1, 0);
-                        updateOptionalsRec(new Cell(i + 1, j + 1), m_Matrix[i, j], 1, 1, 0);
-                        updateOptionalsRec(new Cell(i + -1, j + 1), m_Matrix[i, j], -1, 1, 0);
-                        updateOptionalsRec(new Cell(i - 1, j - 1), m_Matrix[i, j], -1, -1, 0);
-                        updateOptionalsRec(new Cell(i - 1, j + 0), m_Matrix[i, j], -1, 0, 0);
-                        //updateOptionalsRec(new Cell(i , j ), m_Matrix[i, j], 0, 1, counter);
-                        //updateOptionalsRec(new Cell(i , j ), m_Matrix[i, j], 0, -1, counter);
-                        //updateOptionalsRec(new Cell(i , j ), m_Matrix[i, j], 1, 0, counter);
-                        //updateOptionalsRec(new Cell(i , j ), m_Matrix[i, j], 1, -1, counter);
-                        //updateOptionalsRec(new Cell(i , j), m_Matrix[i, j], 1, 1, counter);
-                        //updateOptionalsRec(new Cell(i , j), m_Matrix[i, j], -1, 1, counter);
-                        //updateOptionalsRec(new Cell(i , j), m_Matrix[i, j], -1, -1, counter);
-                        //updateOptionalsRec(new Cell(i , j), m_Matrix[i, j], -1, 0, counter);
+                        updateOptionalsRec(new Cell(i + 0, j + 1), m_Matrix[i, j], 0, 1, counter);
+                        updateOptionalsRec(new Cell(i + 0, j - 1), m_Matrix[i, j], 0, -1, counter);
+                        updateOptionalsRec(new Cell(i + 1, j + 0), m_Matrix[i, j], 1, 0, counter);
+                        updateOptionalsRec(new Cell(i + 1, j - 1), m_Matrix[i, j], 1, -1, counter);
+                        updateOptionalsRec(new Cell(i + 1, j + 1), m_Matrix[i, j], 1, 1, counter);
+                        updateOptionalsRec(new Cell(i + -1, j + 1), m_Matrix[i, j], -1, 1, counter);
+                        updateOptionalsRec(new Cell(i - 1, j - 1), m_Matrix[i, j], -1, -1, counter);
+                        updateOptionalsRec(new Cell(i - 1, j + 0), m_Matrix[i, j], -1, 0, counter);
                     }
                 }
             }
