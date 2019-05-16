@@ -151,7 +151,7 @@ namespace Ex02_Othelo
         {
             Ex02.ConsoleUtils.Screen.Clear();
             int boardSize = 0;
-            int chosen ;
+            int chosen;
             Console.WriteLine("Please Choose Board size (type 8 for 8x8 and 6 for 6x6):");
             Console.WriteLine("1. 6-6 board ");
             Console.WriteLine("2. 8-8 board ");
@@ -173,7 +173,7 @@ namespace Ex02_Othelo
             {
                 boardSize = 8;
             }
-           
+
             return boardSize;
         }
 
