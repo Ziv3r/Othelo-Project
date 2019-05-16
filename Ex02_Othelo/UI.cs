@@ -30,7 +30,6 @@ namespace Ex02_Othelo
             }
             m_MatrixPrint = new char[m_Height, m_Width];
         }
-
         public Cell GetCellFromPlayer(string i_PlayerName, bool i_FirstTry)
         {
             string input;
@@ -38,7 +37,7 @@ namespace Ex02_Othelo
             int col = -1;
             do
             {
-                Console.WriteLine("{0} choose {1}cell:", i_PlayerName, !i_FirstTry ? "valid " : "");
+                Console.WriteLine("{0} please choose {1}cell:", i_PlayerName, !i_FirstTry ? "valid " : "");
                 input = Console.ReadLine();
                 if (input.Length < 2)
                 {
@@ -68,7 +67,11 @@ namespace Ex02_Othelo
         {
             string[] names = new string[2];
 
-            Console.WriteLine("Enter number of players: ");
+            Console.WriteLine("please choose game type: ");
+            Console.WriteLine("1.Human vs Computer ");
+            Console.WriteLine("2.Human vs Human ");
+
+            //Console.WriteLine("Enter number of players: ");
             string numAsString = Console.ReadLine();
             int numOfPlayers = 0;
             while (!int.TryParse(numAsString, out numOfPlayers) || !isNumOfPlayersValid(numOfPlayers))
@@ -137,7 +140,7 @@ namespace Ex02_Othelo
 
         public void NoOptionsMessage(string i_Name)
         {
-            if(i_Name != "")
+            if (i_Name != "")
             {
                 Console.WriteLine("{0} have no move to make", i_Name);
                 System.Threading.Thread.Sleep(3000);
@@ -146,22 +149,37 @@ namespace Ex02_Othelo
 
         private int getBoardSize()
         {
+            Ex02.ConsoleUtils.Screen.Clear();
             int boardSize = 0;
-            Console.WriteLine("Choose Board size (type 8 for 8x8 and 6 for 6x6):");
-            string boardSizeString = Console.ReadLine();
+            int chosen ;
+            Console.WriteLine("Please Choose Board size (type 8 for 8x8 and 6 for 6x6):");
+            Console.WriteLine("1. 6-6 board ");
+            Console.WriteLine("2. 8-8 board ");
+            string choosenOption = Console.ReadLine();
 
-            while (!int.TryParse(boardSizeString, out boardSize) || !isBoardSizeValid(boardSize))
+            while (!int.TryParse(choosenOption, out chosen) || !isBoardSizeValid(chosen))
             {
-                Console.WriteLine("Please choose 6 or 8:");
-                boardSizeString = Console.ReadLine();
+                Ex02.ConsoleUtils.Screen.Clear();
+                Console.WriteLine("Please Choose Board size (type 8 for 8x8 and 6 for 6x6):");
+                Console.WriteLine("1. 6-6 board ");
+                Console.WriteLine("2. 8-8 board ");
+                choosenOption = Console.ReadLine();
             }
-
+            if (chosen == 1)
+            {
+                boardSize = 6; ;
+            }
+            else if (chosen == 2)
+            {
+                boardSize = 8;
+            }
+           
             return boardSize;
         }
 
         private bool isBoardSizeValid(int i_Size)
         {
-            return i_Size == 6 || i_Size == 8;
+            return i_Size == 1 || i_Size == 2;
         }
         private bool isNumOfPlayersValid(int i_NumOfPlayers)
         {
@@ -170,7 +188,6 @@ namespace Ex02_Othelo
 
         public void FillUpMatrixP(string[] PlayersNames, char[,] i_MatrixLogic, int i_FirstScore, int i_SecondScore)
         {
-
             int counter = 0;
             int countNumber = 0;
 
@@ -209,6 +226,16 @@ namespace Ex02_Othelo
         }
         private void printMatirxP(string[] PlayersNames, int i_FirstScore, int i_SecondScore)
         {
+            string Title = string.Format(@"   ____  _   _          _       
+  / __ \| | | |        | |      
+ | |  | | |_| |__   ___| | ___  
+ | |  | | __| '_ \ / _ \ |/ _ \ 
+ | |__| | |_| | | |  __/ | (_) |
+  \____/ \__|_| |_|\___|_|\___/ 
+");
+
+            Console.WriteLine(Title);
+
             string secondPyaer = string.IsNullOrEmpty(PlayersNames[1]) ? "computer" : PlayersNames[1];
 
             Console.WriteLine("{0} {1} \t\t\t {2} {3}", PlayersNames[0], i_FirstScore, secondPyaer, i_SecondScore);
