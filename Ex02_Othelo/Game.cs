@@ -7,7 +7,8 @@ namespace Ex02_Othelo
 {
     class Game
     {
-        private int m_CurrentPlayer = 1;
+        private const int k_MaxVal = 100;
+        private int m_CurrentPlayer = 0;
         private Board m_Board = new Board();
         private UI m_UserInterface = new UI();
         private Player m_Player1 = new Player();
@@ -24,7 +25,6 @@ namespace Ex02_Othelo
             m_Board.Size = matrixSize;
             m_UserInterface.InitUI(m_Board.Size);
             m_Board.Init(m_Board.Size);
-            m_Board.PrintOptionals();
             run();
         }
 
@@ -58,7 +58,6 @@ namespace Ex02_Othelo
                     } while (!m_Board.TryUpdateMatrix(choosenCell, m_CurrentPlayer));
                 }
 
-                updateScore();
                 if (IsComputerPlaying())
                 {
                     startNewGame = m_UserInterface.GameFinished(m_PlayersNames, m_Player1.Score, m_compPlayer.Score);
@@ -96,10 +95,9 @@ namespace Ex02_Othelo
         private Cell getCellFromCureentPlayer(bool i_IsFirstChance)
         {
             Cell choosenCell = null;
-
             if (m_PlayersNames[m_CurrentPlayer] == string.Empty)
             {
-                choosenCell = m_compPlayer.ChooseCell(m_Board.Optionals2);
+                choosenCell = computerMove();
             }
 
             else
@@ -111,15 +109,16 @@ namespace Ex02_Othelo
         }
         private void FillUpAndPrintMatrix()
         {
+            updateScore();
             if (IsComputerPlaying())
             {
-                m_UserInterface.FillUpMatrixP(m_PlayersNames, m_Board.Matrix, m_Player1.Score, m_compPlayer.Score); // if computer!!!!!!!
+                m_UserInterface.FillUpMatrixP(m_PlayersNames, m_Board.Matrix, m_Player1.Score, m_compPlayer.Score);
             }
             else
             {
-                m_UserInterface.FillUpMatrixP(m_PlayersNames, m_Board.Matrix, m_Player1.Score, m_Player2.Score); // if computer!!!!!!!
+                m_UserInterface.FillUpMatrixP(m_PlayersNames, m_Board.Matrix, m_Player1.Score, m_Player2.Score);
             }
-            updateScore();
+
         }
         private bool checkeOptionsForPlayer()
         {
@@ -149,18 +148,76 @@ namespace Ex02_Othelo
             int score1, score2;
 
             m_Board.GetScores(out score1, out score2);
+            m_Player1.Score = score1;
 
             if (IsComputerPlaying())
             {
-                m_Player1.Score = score1;
                 m_compPlayer.Score = score2;
             }
             else
             {
-                m_Player1.Score = score1;
                 m_Player2.Score = score2;
             }
         }
+
+        private Cell computerMove()
+        {
+            Cell bestMove = null;
+            int maxVal = -100;
+            int score1 = 0, score2 = 0;
+            foreach (Cell option in m_Board.Optionals2)
+            {
+                Board child = m_Board.Clone();
+                child.TryUpdateMatrix(option, 1);
+                child.GetScores(out score1, out score2);
+                int valOfMove = minMax(false, 5, child, score1, score2);
+
+                if (valOfMove > maxVal)
+                {
+                    maxVal = valOfMove;
+                    bestMove = option;
+                }
+            }
+
+            return bestMove;
+
+        }
+        private int minMax(bool i_isComputer, int i_depth, Board i_Board, int i_Score1, int i_Score2)
+        {
+            if (i_depth == 0 || i_Board.Optionals2.Count.Equals(0))
+            {
+                return i_Score2 - i_Score1;
+            }
+
+            int bestVal = 100;
+            if (!i_isComputer)
+            {
+                foreach (Cell option in i_Board.Optionals1)
+                {
+                    Board child = i_Board.Clone();
+                    child.TryUpdateMatrix(option, 0);
+
+                    child.GetScores(out i_Score1, out i_Score2);
+                    bestVal = Math.Min(bestVal, minMax(!i_isComputer, i_depth - 1, child, i_Score1, i_Score2));
+                }
+            }
+
+            else
+            {
+                bestVal = -100;
+
+                foreach (Cell option in i_Board.Optionals2)
+                {
+                    Board child = i_Board.Clone();
+                    child.TryUpdateMatrix(option, 1);
+
+                    child.GetScores(out i_Score1, out i_Score2);
+                    bestVal = Math.Max(bestVal, minMax(!i_isComputer, i_depth - 1, child, i_Score1, i_Score2));
+                }
+            }
+            return bestVal;
+        }
+
     }
 }
 

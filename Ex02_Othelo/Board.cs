@@ -14,6 +14,30 @@ namespace Ex02_Othelo
         private List<Cell> m_Optional1 = new List<Cell>();
         private List<Cell> m_Optional2 = new List<Cell>();
 
+        public Board Clone()
+        {
+            Board newBoard = new Board();        
+            newBoard.m_Size = m_Size;
+            newBoard.m_Matrix = new char[m_Size, m_Size];
+            for (int row = 0; row < m_Size; row++)
+            {
+                for (int col = 0; col < m_Size; col++)
+                {
+                    char currChar = m_Matrix[row, col];
+                    newBoard.m_Matrix[row, col] = currChar;
+                }
+            }
+            foreach (Cell option in m_Optional1)
+            {
+                newBoard.m_Optional1.Add(new Cell(option.X,option.Y));
+            }
+            foreach (Cell option in m_Optional2)
+            {
+                newBoard.m_Optional2.Add(new Cell(option.X, option.Y));
+            }
+
+            return newBoard;
+        }
         public void Init(int i_Size)
         {
             m_Size = i_Size;
@@ -107,13 +131,13 @@ namespace Ex02_Othelo
             {
                 for (int j = 0; j < m_Size; j++)
                 {
-                    if(m_Matrix[i,j] == 'O')
-                    {
-                        o_Score1++;
-                    }
-                    else if(m_Matrix[i, j] == 'X')
+                    if(m_Matrix[i,j] == k_SecPlayerSign)
                     {
                         o_Score2++;
+                    }
+                    else if(m_Matrix[i, j] == k_FirstPlayerSign)
+                    {
+                        o_Score1++;
                     }
                 }
             }
@@ -190,14 +214,22 @@ namespace Ex02_Othelo
                 {
                     if (m_Matrix[i, j] != k_EmptyCellSign)
                     {
-                        updateOptionalsRec(new Cell(i , j ), m_Matrix[i, j], 0, 1, counter);
-                        updateOptionalsRec(new Cell(i , j ), m_Matrix[i, j], 0, -1, counter);
-                        updateOptionalsRec(new Cell(i , j ), m_Matrix[i, j], 1, 0, counter);
-                        updateOptionalsRec(new Cell(i , j ), m_Matrix[i, j], 1, -1, counter);
-                        updateOptionalsRec(new Cell(i , j), m_Matrix[i, j], 1, 1, counter);
-                        updateOptionalsRec(new Cell(i , j), m_Matrix[i, j], -1, 1, counter);
-                        updateOptionalsRec(new Cell(i , j), m_Matrix[i, j], -1, -1, counter);
-                        updateOptionalsRec(new Cell(i , j), m_Matrix[i, j], -1, 0, counter);
+                        updateOptionalsRec(new Cell(i + 0, j + 1), m_Matrix[i, j], 0, 1, 0);
+                        updateOptionalsRec(new Cell(i + 0, j - 1), m_Matrix[i, j], 0, -1, 0);
+                        updateOptionalsRec(new Cell(i + 1, j + 0), m_Matrix[i, j], 1, 0, 0);
+                        updateOptionalsRec(new Cell(i + 1, j - 1), m_Matrix[i, j], 1, -1, 0);
+                        updateOptionalsRec(new Cell(i + 1, j + 1), m_Matrix[i, j], 1, 1, 0);
+                        updateOptionalsRec(new Cell(i + -1, j + 1), m_Matrix[i, j], -1, 1, 0);
+                        updateOptionalsRec(new Cell(i - 1, j - 1), m_Matrix[i, j], -1, -1, 0);
+                        updateOptionalsRec(new Cell(i - 1, j + 0), m_Matrix[i, j], -1, 0, 0);
+                        //updateOptionalsRec(new Cell(i , j ), m_Matrix[i, j], 0, 1, counter);
+                        //updateOptionalsRec(new Cell(i , j ), m_Matrix[i, j], 0, -1, counter);
+                        //updateOptionalsRec(new Cell(i , j ), m_Matrix[i, j], 1, 0, counter);
+                        //updateOptionalsRec(new Cell(i , j ), m_Matrix[i, j], 1, -1, counter);
+                        //updateOptionalsRec(new Cell(i , j), m_Matrix[i, j], 1, 1, counter);
+                        //updateOptionalsRec(new Cell(i , j), m_Matrix[i, j], -1, 1, counter);
+                        //updateOptionalsRec(new Cell(i , j), m_Matrix[i, j], -1, -1, counter);
+                        //updateOptionalsRec(new Cell(i , j), m_Matrix[i, j], -1, 0, counter);
                     }
                 }
             }
@@ -205,23 +237,20 @@ namespace Ex02_Othelo
 
         private void updateOptionalsRec(Cell i_ToUpdate, char i_UserSign, int i_DirX, int i_DirY, int i_Counter)
         {
-            Cell nextCell = new Cell(i_ToUpdate.X + i_DirX, i_ToUpdate.Y + i_DirY);
 
-            if (isOutOfBound(nextCell))
+            if(isOutOfBound(i_ToUpdate))
             {
                 return; 
             }
-            char nextCellSign = m_Matrix[nextCell.X,nextCell.Y];
-
-            if (nextCellSign == i_UserSign)
+            char currentCell = m_Matrix[i_ToUpdate.X, i_ToUpdate.Y];
+            if (currentCell == i_UserSign)
             {
                 return;
             }
-            else if (nextCellSign == k_EmptyCellSign)
+            else if (currentCell == k_EmptyCellSign)
             {
                 if (i_Counter != 0)
                 {
-                    // add this cell to the optional list 
                     if (i_UserSign == k_FirstPlayerSign)
                     {
                         m_Optional1.Add(i_ToUpdate);
@@ -238,8 +267,8 @@ namespace Ex02_Othelo
             }
             else
             {
-                Cell PostCell = new Cell(nextCell.X + i_DirX, nextCell.Y + i_DirY);
-                updateOptionalsRec(PostCell, i_UserSign, i_DirX, i_DirY, i_Counter + 1);
+                Cell nextCell = new Cell(i_ToUpdate.X + i_DirX, i_ToUpdate.Y + i_DirY);
+                updateOptionalsRec(nextCell, i_UserSign, i_DirX, i_DirY, i_Counter + 1);
             }
         }
 

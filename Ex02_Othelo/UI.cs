@@ -137,8 +137,11 @@ namespace Ex02_Othelo
 
         public void NoOptionsMessage(string i_Name)
         {
-            Console.WriteLine("{0} have no move to make", i_Name);
-            System.Threading.Thread.Sleep(3000);
+            if(i_Name != "")
+            {
+                Console.WriteLine("{0} have no move to make", i_Name);
+                System.Threading.Thread.Sleep(3000);
+            }
         }
 
         private int getBoardSize()
