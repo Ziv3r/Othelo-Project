@@ -34,7 +34,7 @@ namespace Controller
                         count++;
                 }
                 m_GameRunning = false;
-                m_UI.m_ExitOrContinue.ShowDialog();
+                m_GameRunning = m_UI.ExitOrContinue(1,1,"Black",new int[] {2,3 });
             }
         }
 
