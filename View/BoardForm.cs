@@ -107,10 +107,15 @@ namespace View
                     if (i_LogicMatrix[i, j] == ' ')
                     {
                         currentButton.Text = string.Empty;
+                    } 
+                    else if(i_LogicMatrix[i, j] =='X')
+                    {
+                        m_Buttons[i, j].BackgroundImage = Properties.Resources.refreshBlue;
                     }
                     else
                     {
-                        m_Buttons[i, j].Text = i_LogicMatrix[i, j].ToString();
+                        m_Buttons[i, j].BackgroundImage = Properties.Resources.refreshGreen;
+
                     }
                     currentButton.BackColor = default(Color);
                     currentButton.Enabled = false;

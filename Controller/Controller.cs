@@ -48,6 +48,7 @@ namespace Controller
         public void HandelButtonClicked(Point p)
         {
             game.TryUpdateLogicMatrix(p);
+            //if computer is playing so show dialog choose cell ? 
         }
 
         public void SetGamePlayers(object sender, EventArgs e)
