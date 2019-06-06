@@ -12,6 +12,7 @@ namespace View
     {
         private int m_BoardSize = 6; //default size
         private string m_BoardSizeTxt = "Board Size: {0}x{0} (click to increse)";
+
         public SettingsForm()
         {
             InitializeComponent();
@@ -30,12 +31,7 @@ namespace View
             BoardSizeBtn.Text = string.Format(m_BoardSizeTxt, m_BoardSize);
         }
 
-        private void onePlayerBtn_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.OK;
-        }
-
-        private void twoPlayersBtn_Click(object sender, EventArgs e)
+        private void choosenNumOfPlayers_Click(object sender ,EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
         }
@@ -43,6 +39,11 @@ namespace View
         public int BoardSize
         {
             get { return m_BoardSize; }
+        }
+
+        private void SettingsForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

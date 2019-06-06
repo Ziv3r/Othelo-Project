@@ -14,5 +14,10 @@ namespace View
         {
             InitializeComponent();
         }
+
+        private void BoardButton_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

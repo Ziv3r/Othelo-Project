@@ -4,3 +4,11 @@ C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\B19 Ex05 
 C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\B19 Ex05 ZivHalsband 308445949 NoamLevy 313527822\Ex02_Othelo\obj\Debug\Ex02_Othelo.pdb
 C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\B19 Ex05 ZivHalsband 308445949 NoamLevy 313527822\Ex02_Othelo\bin\Debug\Ex02_Othelo.dll
 C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\B19 Ex05 ZivHalsband 308445949 NoamLevy 313527822\Ex02_Othelo\obj\Debug\Ex02_Othelo.dll
+C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\Ex02_Othelo\bin\Debug\Ex02_Othelo.dll
+C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\Ex02_Othelo\bin\Debug\Ex02_Othelo.pdb
+C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\Ex02_Othelo\bin\Debug\Ex02.ConsoleUtils.dll
+C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\Ex02_Othelo\obj\Debug\Ex05_Othelo.csprojAssemblyReference.cache
+C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\Ex02_Othelo\obj\Debug\Ex05_Othelo.csproj.CoreCompileInputs.cache
+C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\Ex02_Othelo\obj\Debug\Ex05_Othelo.csproj.CopyComplete
+C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\Ex02_Othelo\obj\Debug\Ex02_Othelo.dll
+C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\Ex02_Othelo\obj\Debug\Ex02_Othelo.pdb

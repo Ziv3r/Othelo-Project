@@ -35,9 +35,10 @@
             // 
             // BoardSizeBtn
             // 
-            this.BoardSizeBtn.Location = new System.Drawing.Point(58, 27);
+            this.BoardSizeBtn.Location = new System.Drawing.Point(65, 34);
+            this.BoardSizeBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BoardSizeBtn.Name = "BoardSizeBtn";
-            this.BoardSizeBtn.Size = new System.Drawing.Size(469, 66);
+            this.BoardSizeBtn.Size = new System.Drawing.Size(528, 82);
             this.BoardSizeBtn.TabIndex = 0;
             this.BoardSizeBtn.Text = "Board Size: 6x6 (click to increase)";
             this.BoardSizeBtn.UseVisualStyleBackColor = true;
@@ -45,36 +46,40 @@
             // 
             // TwoPlayersBtn
             // 
-            this.TwoPlayersBtn.Location = new System.Drawing.Point(371, 129);
+            this.TwoPlayersBtn.Location = new System.Drawing.Point(417, 161);
+            this.TwoPlayersBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TwoPlayersBtn.Name = "TwoPlayersBtn";
-            this.TwoPlayersBtn.Size = new System.Drawing.Size(156, 65);
+            this.TwoPlayersBtn.Size = new System.Drawing.Size(176, 81);
             this.TwoPlayersBtn.TabIndex = 1;
             this.TwoPlayersBtn.Text = "Play Against Your Friend";
             this.TwoPlayersBtn.UseVisualStyleBackColor = true;
-            this.TwoPlayersBtn.Click += new System.EventHandler(this.twoPlayersBtn_Click);
+            this.TwoPlayersBtn.Click += new System.EventHandler(this.choosenNumOfPlayers_Click);
             // 
             // OnePlayerBtn
             // 
-            this.OnePlayerBtn.Location = new System.Drawing.Point(58, 129);
+            this.OnePlayerBtn.Location = new System.Drawing.Point(65, 161);
+            this.OnePlayerBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.OnePlayerBtn.Name = "OnePlayerBtn";
-            this.OnePlayerBtn.Size = new System.Drawing.Size(156, 65);
+            this.OnePlayerBtn.Size = new System.Drawing.Size(176, 81);
             this.OnePlayerBtn.TabIndex = 2;
             this.OnePlayerBtn.Text = "Play Against The Computer";
             this.OnePlayerBtn.UseVisualStyleBackColor = true;
-            this.OnePlayerBtn.Click += new System.EventHandler(this.onePlayerBtn_Click);
+            this.OnePlayerBtn.Click += new System.EventHandler(this.choosenNumOfPlayers_Click);
             // 
             // SettingsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(610, 239);
+            this.ClientSize = new System.Drawing.Size(686, 299);
             this.Controls.Add(this.OnePlayerBtn);
             this.Controls.Add(this.TwoPlayersBtn);
             this.Controls.Add(this.BoardSizeBtn);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SettingsForm";
             this.Text = "Othello - Game Settings";
+            this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.ResumeLayout(false);
 
         }

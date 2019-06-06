@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Forms;
 
 using View;
 
@@ -12,9 +13,8 @@ namespace Controller
         private UI m_UI = new UI();
         public void GameLoop()
         {
-
-            m_UI.m_SettingsForm.OnePlayerBtn.Click += new EventHandler(SetGameWithOnePlayer);
-            m_UI.m_SettingsForm.TwoPlayersBtn.Click += new EventHandler(SetGameWithTwoPlayers);
+            m_UI.m_SettingsForm.OnePlayerBtn.Click += new EventHandler(setGamePlayers);
+            m_UI.m_SettingsForm.TwoPlayersBtn.Click += new EventHandler(setGamePlayers);
 
             m_UI.m_SettingsForm.ShowDialog();
 
@@ -22,15 +22,16 @@ namespace Controller
 
         }
 
-        public void SetGameWithOnePlayer(object sender, EventArgs e)
+        public void setGamePlayers(object sender, EventArgs e)
         {
-            game.IsComputerPlaying = true;
-            startGame();
-        }
-
-        public void SetGameWithTwoPlayers(object sender, EventArgs e)
-        {
-            game.IsComputerPlaying = false;
+            if((sender as Button).Name == "OnePlayerBtn")
+            {
+                game.IsComputerPlaying = true;
+            }
+            else
+            {
+                game.IsComputerPlaying = true;
+            }
             startGame();
         }
 
@@ -39,5 +40,6 @@ namespace Controller
             game.Start(m_UI.m_SettingsForm.BoardSize);
             m_UI.m_Board.AddButtons(m_UI.m_SettingsForm.BoardSize);
         }
+
     }
 }
