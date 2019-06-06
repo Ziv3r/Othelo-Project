@@ -16,9 +16,9 @@ namespace Controller
 
         public void GameLoop()
         {
-            m_UI.m_SettingsForm.OnePlayerBtn.Click += new EventHandler(setGamePlayers);
-            m_UI.m_SettingsForm.TwoPlayersBtn.Click += new EventHandler(setGamePlayers);
+            initalizeButtonsEvents();
 
+            int count = 0;
             while (m_GameRunning)
             {
                 m_UI.m_SettingsForm.ShowDialog();
@@ -26,8 +26,23 @@ namespace Controller
                 {
                     m_UI.m_Board.UpdateBoard(game.getOptionals(),game.GetLogicMatrix(), game.CurrentPlayer);
                     m_UI.m_Board.ShowDialog();
+                    if (count == 3)
+                    {
+                        break;
+                    }
+                    else
+                        count++;
                 }
+                m_GameRunning = false;
+                m_UI.m_ExitOrContinue.ShowDialog();
             }
+        }
+
+        private void initalizeButtonsEvents()
+        {
+            m_UI.m_SettingsForm.OnePlayerBtn.Click += new EventHandler(SetGamePlayers);
+            m_UI.m_SettingsForm.TwoPlayersBtn.Click += new EventHandler(SetGamePlayers);
+            m_UI.m_Board.onClick += HandelButtonClicked;
         }
 
         public void HandelButtonClicked(Point p)
@@ -35,7 +50,7 @@ namespace Controller
             game.TryUpdateLogicMatrix(p);
         }
 
-        public void setGamePlayers(object sender, EventArgs e)
+        public void SetGamePlayers(object sender, EventArgs e)
         {
             if ((sender as Button).Name == "OnePlayerBtn")
             {
@@ -43,7 +58,7 @@ namespace Controller
             }
             else
             {
-                game.IsComputerPlaying = true;
+                game.IsComputerPlaying = false;
             }
             startGame();
         }

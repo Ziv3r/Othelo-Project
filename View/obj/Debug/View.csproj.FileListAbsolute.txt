@@ -18,3 +18,4 @@ C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\View\obj\Debug\Vi
 C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\View\obj\Debug\View.pdb
 C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\View\bin\Debug\View.dll
 C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\View\bin\Debug\View.pdb
+C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\View\obj\Debug\View.ExitOrContinueForm.resources

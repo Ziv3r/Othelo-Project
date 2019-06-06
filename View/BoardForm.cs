@@ -8,14 +8,13 @@ using System.Windows.Forms;
 
 namespace View
 {
+    
     public partial class BoardForm : Form
     {
         private const int k_ButtonsHeightAndWidth = 55;
         private int m_MatrixSize;
-
-        //private Dictionary<Point, Button> m_buttons;
         private Button[,] m_Buttons;
-
+        public event Action<Point> onClick;
         public BoardForm()
         {
             InitializeComponent();
@@ -39,21 +38,27 @@ namespace View
                     Button newButton = createButton(indexes);
                     newButton.Click += new EventHandler(button_Click);
                     m_Buttons[i, j] = newButton;
-                    flowLayoutPanel.Controls.Add(newButton);
+                    m_Buttons[i, j].Top = 3 + i * 55;
+                    m_Buttons[i, j].Left = 3 + j * 55;
+                    this.Controls.Add(newButton);
                 }
             }
-
-            int flowLayOutwidthHeight = calculateFlowLayoutWidth(i_MatrixSize);
-
-            flowLayoutPanel.Width = flowLayOutwidthHeight;
-            flowLayoutPanel.Height = flowLayOutwidthHeight;
-
         }
 
         private void button_Click(object sender, EventArgs e)
         {
-            Point Coords = getPointFromButton(sender as Button);
+            Point coords = getPointFromButton(sender as Button);
+            onClick(coords);
+            this.Close();
+        }
+        private Point getPointFromButton(Button currentButton)
+        {
+            string[] coordinates = currentButton.Name.Split(',');
 
+            int x = int.Parse(coordinates[0]);
+            int y = int.Parse(coordinates[1]);
+
+            return new Point(x,y);
         }
 
         private Button createButton(Point i_coords)
@@ -61,7 +66,7 @@ namespace View
             Button button = new Button();
 
             button.Enabled = false;
-            button.Name = "button" + i_coords.X.ToString() + i_coords.Y.ToString();
+            button.Name = i_coords.X.ToString() + "," + i_coords.Y.ToString();
             button.Size = new System.Drawing.Size(55, 55);
             button.TabIndex = 1;
             button.UseVisualStyleBackColor = true;
@@ -70,11 +75,11 @@ namespace View
 
         public void UpdateBoard(List<Point> i_Optionals, char[,] i_LogicMatrix, string i_CurrentPlayer)
         {
-            //1. change enable-- true /fasle 
-            updateOptional(i_Optionals);
-
-            //2.chagne the text to X/O due to to logic matrix .
+            //1.chagne the text to X/O due to to logic matrix .
             updateMatrix(i_LogicMatrix);
+
+            //2. change enable-- true /fasle 
+            updateOptional(i_Optionals);
 
             //3chagne title of form 
             this.Text = i_CurrentPlayer;
@@ -93,7 +98,7 @@ namespace View
         {
             for (int i = 0; i < m_MatrixSize; i++)
             {
-                for (int j = 0; i < m_MatrixSize; i++)
+                for (int j = 0; j < m_MatrixSize; j++)
                 {
                     Button currentButton = m_Buttons[i, j];
                     if (i_LogicMatrix[i, j] == ' ')
@@ -104,17 +109,10 @@ namespace View
                     {
                         m_Buttons[i, j].Text = i_LogicMatrix[i, j].ToString();
                     }
+                    currentButton.BackColor = default(Color);
+                    currentButton.Enabled = false;
                 }
             }
-        }
-
-        private int calculateFlowLayoutWidth(int i_NumOfButtons)
-        {
-            return i_NumOfButtons * k_ButtonsHeightAndWidth + i_NumOfButtons;
-        }
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

@@ -8,7 +8,8 @@ namespace Ex02_Othelo
     {
         public Point AIMove(Board i_Board, char i_Sign)
         {
-            Point bestMove ;
+            Point bestMove = i_Board.Optionals2[0];
+
             int maxVal = int.MinValue;
             int score1 = 0, score2 = 0;
             foreach (Point option in i_Board.Optionals2)

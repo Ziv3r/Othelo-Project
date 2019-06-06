@@ -8,6 +8,7 @@ namespace View
     {
         public SettingsForm m_SettingsForm = new SettingsForm();
         public BoardForm m_Board = new BoardForm();
+        public ExitOrContinueForm m_ExitOrContinue = new ExitOrContinueForm();
         public UI()
         {
             

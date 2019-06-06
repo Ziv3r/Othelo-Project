@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.SuspendLayout();
-            // 
-            // flowLayoutPanel
-            // 
-            this.flowLayoutPanel.Location = new System.Drawing.Point(23, 12);
-            this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(765, 426);
-            this.flowLayoutPanel.TabIndex = 0;
-            this.flowLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
+        //    this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+        //    this.SuspendLayout();
+        //    // 
+        //    // flowLayoutPanel
+        //    // 
+        //    this.flowLayoutPanel.Location = new System.Drawing.Point(23, 12);
+        //    this.flowLayoutPanel.Name = "flowLayoutPanel";
+        //    this.flowLayoutPanel.Size = new System.Drawing.Size(765, 426);
+        //    this.flowLayoutPanel.TabIndex = 0;
+        //    this.flowLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
             // BoardForm
             // 
@@ -45,7 +45,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.flowLayoutPanel);
+            //this.Controls.Add(this.flowLayoutPanel);
             this.Name = "BoardForm";
             this.Text = "BoardForm";
             this.Load += new System.EventHandler(this.BoardForm_Load);

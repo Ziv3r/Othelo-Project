@@ -50,7 +50,12 @@
     <Compile Include="BoardForm.Designer.cs">
       <DependentUpon>BoardForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExitContinueForm.cs" />
+    <Compile Include="ExitOrContinueForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExitOrContinueForm.designer.cs">
+      <DependentUpon>ExitOrContinueForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +71,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BoardForm.resx">
       <DependentUpon>BoardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExitOrContinueForm.resx">
+      <DependentUpon>ExitOrContinueForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>

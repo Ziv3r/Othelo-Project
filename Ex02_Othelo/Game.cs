@@ -10,7 +10,7 @@ namespace Ex02_Othelo
     {
         private const char k_FirstPlayerSign = 'X';
         private const char k_SecPlayerSign = 'O';
-        private int m_CurrentPlayer = 1;
+        private int m_CurrentPlayer = 0;
         private Board m_Board = new Board();
         private UI m_UserInterface = new UI();
         private Player m_Player1 = new Player();
@@ -21,13 +21,9 @@ namespace Ex02_Othelo
 
         public void Start(int i_BoardSize)
         {
-            //int matrixSize;
-            //m_PlayersNames = m_UserInterface.GetGameData(out matrixSize);
             alocatePlayers();
             m_Board.Size = i_BoardSize;
-           // m_UserInterface.InitUI(m_Board.Size);
             m_Board.Init(m_Board.Size);
-            //run();
         }
 
         private void run()
@@ -80,7 +76,7 @@ namespace Ex02_Othelo
 
         public List<Point> getOptionals()
         {
-            if(m_CurrentPlayer == 1)
+            if(m_CurrentPlayer == 0)
             {
                 return m_Board.Optionals1;
             }
@@ -95,12 +91,18 @@ namespace Ex02_Othelo
             return m_Board.HasOption();
         }
 
-        public bool TryUpdateLogicMatrix(Point i_ChoosenPoint)
+        public void  TryUpdateLogicMatrix(Point i_ChoosenPoint)
         {
-            return !(m_Board.TryUpdateMatrix(i_ChoosenPoint, m_CurrentPlayer));
+            bool checkIfValidate = (m_Board.TryUpdateMatrix(i_ChoosenPoint, m_CurrentPlayer));
+            m_CurrentPlayer = (m_CurrentPlayer * -1) + 1;
+            if (m_IsComputerPlaying)
+            {
+                m_Board.TryUpdateMatrix(getPointFromCureentPlayer(true) , m_CurrentPlayer);
+            }
+            m_CurrentPlayer = (m_CurrentPlayer * -1) + 1;
         }
 
-    private void alocatePlayers()
+        private void alocatePlayers()
         {
             m_Player1.Name = m_PlayersNames[0];
 
@@ -122,8 +124,9 @@ namespace Ex02_Othelo
 
         public string CurrentPlayer
         {
-            get { return m_PlayersNames[m_CurrentPlayer];}
+            get { return m_PlayersNames[Math.Abs(m_CurrentPlayer-1)];}
         }
+
         public bool IsComputerPlaying
         {
             get { return m_IsComputerPlaying; }
@@ -135,17 +138,7 @@ namespace Ex02_Othelo
 
         private Point getPointFromCureentPlayer(bool i_IsFirstChance)
         {
-            Point choosenPoint ;
-            if (m_PlayersNames[m_CurrentPlayer] == string.Empty)
-            {
-                choosenPoint = m_compPlayer.ComputerMove(m_Board.Clone());
-            }
-            else
-            {
-                choosenPoint = m_UserInterface.GetPointFromPlayer(m_PlayersNames[m_CurrentPlayer], i_IsFirstChance);
-            }
-
-            return choosenPoint;
+            return  m_compPlayer.ComputerMove(m_Board.Clone());
         }
 
         private void FillUpAndPrintMatrix()

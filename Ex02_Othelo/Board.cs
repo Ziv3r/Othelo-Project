@@ -98,16 +98,16 @@ namespace Ex02_Othelo
 
         public bool TryUpdateMatrix(Point i_ToUpdate, int i_CurrentPlayer)
         {
-            bool isUpdateSuccess = false;
+            bool isUpdateSuccess = true;
             char userSign = i_CurrentPlayer == 0 ? k_FirstPlayerSign : k_SecPlayerSign;
-            if (i_CurrentPlayer == 0)
-            {
-                isUpdateSuccess = validatePoint(m_Optional1, i_ToUpdate);
-            }
-            else
-            {
-               isUpdateSuccess = validatePoint(m_Optional2, i_ToUpdate);
-            }
+            //if (i_CurrentPlayer == 0)
+            //{
+            //    isUpdateSuccess = validatePoint(m_Optional1, i_ToUpdate);
+            //}
+            //else
+            //{
+            //   isUpdateSuccess = validatePoint(m_Optional2, i_ToUpdate);
+            //}
 
             if (isUpdateSuccess)
             {
