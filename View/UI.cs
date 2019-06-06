@@ -7,7 +7,7 @@ namespace View
     public class UI
     {
         public SettingsForm m_SettingsForm = new SettingsForm();
-
+        public BoardForm m_Board = new BoardForm();
         public UI()
         {
             

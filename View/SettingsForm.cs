@@ -19,15 +19,15 @@ namespace View
 
         private void BoardSizeBtn_Click(object sender, EventArgs e)
         {
-            if(m_BoardSize >= 12)
+            if (m_BoardSize >= 12)
             {
-                BoardSizeBtn.Enabled = false;
+                m_BoardSize = 6;
             }
             else
             {
                 m_BoardSize += 2;
-                BoardSizeBtn.Text = string.Format(m_BoardSizeTxt, m_BoardSize);
             }
+            BoardSizeBtn.Text = string.Format(m_BoardSizeTxt, m_BoardSize);
         }
 
         private void onePlayerBtn_Click(object sender, EventArgs e)

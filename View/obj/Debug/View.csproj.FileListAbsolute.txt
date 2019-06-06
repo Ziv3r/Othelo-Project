@@ -6,3 +6,5 @@ C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\B19 Ex05 
 C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\B19 Ex05 ZivHalsband 308445949 NoamLevy 313527822\View\obj\Debug\View.csproj.CoreCompileInputs.cache
 C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\B19 Ex05 ZivHalsband 308445949 NoamLevy 313527822\View\obj\Debug\View.dll
 C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\B19 Ex05 ZivHalsband 308445949 NoamLevy 313527822\View\obj\Debug\View.pdb
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\B19 Ex05 ZivHalsband 308445949 NoamLevy 313527822\View\obj\Debug\View.BoardButton.resources
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\B19 Ex05 ZivHalsband 308445949 NoamLevy 313527822\View\obj\Debug\View.BoardForm.resources

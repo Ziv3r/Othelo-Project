@@ -15,7 +15,10 @@ namespace Controller
 
             m_UI.m_SettingsForm.OnePlayerBtn.Click += new EventHandler(SetGameWithOnePlayer);
             m_UI.m_SettingsForm.TwoPlayersBtn.Click += new EventHandler(SetGameWithTwoPlayers);
+
             m_UI.m_SettingsForm.ShowDialog();
+
+            m_UI.m_Board.ShowDialog();
 
         }
 
@@ -34,6 +37,7 @@ namespace Controller
         private void startGame()
         {
             game.Start(m_UI.m_SettingsForm.BoardSize);
+            m_UI.m_Board.AddButtons(m_UI.m_SettingsForm.BoardSize);
         }
     }
 }
