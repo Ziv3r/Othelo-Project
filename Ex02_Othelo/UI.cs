@@ -152,7 +152,7 @@ namespace Ex02_Othelo
 
         private int getBoardSize()
         {
-            Ex02.ConsoleUtils.Screen.Clear();
+            Console.Clear();
             int boardSize = 0;
             int chosen;
             Console.WriteLine("Please Choose Board size (type 8 for 8x8 and 6 for 6x6):");
@@ -162,7 +162,7 @@ namespace Ex02_Othelo
 
             while (!int.TryParse(choosenOption, out chosen) || !isBoardSizeValid(chosen))
             {
-                Ex02.ConsoleUtils.Screen.Clear();
+                Console.Clear();
                 Console.WriteLine("Please Choose Board size (type 8 for 8x8 and 6 for 6x6):");
                 Console.WriteLine("1. 6-6 board ");
                 Console.WriteLine("2. 8-8 board ");
@@ -195,8 +195,7 @@ namespace Ex02_Othelo
         {
             int counter = 0;
             int countNumber = 0;
-
-            Ex02.ConsoleUtils.Screen.Clear();
+            Console.Clear();
             for (int i = 0; i < m_Height; i++)
             {
                 for (int j = 0; j < m_Width; j++)

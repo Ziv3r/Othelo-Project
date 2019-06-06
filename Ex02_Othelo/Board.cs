@@ -274,35 +274,6 @@ namespace Ex02_Othelo
             }
         }
 
-        public void PrintMatrix()
-        {
-            for (int i = 0; i < m_Size; i++)
-            {
-                for (int j = 0; j < m_Size; j++)
-                {
-                    Console.Write("{0} ", m_Matrix[i, j]);
-                }
-
-                Console.WriteLine();
-            }
-        }
-
-        public void PrintOptionals()
-        {
-            foreach (Cell c1 in m_Optional1)
-            {
-                Console.Write("({0} , {1}) ", c1.X, c1.Y);
-            }
-
-            Console.WriteLine();
-            foreach (Cell c1 in m_Optional2)
-            {
-                Console.Write("({0} , {1}) ", c1.X, c1.Y);
-            }
-
-            Console.WriteLine();
-        }
-
         public bool HasOption()
         {
             return m_Optional1.Count != 0 || m_Optional2.Count != 0;

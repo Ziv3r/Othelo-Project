@@ -1,14 +1,12 @@
-C:\Users\ziv3r\OneDrive\שולחן העבודה\שנה ב' סמסטר ב\c#\B19 Ex02 Ziv 308445949 Noam 313527822\Ex02_Othelo\obj\Debug\Ex02_Othelo.csprojAssemblyReference.cache
-C:\Users\ziv3r\OneDrive\שולחן העבודה\שנה ב' סמסטר ב\c#\B19 Ex02 Ziv 308445949 Noam 313527822\Ex02_Othelo\obj\Debug\Ex02_Othelo.csproj.CoreCompileInputs.cache
-C:\Users\ziv3r\OneDrive\שולחן העבודה\שנה ב' סמסטר ב\c#\B19 Ex02 Ziv 308445949 Noam 313527822\Ex02_Othelo\bin\Debug\Ex02_Othelo.exe
-C:\Users\ziv3r\OneDrive\שולחן העבודה\שנה ב' סמסטר ב\c#\B19 Ex02 Ziv 308445949 Noam 313527822\Ex02_Othelo\bin\Debug\Ex02_Othelo.pdb
-C:\Users\ziv3r\OneDrive\שולחן העבודה\שנה ב' סמסטר ב\c#\B19 Ex02 Ziv 308445949 Noam 313527822\Ex02_Othelo\obj\Debug\Ex02_Othelo.exe
-C:\Users\ziv3r\OneDrive\שולחן העבודה\שנה ב' סמסטר ב\c#\B19 Ex02 Ziv 308445949 Noam 313527822\Ex02_Othelo\obj\Debug\Ex02_Othelo.pdb
-C:\Users\noamlevy\Desktop\מכללה\שנה ב\C#\Othelo-Project\Ex02_Othelo\obj\Debug\Ex02_Othelo.csprojAssemblyReference.cache
-C:\Users\noamlevy\Desktop\מכללה\שנה ב\C#\Othelo-Project\Ex02_Othelo\obj\Debug\Ex02_Othelo.csproj.CoreCompileInputs.cache
-C:\Users\noamlevy\Desktop\מכללה\שנה ב\C#\Othelo-Project\Ex02_Othelo\obj\Debug\Ex02_Othelo.exe
-C:\Users\noamlevy\Desktop\מכללה\שנה ב\C#\Othelo-Project\Ex02_Othelo\obj\Debug\Ex02_Othelo.pdb
-C:\Users\noamlevy\Desktop\מכללה\שנה ב\C#\Othelo-Project\Ex02_Othelo\bin\Debug\Ex02_Othelo.exe
-C:\Users\noamlevy\Desktop\מכללה\שנה ב\C#\Othelo-Project\Ex02_Othelo\bin\Debug\Ex02_Othelo.pdb
-C:\Users\ziv3r\OneDrive\שולחן העבודה\שנה ב' סמסטר ב\c#\B19 Ex02 Ziv 308445949 Noam 313527822\Ex02_Othelo\bin\Debug\Ex02.ConsoleUtils.dll
-C:\Users\ziv3r\OneDrive\שולחן העבודה\שנה ב' סמסטר ב\c#\B19 Ex02 Ziv 308445949 Noam 313527822\Ex02_Othelo\obj\Debug\Ex02_Othelo.csproj.CopyComplete
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Othelo-Project\B19 Ex02 ZivHalsband 308445949 NoamLevy 313527822\Ex02_Othelo\obj\Debug\Ex02_Othelo.csprojAssemblyReference.cache
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Othelo-Project\B19 Ex02 ZivHalsband 308445949 NoamLevy 313527822\Ex02_Othelo\obj\Debug\Ex02_Othelo.csproj.CoreCompileInputs.cache
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Othelo-Project\B19 Ex02 ZivHalsband 308445949 NoamLevy 313527822\Ex02_Othelo\bin\Debug\Ex02_Othelo.exe
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Othelo-Project\B19 Ex02 ZivHalsband 308445949 NoamLevy 313527822\Ex02_Othelo\bin\Debug\Ex02_Othelo.pdb
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Othelo-Project\B19 Ex02 ZivHalsband 308445949 NoamLevy 313527822\Ex02_Othelo\obj\Debug\Ex02_Othelo.exe
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Othelo-Project\B19 Ex02 ZivHalsband 308445949 NoamLevy 313527822\Ex02_Othelo\obj\Debug\Ex02_Othelo.pdb
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\B19 Ex02 ZivHalsband 308445949 NoamLevy 313527822\Ex02_Othelo\bin\Debug\Ex02_Othelo.exe
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\B19 Ex02 ZivHalsband 308445949 NoamLevy 313527822\Ex02_Othelo\bin\Debug\Ex02_Othelo.pdb
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\B19 Ex02 ZivHalsband 308445949 NoamLevy 313527822\Ex02_Othelo\obj\Debug\Ex02_Othelo.csprojAssemblyReference.cache
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\B19 Ex02 ZivHalsband 308445949 NoamLevy 313527822\Ex02_Othelo\obj\Debug\Ex02_Othelo.csproj.CoreCompileInputs.cache
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\B19 Ex02 ZivHalsband 308445949 NoamLevy 313527822\Ex02_Othelo\obj\Debug\Ex02_Othelo.exe
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\B19 Ex02 ZivHalsband 308445949 NoamLevy 313527822\Ex02_Othelo\obj\Debug\Ex02_Othelo.pdb

@@ -32,6 +32,12 @@ namespace Ex02_Othelo
             return c1.X == c2.X && c1.Y == c2.Y;
         }
 
+        public override bool Equals(object i_ToCheck)
+        {
+            Cell cellToCheck = i_ToCheck as Cell;
+            return this == cellToCheck;
+        }
+
         public static bool operator !=(Cell c1, Cell c2)
         {
             return !(c1.X == c2.X && c1.Y == c2.Y);

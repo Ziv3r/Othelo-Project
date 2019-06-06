@@ -13,8 +13,3 @@ namespace Ex02_Othelo
         }
     }
 }
-
-/* New TO do :
- delete utils / chekcer - print Optionals , ptint logic matrix 
-  - Ai .
- */

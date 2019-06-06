@@ -1,0 +1,10 @@
+ ==========================Exercise Checking Report==========================
+ Exercise No........... 2
+ First Student Details. 308445949 - Ziv Haltsband
+Second Student Details 313527822 - Noam Levy
+Delivery Date......... 19 - May - 2019 
+Delivered In Delay.... No
+Delay Reason.......... 
+Visual Studio Version. 2017
+Comments.............. 
+ ========================End Exercise Checking Report========================  

@@ -58,7 +58,7 @@
 
         private int minMax(bool i_isComputer, int i_depth, Board i_Board, int i_Score1, int i_Score2, char i_Sign)
         {
-            if (i_depth == 0 || i_Board.Optionals2.Count.Equals(0))
+            if (i_depth == 0 || i_Board.Optionals2.Count.Equals(0) || i_Board.Optionals1.Count.Equals(0))
             {
                 return heuristic(i_Score1, i_Score2, i_Board, i_Sign);
             }

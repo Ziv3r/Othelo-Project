@@ -9,7 +9,7 @@ namespace Ex02_Othelo
     {
         private const char k_FirstPlayerSign = 'X';
         private const char k_SecPlayerSign = 'O';
-        private int m_CurrentPlayer = 0;
+        private int m_CurrentPlayer = 1;
         private Board m_Board = new Board();
         private UI m_UserInterface = new UI();
         private Player m_Player1 = new Player();
