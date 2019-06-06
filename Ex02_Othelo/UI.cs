@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Drawing;
 
 namespace Ex02_Othelo
 {
@@ -32,14 +33,14 @@ namespace Ex02_Othelo
             m_MatrixPrint = new char[m_Height, m_Width];
         }
 
-        public Cell GetCellFromPlayer(string i_PlayerName, bool i_FirstTry)
+        public Point GetPointFromPlayer(string i_PlayerName, bool i_FirstTry)
         {
             string input;
             int row = -1;
             int col = -1;
             do
             {
-                Console.WriteLine("\n{0} please choose {1}cell, in the following form(5e) ", i_PlayerName, !i_FirstTry ? "valid " : string.Empty);
+                Console.WriteLine("\n{0} please choose {1}Point, in the following form(5e) ", i_PlayerName, !i_FirstTry ? "valid " : string.Empty);
                 input = Console.ReadLine();
                 if (input.Length < 2)
                 {
@@ -59,7 +60,7 @@ namespace Ex02_Othelo
             }
             while (!int.TryParse(input[0].ToString(), out row) || !isInBoard(--row) || !isInBoard(col));
 
-            return new Cell(row, col);
+            return new Point(row, col);
         }
 
         private bool isInBoard(int i_Num)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Drawing;
 
 namespace Ex02_Othelo
 {
@@ -33,7 +34,7 @@ namespace Ex02_Othelo
         {
             bool startNewGame = true;
             bool firstChance = true;
-            Cell choosenCell;
+            Point choosenPoint;
             while (startNewGame)
             {
                 while (m_Board.HasOption())
@@ -49,15 +50,15 @@ namespace Ex02_Othelo
                             break;
                         }
 
-                        choosenCell = getCellFromCureentPlayer(firstChance);
+                        choosenPoint = getPointFromCureentPlayer(firstChance);
                         firstChance = false;
 
-                        if (choosenCell == new Cell(-1, -1))
+                        if (choosenPoint == new Point(-1, -1))
                         {
                             return;
                         }
                     }
-                    while (!m_Board.TryUpdateMatrix(choosenCell, m_CurrentPlayer));
+                    while (!m_Board.TryUpdateMatrix(choosenPoint, m_CurrentPlayer));
                 }
 
                 if (m_IsComputerPlaying)
@@ -77,7 +78,29 @@ namespace Ex02_Othelo
             }
         }
 
-        private void alocatePlayers()
+        public List<Point> getOptionals()
+        {
+            if(m_CurrentPlayer == 1)
+            {
+                return m_Board.Optionals1;
+            }
+            else
+            {
+                return m_Board.Optionals2;
+            }
+        }
+
+        public bool HasOptionsToPlay()
+        {
+            return m_Board.HasOption();
+        }
+
+        public bool TryUpdateLogicMatrix(Point i_ChoosenPoint)
+        {
+            return !(m_Board.TryUpdateMatrix(i_ChoosenPoint, m_CurrentPlayer));
+        }
+
+    private void alocatePlayers()
         {
             m_Player1.Name = m_PlayersNames[0];
 
@@ -92,8 +115,15 @@ namespace Ex02_Othelo
             }
         }
 
-       
+       public char[,] GetLogicMatrix()
+        {
+            return m_Board.Matrix;
+        }
 
+        public string CurrentPlayer
+        {
+            get { return m_PlayersNames[m_CurrentPlayer];}
+        }
         public bool IsComputerPlaying
         {
             get { return m_IsComputerPlaying; }
@@ -103,19 +133,19 @@ namespace Ex02_Othelo
             }
         }
 
-        private Cell getCellFromCureentPlayer(bool i_IsFirstChance)
+        private Point getPointFromCureentPlayer(bool i_IsFirstChance)
         {
-            Cell choosenCell = null;
+            Point choosenPoint ;
             if (m_PlayersNames[m_CurrentPlayer] == string.Empty)
             {
-                choosenCell = m_compPlayer.ComputerMove(m_Board.Clone());
+                choosenPoint = m_compPlayer.ComputerMove(m_Board.Clone());
             }
             else
             {
-                choosenCell = m_UserInterface.GetCellFromPlayer(m_PlayersNames[m_CurrentPlayer], i_IsFirstChance);
+                choosenPoint = m_UserInterface.GetPointFromPlayer(m_PlayersNames[m_CurrentPlayer], i_IsFirstChance);
             }
 
-            return choosenCell;
+            return choosenPoint;
         }
 
         private void FillUpAndPrintMatrix()

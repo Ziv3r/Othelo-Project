@@ -37,7 +37,6 @@
   <ItemGroup>
     <Compile Include="AI.cs" />
     <Compile Include="Board.cs" />
-    <Compile Include="Cell.cs" />
     <Compile Include="ComputerPlayer.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Player.cs" />
@@ -48,6 +47,7 @@
     <Reference Include="Ex02.ConsoleUtils">
       <HintPath>..\..\..\..\..\..\..\..\Temp\Ex02.ConsoleUtils.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

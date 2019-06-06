@@ -1,15 +1,17 @@
-﻿namespace Ex02_Othelo
+﻿using System.Drawing;
+
+namespace Ex02_Othelo
 {
     using System;
 
     public class AI
     {
-        public Cell AIMove(Board i_Board, char i_Sign)
+        public Point AIMove(Board i_Board, char i_Sign)
         {
-            Cell bestMove = null;
+            Point bestMove ;
             int maxVal = int.MinValue;
             int score1 = 0, score2 = 0;
-            foreach (Cell option in i_Board.Optionals2)
+            foreach (Point option in i_Board.Optionals2)
             {
                 Board child = i_Board.Clone();
                 child.TryUpdateMatrix(option, 1);
@@ -66,7 +68,7 @@
             int bestVal = int.MaxValue;
             if (!i_isComputer)
             {
-                foreach (Cell option in i_Board.Optionals1)
+                foreach (Point option in i_Board.Optionals1)
                 {
                     Board child = i_Board.Clone();
                     child.TryUpdateMatrix(option, 0);
@@ -78,7 +80,7 @@
             {
                 bestVal = int.MinValue;
 
-                foreach (Cell option in i_Board.Optionals2)
+                foreach (Point option in i_Board.Optionals2)
                 {
                     Board child = i_Board.Clone();
                     child.TryUpdateMatrix(option, 1);

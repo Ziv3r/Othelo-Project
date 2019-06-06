@@ -17,7 +17,7 @@ namespace View
         {
             InitializeComponent();
         }
-
+        
         private void BoardSizeBtn_Click(object sender, EventArgs e)
         {
             if (m_BoardSize >= 12)

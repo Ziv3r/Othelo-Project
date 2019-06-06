@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing;
 
 using View;
 
@@ -11,20 +12,32 @@ namespace Controller
     {
         private Ex02_Othelo.Game game = new Ex02_Othelo.Game();
         private UI m_UI = new UI();
+        private bool m_GameRunning = true;
+
         public void GameLoop()
         {
             m_UI.m_SettingsForm.OnePlayerBtn.Click += new EventHandler(setGamePlayers);
             m_UI.m_SettingsForm.TwoPlayersBtn.Click += new EventHandler(setGamePlayers);
 
-            m_UI.m_SettingsForm.ShowDialog();
+            while (m_GameRunning)
+            {
+                m_UI.m_SettingsForm.ShowDialog();
+                while (game.HasOptionsToPlay())
+                {
+                    m_UI.m_Board.UpdateBoard(game.getOptionals(),game.GetLogicMatrix(), game.CurrentPlayer);
+                    m_UI.m_Board.ShowDialog();
+                }
+            }
+        }
 
-            m_UI.m_Board.ShowDialog();
-
+        public void HandelButtonClicked(Point p)
+        {
+            game.TryUpdateLogicMatrix(p);
         }
 
         public void setGamePlayers(object sender, EventArgs e)
         {
-            if((sender as Button).Name == "OnePlayerBtn")
+            if ((sender as Button).Name == "OnePlayerBtn")
             {
                 game.IsComputerPlaying = true;
             }

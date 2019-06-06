@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Drawing;
 
 namespace Ex02_Othelo
 {
@@ -15,7 +16,7 @@ namespace Ex02_Othelo
             m_Sign = i_FirstPlayerSign;
         }
 
-        public Cell ComputerMove(Board i_Board)
+        public Point ComputerMove(Board i_Board)
         {
            return m_AiMoves.AIMove(i_Board, m_Sign);
         }
