@@ -28,6 +28,9 @@ namespace View
         public void AddButtons(int i_MatrixSize)
         {
             m_Buttons = new Button[i_MatrixSize, i_MatrixSize];
+            this.Size = new Size(i_MatrixSize * 55+200, i_MatrixSize*55 +200);
+            this.ClientSize = new Size(i_MatrixSize * 55 + 15, i_MatrixSize * 55 + 15);
+
             m_MatrixSize = i_MatrixSize;
 
             for (int i = 0; i < i_MatrixSize; i++)

@@ -28,25 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-        //    this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-        //    this.SuspendLayout();
-        //    // 
-        //    // flowLayoutPanel
-        //    // 
-        //    this.flowLayoutPanel.Location = new System.Drawing.Point(23, 12);
-        //    this.flowLayoutPanel.Name = "flowLayoutPanel";
-        //    this.flowLayoutPanel.Size = new System.Drawing.Size(765, 426);
-        //    this.flowLayoutPanel.TabIndex = 0;
-        //    this.flowLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
+            this.SuspendLayout();
             // 
             // BoardForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            //this.Controls.Add(this.flowLayoutPanel);
+            this.ClientSize = new System.Drawing.Size(900, 562);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "BoardForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BoardForm";
             this.Load += new System.EventHandler(this.BoardForm_Load);
             this.ResumeLayout(false);

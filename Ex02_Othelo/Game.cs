@@ -17,7 +17,7 @@ namespace Ex02_Othelo
         private Player m_Player2 = null;
         private ComputerPlayer m_compPlayer = null;
         bool m_IsComputerPlaying = false;
-        private string[] m_PlayersNames = {"First Player", "Second Player" };
+        private string[] m_PlayersNames = { "First Player", "Second Player" };
 
         public void Start(int i_BoardSize)
         {
@@ -76,7 +76,7 @@ namespace Ex02_Othelo
 
         public List<Point> getOptionals()
         {
-            if(m_CurrentPlayer == 0)
+            if (m_CurrentPlayer == 0)
             {
                 return m_Board.Optionals1;
             }
@@ -91,15 +91,15 @@ namespace Ex02_Othelo
             return m_Board.HasOption();
         }
 
-        public void  TryUpdateLogicMatrix(Point i_ChoosenPoint)
+        public void TryUpdateLogicMatrix(Point i_ChoosenPoint)
         {
             bool checkIfValidate = (m_Board.TryUpdateMatrix(i_ChoosenPoint, m_CurrentPlayer));
             m_CurrentPlayer = (m_CurrentPlayer * -1) + 1;
             if (m_IsComputerPlaying)
             {
-                m_Board.TryUpdateMatrix(getPointFromCureentPlayer(true) , m_CurrentPlayer);
+                m_Board.TryUpdateMatrix(getPointFromCureentPlayer(true), m_CurrentPlayer);
+                m_CurrentPlayer = (m_CurrentPlayer * -1) + 1;
             }
-            m_CurrentPlayer = (m_CurrentPlayer * -1) + 1;
         }
 
         private void alocatePlayers()
@@ -117,14 +117,14 @@ namespace Ex02_Othelo
             }
         }
 
-       public char[,] GetLogicMatrix()
+        public char[,] GetLogicMatrix()
         {
             return m_Board.Matrix;
         }
 
         public string CurrentPlayer
         {
-            get { return m_PlayersNames[Math.Abs(m_CurrentPlayer-1)];}
+            get { return m_PlayersNames[Math.Abs(m_CurrentPlayer)]; }
         }
 
         public bool IsComputerPlaying
@@ -138,7 +138,7 @@ namespace Ex02_Othelo
 
         private Point getPointFromCureentPlayer(bool i_IsFirstChance)
         {
-            return  m_compPlayer.ComputerMove(m_Board.Clone());
+            return m_compPlayer.ComputerMove(m_Board.Clone());
         }
 
         private void FillUpAndPrintMatrix()
