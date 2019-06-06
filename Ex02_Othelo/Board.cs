@@ -82,17 +82,18 @@ namespace Ex02_Othelo
 
         private void addDefaults()
         {
-             if (m_Size == 6)
-            {
-                m_Matrix[2, 2] = m_Matrix[3, 3] = k_FirstPlayerSign;
-                m_Matrix[2, 3] = m_Matrix[3, 2] = k_SecPlayerSign;
-            }
-            else
-            {
-                m_Matrix[3, 3] = m_Matrix[4, 4] = k_FirstPlayerSign;
-                m_Matrix[3, 4] = m_Matrix[4, 3] = k_SecPlayerSign;
-            }
+            int[] defaultIdxForTopBlack = { 2,2};
+            int[] defaultIdxForBottomBlack = { 3,3};
+            int[] defaultIdxForTopWhite = { 2,3};
+            int[] defaultIdxForBottomWhite = { 3,2};
 
+            int toAddToDefault = (m_Size - 6) / 2; // formula for position first stones
+
+            m_Matrix[defaultIdxForBottomBlack[0] + toAddToDefault, defaultIdxForBottomBlack[1] + toAddToDefault] =
+                m_Matrix[defaultIdxForTopBlack[0] + toAddToDefault, defaultIdxForTopBlack[1] + toAddToDefault] = k_FirstPlayerSign;
+            m_Matrix[defaultIdxForBottomWhite[0] + toAddToDefault, defaultIdxForBottomWhite[1] + toAddToDefault] =
+                m_Matrix[defaultIdxForTopWhite[0] + toAddToDefault, defaultIdxForTopWhite[1] + toAddToDefault] = k_SecPlayerSign;
+         
             updateOptionals();
         }
 
@@ -100,15 +101,7 @@ namespace Ex02_Othelo
         {
             bool isUpdateSuccess = true;
             char userSign = i_CurrentPlayer == 0 ? k_FirstPlayerSign : k_SecPlayerSign;
-            //if (i_CurrentPlayer == 0)
-            //{
-            //    isUpdateSuccess = validatePoint(m_Optional1, i_ToUpdate);
-            //}
-            //else
-            //{
-            //   isUpdateSuccess = validatePoint(m_Optional2, i_ToUpdate);
-            //}
-
+           
             if (isUpdateSuccess)
             {
                 update(i_ToUpdate, userSign);
