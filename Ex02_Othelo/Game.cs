@@ -15,17 +15,18 @@ namespace Ex02_Othelo
         private Player m_Player1 = new Player();
         private Player m_Player2 = null;
         private ComputerPlayer m_compPlayer = null;
-        private string[] m_PlayersNames;
+        bool m_IsComputerPlaying = false;
+        private string[] m_PlayersNames = {"First Player", "Second Player" };
 
-        public void Start()
+        public void Start(int i_BoardSize)
         {
-            int matrixSize;
-            m_PlayersNames = m_UserInterface.GetGameData(out matrixSize);
+            //int matrixSize;
+            //m_PlayersNames = m_UserInterface.GetGameData(out matrixSize);
             alocatePlayers();
-            m_Board.Size = matrixSize;
-            m_UserInterface.InitUI(m_Board.Size);
+            m_Board.Size = i_BoardSize;
+           // m_UserInterface.InitUI(m_Board.Size);
             m_Board.Init(m_Board.Size);
-            run();
+            //run();
         }
 
         private void run()
@@ -59,7 +60,7 @@ namespace Ex02_Othelo
                     while (!m_Board.TryUpdateMatrix(choosenCell, m_CurrentPlayer));
                 }
 
-                if (IsComputerPlaying())
+                if (m_IsComputerPlaying)
                 {
                     startNewGame = m_UserInterface.GameFinished(m_PlayersNames, m_Player1.Score, m_compPlayer.Score);
                 }
@@ -80,7 +81,7 @@ namespace Ex02_Othelo
         {
             m_Player1.Name = m_PlayersNames[0];
 
-            if (IsComputerPlaying())
+            if (m_IsComputerPlaying)
             {
                 m_compPlayer = new ComputerPlayer(k_FirstPlayerSign);
             }
@@ -91,9 +92,15 @@ namespace Ex02_Othelo
             }
         }
 
-        private bool IsComputerPlaying()
+       
+
+        public bool IsComputerPlaying
         {
-            return m_PlayersNames[1] == string.Empty;
+            get { return m_IsComputerPlaying; }
+            set
+            {
+                m_IsComputerPlaying = value;
+            }
         }
 
         private Cell getCellFromCureentPlayer(bool i_IsFirstChance)
@@ -114,7 +121,7 @@ namespace Ex02_Othelo
         private void FillUpAndPrintMatrix()
         {
             updateScore();
-            if (IsComputerPlaying())
+            if (m_IsComputerPlaying)
             {
                 m_UserInterface.FillUpMatrixP(m_PlayersNames, m_Board.Matrix, m_Player1.Score, m_compPlayer.Score);
             }
@@ -155,7 +162,7 @@ namespace Ex02_Othelo
             m_Board.GetScores(out score1, out score2);
             m_Player1.Score = score1;
 
-            if (IsComputerPlaying())
+            if (m_IsComputerPlaying)
             {
                 m_compPlayer.Score = score2;
             }

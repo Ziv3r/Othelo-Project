@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5719BE39-DB2D-4543-9893-6D7E182EE446}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>Ex02_Othelo</RootNamespace>
-    <AssemblyName>Ex02_Othelo</AssemblyName>
+    <ProjectGuid>{E59DC12D-5731-4BE0-A29C-0D66EF2A1D60}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Controller</RootNamespace>
+    <AssemblyName>Controller</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -35,19 +35,23 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AI.cs" />
-    <Compile Include="Board.cs" />
-    <Compile Include="Cell.cs" />
-    <Compile Include="ComputerPlayer.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Controller.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="UI.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Ex02.ConsoleUtils">
-      <HintPath>..\..\..\..\..\..\..\..\Temp\Ex02.ConsoleUtils.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Ex02_Othelo\Ex05_Othelo.csproj">
+      <Project>{5719be39-db2d-4543-9893-6d7e182ee446}</Project>
+      <Name>Ex05_Othelo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\View\View.csproj">
+      <Project>{50f8b039-a8ed-445d-84de-37b5309a3f28}</Project>
+      <Name>View</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
