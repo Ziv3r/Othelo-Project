@@ -1,6 +1,6 @@
 ﻿namespace View
 {
-    partial class BoardForm
+    public partial class BoardForm
     {
         /// <summary>
         /// Required designer variable.
@@ -17,6 +17,7 @@
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 

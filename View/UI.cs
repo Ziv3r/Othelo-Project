@@ -2,13 +2,24 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+
 namespace View
 {
     public class UI
     {
-        public SettingsForm m_SettingsForm = new SettingsForm();
-        public BoardForm m_Board = new BoardForm();
-        public ExitOrContinueForm m_ExitOrContinue = new ExitOrContinueForm();
+        private SettingsForm m_SettingsForm = new SettingsForm();
+        private BoardForm m_Board = new BoardForm();
+
+        public SettingsForm SettingForm
+        {
+            get { return m_SettingsForm; }
+        }
+
+        public BoardForm BoardForm
+        {
+            get { return m_Board; }
+        }
+
         public bool ExitOrContinue(int i_WinnerScore, int i_LoserScore, string i_WinnersColor, int[] i_GamesPoint)
         {
             bool result = false;

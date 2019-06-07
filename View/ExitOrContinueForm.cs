@@ -10,7 +10,6 @@ namespace View
 {
     public partial class ExitOrContinueForm : Form
     {
-        
         public ExitOrContinueForm()
         {
             InitializeComponent();
@@ -18,7 +17,6 @@ namespace View
 
         private void button1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void ExitOrContinueForm_Load(object sender, EventArgs e)

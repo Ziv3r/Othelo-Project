@@ -1,6 +1,6 @@
 ﻿namespace View
 {
-    partial class ExitOrContinueForm
+    public partial class ExitOrContinueForm
     {
         /// <summary>
         /// Required designer variable.
@@ -17,6 +17,7 @@
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 

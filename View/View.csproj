@@ -38,12 +38,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoardButton.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BoardButton.Designer.cs">
-      <DependentUpon>BoardButton.cs</DependentUpon>
-    </Compile>
     <Compile Include="BoardForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,6 +50,11 @@
     <Compile Include="ExitOrContinueForm.designer.cs">
       <DependentUpon>ExitOrContinueForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,18 +65,40 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BoardButton.resx">
-      <DependentUpon>BoardButton.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="BoardForm.resx">
       <DependentUpon>BoardForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExitOrContinueForm.resx">
       <DependentUpon>ExitOrContinueForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlackIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blackImage.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blackImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refreshBlue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refreshGreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CoinRed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CoinYellow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

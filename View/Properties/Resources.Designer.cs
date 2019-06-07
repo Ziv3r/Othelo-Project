@@ -61,31 +61,31 @@ namespace View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CoinRed {
+            get {
+                object obj = ResourceManager.GetObject("CoinRed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CoinYellow {
+            get {
+                object obj = ResourceManager.GetObject("CoinYellow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         internal static string icon {
             get {
                 return ResourceManager.GetString("icon", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap refreshBlue {
-            get {
-                object obj = ResourceManager.GetObject("refreshBlue", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap refreshGreen {
-            get {
-                object obj = ResourceManager.GetObject("refreshGreen", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

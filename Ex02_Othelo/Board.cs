@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-
 namespace Ex02_Othelo
 {
     public class Board
@@ -18,7 +17,7 @@ namespace Ex02_Othelo
 
         public Board Clone()
         {
-            Board newBoard = new Board();        
+            Board newBoard = new Board();
             newBoard.m_Size = m_Size;
             newBoard.m_Matrix = new char[m_Size, m_Size];
             for (int row = 0; row < m_Size; row++)
@@ -82,10 +81,10 @@ namespace Ex02_Othelo
 
         private void addDefaults()
         {
-            int[] defaultIdxForTopBlack = { 2,2};
-            int[] defaultIdxForBottomBlack = { 3,3};
-            int[] defaultIdxForTopWhite = { 2,3};
-            int[] defaultIdxForBottomWhite = { 3,2};
+            int[] defaultIdxForTopBlack = { 2, 2 };
+            int[] defaultIdxForBottomBlack = { 3, 3 };
+            int[] defaultIdxForTopWhite = { 2, 3 };
+            int[] defaultIdxForBottomWhite = { 3, 2 };
 
             int toAddToDefault = (m_Size - 6) / 2; // formula for position first stones
 
@@ -93,7 +92,7 @@ namespace Ex02_Othelo
                 m_Matrix[defaultIdxForTopBlack[0] + toAddToDefault, defaultIdxForTopBlack[1] + toAddToDefault] = k_FirstPlayerSign;
             m_Matrix[defaultIdxForBottomWhite[0] + toAddToDefault, defaultIdxForBottomWhite[1] + toAddToDefault] =
                 m_Matrix[defaultIdxForTopWhite[0] + toAddToDefault, defaultIdxForTopWhite[1] + toAddToDefault] = k_SecPlayerSign;
-         
+
             updateOptionals();
         }
 
@@ -101,7 +100,7 @@ namespace Ex02_Othelo
         {
             bool isUpdateSuccess = true;
             char userSign = i_CurrentPlayer == 0 ? k_FirstPlayerSign : k_SecPlayerSign;
-           
+
             if (isUpdateSuccess)
             {
                 update(i_ToUpdate, userSign);
@@ -112,15 +111,15 @@ namespace Ex02_Othelo
 
         private bool validatePoint(List<Point> i_OptionsArr, Point i_ToCheck)
         {
-            bool isValid = false; 
-                foreach (Point currentPoint in i_OptionsArr)
+            bool isValid = false;
+            foreach (Point currentPoint in i_OptionsArr)
+            {
+                if (currentPoint == i_ToCheck)
                 {
-                    if (currentPoint == i_ToCheck)
-                    {
-                        isValid = true;
-                        break;
-                    }
+                    isValid = true;
+                    break;
                 }
+            }
 
             return isValid;
         }
@@ -134,11 +133,11 @@ namespace Ex02_Othelo
             {
                 for (int j = 0; j < m_Size; j++)
                 {
-                    if(m_Matrix[i, j] == k_SecPlayerSign)
+                    if (m_Matrix[i, j] == k_SecPlayerSign)
                     {
                         o_Score2++;
                     }
-                    else if(m_Matrix[i, j] == k_FirstPlayerSign)
+                    else if (m_Matrix[i, j] == k_FirstPlayerSign)
                     {
                         o_Score1++;
                     }
@@ -190,6 +189,7 @@ namespace Ex02_Othelo
             if (res)
             {
                 m_Matrix[i_ToUpdate.X + i_DirX, i_ToUpdate.Y + i_DirY] = i_UserSign;
+
             }
 
             return res;
@@ -201,7 +201,7 @@ namespace Ex02_Othelo
 
             if (i_toCheckIfOutOfBound.X >= m_Size || i_toCheckIfOutOfBound.X < 0)
             {
-                    outOfBound = true;
+                outOfBound = true;
             }
 
             return outOfBound || (i_toCheckIfOutOfBound.Y >= m_Size || i_toCheckIfOutOfBound.Y < 0);
@@ -209,9 +209,9 @@ namespace Ex02_Othelo
 
         private void updateOptionals()
         {
-            m_Optional1.Clear(); 
+            m_Optional1.Clear();
             m_Optional2.Clear();
-            int counter = 0; 
+            int counter = 0;
 
             for (int i = 0; i < m_Size; i++)
             {
@@ -234,9 +234,9 @@ namespace Ex02_Othelo
 
         private void updateOptionalsRec(Point i_ToUpdate, char i_UserSign, int i_DirX, int i_DirY, int i_Counter)
         {
-            if(isOutOfBound(i_ToUpdate))
+            if (isOutOfBound(i_ToUpdate))
             {
-                return; 
+                return;
             }
 
             char currentPoint = m_Matrix[i_ToUpdate.X, i_ToUpdate.Y];

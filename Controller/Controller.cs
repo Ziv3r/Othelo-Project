@@ -3,71 +3,94 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
-
 using View;
+using Ex02_Othelo;
 
 namespace Controller
 {
-    class Controller
+    internal class Controller
     {
-        private Ex02_Othelo.Game game = new Ex02_Othelo.Game();
+        private Game m_Game = new Game();
         private UI m_UI = new UI();
         private bool m_GameRunning = true;
 
         public void GameLoop()
         {
-            initalizeButtonsEvents();
+            initalizeGame();
+            int[] points = new int[] { 0, 0 };
 
-            int count = 0;
             while (m_GameRunning)
             {
-                m_UI.m_SettingsForm.ShowDialog();
-                while (game.HasOptionsToPlay())
-                {
-                    m_UI.m_Board.UpdateBoard(game.getOptionals(),game.GetLogicMatrix(), game.CurrentPlayer);
-                    m_UI.m_Board.ShowDialog();
-                    if (count == 3)
-                    {
-                        break;
-                    }
-                    else
-                        count++;
-                }
-                m_GameRunning = false;
-                m_GameRunning = m_UI.ExitOrContinue(1,1,"Black",new int[] {2,3 });
+                m_UI.SettingForm.ShowDialog();
+                m_UI.BoardForm.ShowDialog();
+                ExitOrContinueExecute(points);
             }
-        }
-
-        private void initalizeButtonsEvents()
-        {
-            m_UI.m_SettingsForm.OnePlayerBtn.Click += new EventHandler(SetGamePlayers);
-            m_UI.m_SettingsForm.TwoPlayersBtn.Click += new EventHandler(SetGamePlayers);
-            m_UI.m_Board.onClick += HandelButtonClicked;
-        }
-
-        public void HandelButtonClicked(Point p)
-        {
-            game.TryUpdateLogicMatrix(p);
-            //if computer is playing so show dialog choose cell ? 
         }
 
         public void SetGamePlayers(object sender, EventArgs e)
         {
             if ((sender as Button).Name == "OnePlayerBtn")
             {
-                game.IsComputerPlaying = true;
+                m_Game.IsComputerPlaying = true;
             }
             else
             {
-                game.IsComputerPlaying = false;
+                m_Game.IsComputerPlaying = false;
             }
+
             startGame();
         }
 
         private void startGame()
         {
-            game.Start(m_UI.m_SettingsForm.BoardSize);
-            m_UI.m_Board.AddButtons(m_UI.m_SettingsForm.BoardSize);
+            m_Game.Start(m_UI.SettingForm.BoardSize);
+            m_UI.BoardForm.AddButtons(m_UI.SettingForm.BoardSize);
+            m_UI.BoardForm.UpdateBoard(m_Game.getOptionals(), m_Game.GetLogicMatrix(), m_Game.CurrentPlayer);
+        }
+        private void initalizeGame()
+        {
+            m_UI.SettingForm.OnePlayerButton.Click += new EventHandler(SetGamePlayers);
+            m_UI.SettingForm.TwoPlayersButton.Click += new EventHandler(SetGamePlayers);
+            m_UI.BoardForm.onClick += HandelButtonClicked;
+        }
+
+        public void HandelButtonClicked(Point p)
+        {
+            m_Game.TryUpdateLogicMatrix(p);
+            m_UI.BoardForm.UpdateBoard(m_Game.getOptionals(), m_Game.GetLogicMatrix(), m_Game.CurrentPlayer);
+        }
+
+        private void ExitOrContinueExecute(int[] points)
+        {
+            int winnerScore;
+            int loserScore;
+            string winnerColor;
+            getWinnerAndLoserPoints(out winnerScore, out loserScore, out winnerColor, points);
+
+            m_GameRunning = m_UI.ExitOrContinue(winnerScore, loserScore, winnerColor, points);
+        }
+        private void getWinnerAndLoserPoints(out int winnerScore, out int loserScore, out string winnerColor, int[] points)
+        {
+            bool isFirstWin = true;
+
+            int firstPlayerScore = m_Game.getFirstPlayerScore();
+            int SecondPlayerScore = m_Game.getSecondPlayerScore();
+            isFirstWin = (firstPlayerScore > SecondPlayerScore) ? true : false;
+
+            if (isFirstWin)
+            {
+                winnerScore = firstPlayerScore;
+                loserScore = SecondPlayerScore;
+                winnerColor = "black";
+                points[0]++;
+            }
+            else
+            {
+                winnerScore = SecondPlayerScore;
+                loserScore = firstPlayerScore;
+                winnerColor = "white";
+                points[1]++;
+            }
         }
 
     }

@@ -12,11 +12,10 @@ namespace Ex02_Othelo
         private const char k_SecPlayerSign = 'O';
         private int m_CurrentPlayer = 0;
         private Board m_Board = new Board();
-        private UI m_UserInterface = new UI();
         private Player m_Player1 = new Player();
         private Player m_Player2 = null;
         private ComputerPlayer m_compPlayer = null;
-        bool m_IsComputerPlaying = false;
+        private bool m_IsComputerPlaying = false;
         private string[] m_PlayersNames = { "First Player", "Second Player" };
 
         public void Start(int i_BoardSize)
@@ -24,54 +23,6 @@ namespace Ex02_Othelo
             alocatePlayers();
             m_Board.Size = i_BoardSize;
             m_Board.Init(m_Board.Size);
-        }
-
-        private void run()
-        {
-            bool startNewGame = true;
-            bool firstChance = true;
-            Point choosenPoint;
-            while (startNewGame)
-            {
-                while (m_Board.HasOption())
-                {
-                    firstChance = true;
-                    FillUpAndPrintMatrix();
-                    m_CurrentPlayer = (m_CurrentPlayer * -1) + 1;         ////switch players 0=>1 ,1=>0
-                    do
-                    {
-                        if (!checkeOptionsForPlayer())
-                        {
-                            m_UserInterface.NoOptionsMessage(m_PlayersNames[m_CurrentPlayer]);
-                            break;
-                        }
-
-                        choosenPoint = getPointFromCureentPlayer(firstChance);
-                        firstChance = false;
-
-                        if (choosenPoint == new Point(-1, -1))
-                        {
-                            return;
-                        }
-                    }
-                    while (!m_Board.TryUpdateMatrix(choosenPoint, m_CurrentPlayer));
-                }
-
-                if (m_IsComputerPlaying)
-                {
-                    startNewGame = m_UserInterface.GameFinished(m_PlayersNames, m_Player1.Score, m_compPlayer.Score);
-                }
-                else
-                {
-                    startNewGame = m_UserInterface.GameFinished(m_PlayersNames, m_Player1.Score, m_Player2.Score);
-                }
-
-                if (startNewGame)
-                {
-                    m_UserInterface.InitUI(m_Board.Size);
-                    m_Board.Init(m_Board.Size);
-                }
-            }
         }
 
         public List<Point> getOptionals()
@@ -93,15 +44,35 @@ namespace Ex02_Othelo
 
         public void TryUpdateLogicMatrix(Point i_ChoosenPoint)
         {
-            bool checkIfValidate = (m_Board.TryUpdateMatrix(i_ChoosenPoint, m_CurrentPlayer));
+            bool checkIfValidate = m_Board.TryUpdateMatrix(i_ChoosenPoint, m_CurrentPlayer);
             m_CurrentPlayer = (m_CurrentPlayer * -1) + 1;
             if (m_IsComputerPlaying)
             {
-                m_Board.TryUpdateMatrix(getPointFromCureentPlayer(true), m_CurrentPlayer);
+                Point ComputerMove = getPointFromCureentPlayer(true);
+                if (ComputerMove != Point.Empty)
+                {
+                    m_Board.TryUpdateMatrix(getPointFromCureentPlayer(true), m_CurrentPlayer);
+                }
                 m_CurrentPlayer = (m_CurrentPlayer * -1) + 1;
             }
+            updateScore();
         }
 
+        public int getFirstPlayerScore()
+        {
+            return m_Player1.Score;
+        }
+        public int getSecondPlayerScore()
+        {
+            if (m_IsComputerPlaying)
+            {
+                return m_compPlayer.Score;
+            }
+            else
+            {
+                return m_Player2.Score;
+            }
+        }
         private void alocatePlayers()
         {
             m_Player1.Name = m_PlayersNames[0];
@@ -141,19 +112,6 @@ namespace Ex02_Othelo
             return m_compPlayer.ComputerMove(m_Board.Clone());
         }
 
-        private void FillUpAndPrintMatrix()
-        {
-            updateScore();
-            if (m_IsComputerPlaying)
-            {
-                m_UserInterface.FillUpMatrixP(m_PlayersNames, m_Board.Matrix, m_Player1.Score, m_compPlayer.Score);
-            }
-            else
-            {
-                m_UserInterface.FillUpMatrixP(m_PlayersNames, m_Board.Matrix, m_Player1.Score, m_Player2.Score);
-            }
-        }
-
         private bool checkeOptionsForPlayer()
         {
             bool isPossibleOption = true;
@@ -162,7 +120,6 @@ namespace Ex02_Othelo
             {
                 if (m_Board.Optionals1.Count == 0)
                 {
-                    m_UserInterface.NoOptionsMessage(m_PlayersNames[m_CurrentPlayer]);
                     isPossibleOption = false;
                 }
             }
@@ -170,7 +127,6 @@ namespace Ex02_Othelo
             {
                 if (m_Board.Optionals2.Count == 0)
                 {
-                    m_UserInterface.NoOptionsMessage(m_PlayersNames[m_CurrentPlayer]);
                     isPossibleOption = false;
                 }
             }

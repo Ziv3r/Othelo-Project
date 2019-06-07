@@ -16,15 +16,17 @@ namespace Ex02_Othelo
             m_Sign = i_FirstPlayerSign;
         }
 
-        public Point ComputerMove(Board i_Board)
-        {
-           return m_AiMoves.AIMove(i_Board, m_Sign);
-        }
-
         public int Score
         {
             get { return m_Score; }
             set { m_Score = value; }
         }
+       
+        public Point ComputerMove(Board i_Board)
+        {
+           return m_AiMoves.AIMove(i_Board, m_Sign);
+        }
+
+
     }
 }
