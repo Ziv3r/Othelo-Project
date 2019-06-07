@@ -16,16 +16,18 @@ namespace Controller
 
         public void GameLoop()
         {
-            initalizeGame();
             int[] points = new int[] { 0, 0 };
+            initalizeGame();
+            m_UI.SettingForm.ShowDialog();
 
             while (m_GameRunning)
             {
-                m_UI.SettingForm.ShowDialog();
-                if(m_UI.BoardForm.ShowDialog() == DialogResult.Cancel)
+                startGame();
+                if (m_UI.BoardForm.ShowDialog() == DialogResult.Cancel)
                 {
                     break;
                 }
+
                 ExitOrContinueExecute(points);
             }
         }
@@ -40,6 +42,7 @@ namespace Controller
             {
                 m_Game.IsComputerPlaying = false;
             }
+            m_UI.BoardForm.AddButtons(m_UI.SettingForm.BoardSize);
 
             startGame();
         }
@@ -47,55 +50,55 @@ namespace Controller
         private void startGame()
         {
             m_Game.Start(m_UI.SettingForm.BoardSize);
-            m_UI.BoardForm.AddButtons(m_UI.SettingForm.BoardSize);
             m_UI.BoardForm.UpdateBoard(m_Game.getOptionals(), m_Game.GetLogicMatrix(), m_Game.CurrentPlayer);
         }
+
         private void initalizeGame()
         {
             m_UI.SettingForm.OnePlayerButton.Click += new EventHandler(SetGamePlayers);
             m_UI.SettingForm.TwoPlayersButton.Click += new EventHandler(SetGamePlayers);
-            m_UI.BoardForm.onClick += HandelButtonClicked;
+            m_UI.BoardForm.OnClick += HandelButtonClicked;
         }
 
-        public void HandelButtonClicked(Point p)
+        public void HandelButtonClicked(Point i_ClickedBtn)
         {
-            m_Game.TryUpdateLogicMatrix(p);
+            m_Game.TryUpdateLogicMatrix(i_ClickedBtn);
             m_UI.BoardForm.UpdateBoard(m_Game.getOptionals(), m_Game.GetLogicMatrix(), m_Game.CurrentPlayer);
             if (!m_Game.HasOptionsToPlay())
             {
-                m_UI.BoardForm.Close();
+                m_UI.BoardForm.DialogResult = DialogResult.Abort;
             }
         }
 
-        private void ExitOrContinueExecute(int[] points)
+        private void ExitOrContinueExecute(int[] i_Points)
         {
             int winnerScore;
             int loserScore;
             string winnerColor;
-            getWinnerAndLoserPoints(out winnerScore, out loserScore, out winnerColor, points);
 
-            m_GameRunning = m_UI.ExitOrContinue(winnerScore, loserScore, winnerColor, points);
+            getWinnerAndLoserPoints(out winnerScore, out loserScore, out winnerColor, i_Points);
+            m_GameRunning = m_UI.ExitOrContinue(winnerScore, loserScore, winnerColor, i_Points);
         }
-        private void getWinnerAndLoserPoints(out int winnerScore, out int loserScore, out string winnerColor, int[] points)
+
+        private void getWinnerAndLoserPoints(out int i_WinnerScore, out int i_LoserScore, out string i_WinnerColor, int[] points)
         {
             bool isFirstWin = true;
-
             int firstPlayerScore = m_Game.getFirstPlayerScore();
             int SecondPlayerScore = m_Game.getSecondPlayerScore();
             isFirstWin = (firstPlayerScore > SecondPlayerScore) ? true : false;
 
             if (isFirstWin)
             {
-                winnerScore = firstPlayerScore;
-                loserScore = SecondPlayerScore;
-                winnerColor = "Red";
+                i_WinnerScore = firstPlayerScore;
+                i_LoserScore = SecondPlayerScore;
+                i_WinnerColor = "Red";
                 points[0]++;
             }
             else
             {
-                winnerScore = SecondPlayerScore;
-                loserScore = firstPlayerScore;
-                winnerColor = "Yello";
+                i_WinnerScore = SecondPlayerScore;
+                i_LoserScore = firstPlayerScore;
+                i_WinnerColor = "Yellow";
                 points[1]++;
             }
         }

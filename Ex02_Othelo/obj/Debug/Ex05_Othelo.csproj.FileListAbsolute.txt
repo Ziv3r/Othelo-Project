@@ -12,3 +12,10 @@ C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\Ex02_Othelo\obj\D
 C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\Ex02_Othelo\obj\Debug\Ex05_Othelo.csproj.CopyComplete
 C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\Ex02_Othelo\obj\Debug\Ex02_Othelo.dll
 C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\Ex02_Othelo\obj\Debug\Ex02_Othelo.pdb
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\Ex02_Othelo\bin\Debug\Ex02_Othelo.dll
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\Ex02_Othelo\bin\Debug\Ex02_Othelo.pdb
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\Ex02_Othelo\obj\Debug\Ex05_Othelo.csprojAssemblyReference.cache
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\Ex02_Othelo\obj\Debug\Ex05_Othelo.csproj.CoreCompileInputs.cache
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\Ex02_Othelo\obj\Debug\Ex05_Othelo.csproj.CopyComplete
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\Ex02_Othelo\obj\Debug\Ex02_Othelo.dll
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\Ex02_Othelo\obj\Debug\Ex02_Othelo.pdb

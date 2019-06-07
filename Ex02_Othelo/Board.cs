@@ -20,6 +20,7 @@ namespace Ex02_Othelo
             Board newBoard = new Board();
             newBoard.m_Size = m_Size;
             newBoard.m_Matrix = new char[m_Size, m_Size];
+
             for (int row = 0; row < m_Size; row++)
             {
                 for (int col = 0; col < m_Size; col++)
@@ -195,16 +196,16 @@ namespace Ex02_Othelo
             return res;
         }
 
-        private bool isOutOfBound(Point i_toCheckIfOutOfBound)
+        private bool isOutOfBound(Point i_ToCheckIfOutOfBound)
         {
             bool outOfBound = false;
 
-            if (i_toCheckIfOutOfBound.X >= m_Size || i_toCheckIfOutOfBound.X < 0)
+            if (i_ToCheckIfOutOfBound.X >= m_Size || i_ToCheckIfOutOfBound.X < 0)
             {
                 outOfBound = true;
             }
 
-            return outOfBound || (i_toCheckIfOutOfBound.Y >= m_Size || i_toCheckIfOutOfBound.Y < 0);
+            return outOfBound || (i_ToCheckIfOutOfBound.Y >= m_Size || i_ToCheckIfOutOfBound.Y < 0);
         }
 
         private void updateOptionals()

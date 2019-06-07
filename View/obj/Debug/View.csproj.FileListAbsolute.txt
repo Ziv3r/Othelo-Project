@@ -19,3 +19,14 @@ C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\View\bin\Debug\Vi
 C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\View\bin\Debug\View.pdb
 C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\View\obj\Debug\View.ExitOrContinueForm.resources
 C:\Users\ziv3r\OneDrive\שולחן העבודה\Othelo-Project\View\obj\Debug\View.Properties.Resources.resources
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\View\bin\Debug\View.dll
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\View\bin\Debug\View.pdb
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\View\obj\Debug\View.csprojAssemblyReference.cache
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\View\obj\Debug\View.BoardForm.resources
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\View\obj\Debug\View.ExitOrContinueForm.resources
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\View\obj\Debug\View.Properties.Resources.resources
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\View\obj\Debug\View.SettingsForm.resources
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\View\obj\Debug\View.csproj.GenerateResource.cache
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\View\obj\Debug\View.csproj.CoreCompileInputs.cache
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\View\obj\Debug\View.dll
+C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\View\obj\Debug\View.pdb

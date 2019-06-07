@@ -14,9 +14,9 @@ namespace Ex02_Othelo
         private Board m_Board = new Board();
         private Player m_Player1 = new Player();
         private Player m_Player2 = null;
-        private ComputerPlayer m_compPlayer = null;
+        private ComputerPlayer m_CompPlayer = null;
         private bool m_IsComputerPlaying = false;
-        private string[] m_PlayersNames = { "First Player", "Second Player" };
+        private string[] m_PlayersNames = { "Red", "Yellow" };
 
         public void Start(int i_BoardSize)
         {
@@ -27,14 +27,17 @@ namespace Ex02_Othelo
 
         public List<Point> getOptionals()
         {
+            List<Point> toReturn;
             if (m_CurrentPlayer == 0)
             {
-                return m_Board.Optionals1;
+                toReturn = m_Board.Optionals1;
             }
             else
             {
-                return m_Board.Optionals2;
+                toReturn = m_Board.Optionals2;
             }
+
+            return toReturn;
         }
 
         public bool HasOptionsToPlay()
@@ -45,41 +48,55 @@ namespace Ex02_Othelo
         public void TryUpdateLogicMatrix(Point i_ChoosenPoint)
         {
             bool checkIfValidate = m_Board.TryUpdateMatrix(i_ChoosenPoint, m_CurrentPlayer);
-            m_CurrentPlayer = (m_CurrentPlayer * -1) + 1;
+            caclCurrPlayer();
+
             if (m_IsComputerPlaying)
             {
-                Point ComputerMove = getPointFromCureentPlayer(true);
+                Point ComputerMove = getPointFromCurentPlayer(true);
                 if (ComputerMove != Point.Empty)
                 {
-                    m_Board.TryUpdateMatrix(getPointFromCureentPlayer(true), m_CurrentPlayer);
+                    m_Board.TryUpdateMatrix(getPointFromCurentPlayer(true), m_CurrentPlayer);
                 }
-                m_CurrentPlayer = (m_CurrentPlayer * -1) + 1;
+                caclCurrPlayer();
             }
+            List<Point> op = m_CurrentPlayer == 0 ? m_Board.Optionals1 : m_Board.Optionals2;
+            if (op.Count == 0)
+            {
+                caclCurrPlayer();
+            }
+
             updateScore();
+        }
+
+        private void caclCurrPlayer()
+        {
+            m_CurrentPlayer = (m_CurrentPlayer * -1) + 1;
         }
 
         public int getFirstPlayerScore()
         {
             return m_Player1.Score;
         }
+
         public int getSecondPlayerScore()
         {
             if (m_IsComputerPlaying)
             {
-                return m_compPlayer.Score;
+                return m_CompPlayer.Score;
             }
             else
             {
                 return m_Player2.Score;
             }
         }
+
         private void alocatePlayers()
         {
             m_Player1.Name = m_PlayersNames[0];
 
             if (m_IsComputerPlaying)
             {
-                m_compPlayer = new ComputerPlayer(k_FirstPlayerSign);
+                m_CompPlayer = new ComputerPlayer(k_FirstPlayerSign);
             }
             else
             {
@@ -101,15 +118,12 @@ namespace Ex02_Othelo
         public bool IsComputerPlaying
         {
             get { return m_IsComputerPlaying; }
-            set
-            {
-                m_IsComputerPlaying = value;
-            }
+            set { m_IsComputerPlaying = value; }
         }
 
-        private Point getPointFromCureentPlayer(bool i_IsFirstChance)
+        private Point getPointFromCurentPlayer(bool i_IsFirstChance)
         {
-            return m_compPlayer.ComputerMove(m_Board.Clone());
+            return m_CompPlayer.ComputerMove(m_Board.Clone());
         }
 
         private bool checkeOptionsForPlayer()
@@ -143,7 +157,7 @@ namespace Ex02_Othelo
 
             if (m_IsComputerPlaying)
             {
-                m_compPlayer.Score = score2;
+                m_CompPlayer.Score = score2;
             }
             else
             {

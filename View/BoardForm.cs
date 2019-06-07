@@ -12,28 +12,24 @@ namespace View
     {
         private const int k_ImageWidthAndHeight = 50;
         private const int k_ButtonsHeightAndWidth = 55;
+        public const string k_TopBarMessage = "Othello - {0}'s Turn";
         private int m_MatrixSize;
         private PictureBox[,] m_Buttons;
         readonly Bitmap r_RedImage = new Bitmap(Properties.Resources.CoinRed, new Size(k_ImageWidthAndHeight, k_ImageWidthAndHeight));
         readonly Bitmap r_YellowImage = new Bitmap(Properties.Resources.CoinYellow, new Size(k_ImageWidthAndHeight, k_ImageWidthAndHeight));
 
-        public event Action<Point> onClick;
+        public event Action<Point> OnClick;
 
         public BoardForm()
         {
             InitializeComponent();
         }
 
-        private void BoardForm_Load(object sender, EventArgs e)
-        {
-
-        }
 
         public void AddButtons(int i_MatrixSize)
         {
             m_Buttons = new PictureBox[i_MatrixSize, i_MatrixSize];
-            this.Size = new Size(i_MatrixSize * 55 + 200, i_MatrixSize * 55 + 200);
-            this.ClientSize = new Size(i_MatrixSize * 55 + 15, i_MatrixSize * 55 + 15);
+            this.ClientSize = new Size(i_MatrixSize * k_ButtonsHeightAndWidth + 50, i_MatrixSize * k_ButtonsHeightAndWidth + 50);
 
             m_MatrixSize = i_MatrixSize;
 
@@ -46,8 +42,8 @@ namespace View
                     newPic.Click += new EventHandler(picBox_Click);
                     newPic.Paint += new PaintEventHandler(pictureBox_Paint);
                     m_Buttons[i, j] = newPic;
-                    m_Buttons[i, j].Top = 3 + i * 55;
-                    m_Buttons[i, j].Left = 3 + j * 55;
+                    m_Buttons[i, j].Top = 25 + i * k_ButtonsHeightAndWidth;
+                    m_Buttons[i, j].Left = 25 + j * k_ButtonsHeightAndWidth;
                     this.Controls.Add(newPic);
                 }
             }
@@ -56,12 +52,12 @@ namespace View
         private void picBox_Click(object sender, EventArgs e)
         {
             Point coords = getPointFromButton(sender as PictureBox);
-            onClick(coords);
+            OnClick(coords);
         }
 
-        private Point getPointFromButton(PictureBox currentButton)
+        private Point getPointFromButton(PictureBox i_CurrentButton)
         {
-            string[] coordinates = currentButton.Name.Split(',');
+            string[] coordinates = i_CurrentButton.Name.Split(',');
 
             int x = int.Parse(coordinates[0]);
             int y = int.Parse(coordinates[1]);
@@ -72,34 +68,23 @@ namespace View
         private PictureBox createPicBox(Point i_Indx)
         {
             PictureBox picBox = new PictureBox();
-            picBox.Location = new System.Drawing.Point(218, 70);
             picBox.Name = i_Indx.X.ToString() + "," + i_Indx.Y.ToString();
-            picBox.Size = new System.Drawing.Size(55, 55);
-            picBox.TabIndex = 1;
-            picBox.TabStop = false;
+            picBox.Size = new System.Drawing.Size(k_ButtonsHeightAndWidth, k_ButtonsHeightAndWidth);
             picBox.BackgroundImageLayout = ImageLayout.Center;
             return picBox;
         }
+
         private void pictureBox_Paint(object sender, PaintEventArgs e)
         {
             PictureBox pic = sender as PictureBox;
-            ControlPaint.DrawBorder(e.Graphics, pic.ClientRectangle,
-                Color.Black, 1, ButtonBorderStyle.Solid, // left border
-                Color.Black, 1, ButtonBorderStyle.Solid,// top border
-                Color.Black, 1, ButtonBorderStyle.Solid,// right border
-                Color.Black, 1, ButtonBorderStyle.Solid);// bottom border
+            ControlPaint.DrawBorder(e.Graphics, pic.ClientRectangle, Color.Black, ButtonBorderStyle.Solid);
         }
 
         public void UpdateBoard(List<Point> i_Optionals, char[,] i_LogicMatrix, string i_CurrentPlayer)
         {
-            // 1.chagne the text to X/O due to to logic matrix .
             updateMatrix(i_LogicMatrix);
-
-            // 2. change enable-- true /fasle 
             updateOptional(i_Optionals);
-
-            // 3chagne title of form 
-            this.Text = i_CurrentPlayer;
+            this.Text = string.Format(k_TopBarMessage, i_CurrentPlayer);
         }
 
         private void updateOptional(List<Point> i_Optionals)
@@ -122,6 +107,7 @@ namespace View
                     if (i_LogicMatrix[i, j] == ' ')
                     {
                         currentButton.Text = string.Empty;
+                        currentButton.BackgroundImage = null;
                     }
                     else if (i_LogicMatrix[i, j] == 'X')
                     {
@@ -136,6 +122,11 @@ namespace View
                     currentButton.Enabled = false;
                 }
             }
+        }
+
+        private void BoardForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
