@@ -22,7 +22,10 @@ namespace Controller
             while (m_GameRunning)
             {
                 m_UI.SettingForm.ShowDialog();
-                m_UI.BoardForm.ShowDialog();
+                if(m_UI.BoardForm.ShowDialog() == DialogResult.Cancel)
+                {
+                    break;
+                }
                 ExitOrContinueExecute(points);
             }
         }
@@ -58,6 +61,10 @@ namespace Controller
         {
             m_Game.TryUpdateLogicMatrix(p);
             m_UI.BoardForm.UpdateBoard(m_Game.getOptionals(), m_Game.GetLogicMatrix(), m_Game.CurrentPlayer);
+            if (!m_Game.HasOptionsToPlay())
+            {
+                m_UI.BoardForm.Close();
+            }
         }
 
         private void ExitOrContinueExecute(int[] points)
@@ -81,14 +88,14 @@ namespace Controller
             {
                 winnerScore = firstPlayerScore;
                 loserScore = SecondPlayerScore;
-                winnerColor = "black";
+                winnerColor = "Red";
                 points[0]++;
             }
             else
             {
                 winnerScore = SecondPlayerScore;
                 loserScore = firstPlayerScore;
-                winnerColor = "white";
+                winnerColor = "Yello";
                 points[1]++;
             }
         }
