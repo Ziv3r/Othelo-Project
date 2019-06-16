@@ -190,7 +190,6 @@ namespace Ex02_Othelo
             if (res)
             {
                 m_Matrix[i_ToUpdate.X + i_DirX, i_ToUpdate.Y + i_DirY] = i_UserSign;
-
             }
 
             return res;

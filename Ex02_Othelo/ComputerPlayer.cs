@@ -26,7 +26,5 @@ namespace Ex02_Othelo
         {
            return m_AiMoves.AIMove(i_Board, m_Sign);
         }
-
-
     }
 }

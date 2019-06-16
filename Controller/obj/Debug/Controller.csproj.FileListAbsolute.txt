@@ -31,3 +31,14 @@ C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Pr
 C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\Controller\obj\Debug\Controller.csproj.CopyComplete
 C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\Controller\obj\Debug\Controller.exe
 C:\Users\noamlevy\Desktop\מכללה\שנה ב\סימסטר ב\C#\Ex05\Othelo-Project\Controller\obj\Debug\Controller.pdb
+C:\Users\ziv3r\Desktop\Othelo-Project\Controller\bin\Debug\Controller.exe
+C:\Users\ziv3r\Desktop\Othelo-Project\Controller\bin\Debug\Controller.pdb
+C:\Users\ziv3r\Desktop\Othelo-Project\Controller\bin\Debug\Ex02_Othelo.dll
+C:\Users\ziv3r\Desktop\Othelo-Project\Controller\bin\Debug\View.dll
+C:\Users\ziv3r\Desktop\Othelo-Project\Controller\bin\Debug\Ex02_Othelo.pdb
+C:\Users\ziv3r\Desktop\Othelo-Project\Controller\bin\Debug\View.pdb
+C:\Users\ziv3r\Desktop\Othelo-Project\Controller\obj\Debug\Controller.csprojAssemblyReference.cache
+C:\Users\ziv3r\Desktop\Othelo-Project\Controller\obj\Debug\Controller.csproj.CoreCompileInputs.cache
+C:\Users\ziv3r\Desktop\Othelo-Project\Controller\obj\Debug\Controller.csproj.CopyComplete
+C:\Users\ziv3r\Desktop\Othelo-Project\Controller\obj\Debug\Controller.exe
+C:\Users\ziv3r\Desktop\Othelo-Project\Controller\obj\Debug\Controller.pdb

@@ -15,6 +15,7 @@ namespace View
 
         public SettingsForm()
         {
+            Application.EnableVisualStyles();
             InitializeComponent();
         }
 
@@ -52,6 +53,8 @@ namespace View
             this.DialogResult = DialogResult.OK;
         }
 
-        
+        private void SettingsForm_Load(object sender, EventArgs e)
+        {
+        }
     }
 }

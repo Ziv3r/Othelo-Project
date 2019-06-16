@@ -57,8 +57,10 @@ namespace Ex02_Othelo
                 {
                     m_Board.TryUpdateMatrix(getPointFromCurentPlayer(true), m_CurrentPlayer);
                 }
+
                 caclCurrPlayer();
             }
+
             List<Point> op = m_CurrentPlayer == 0 ? m_Board.Optionals1 : m_Board.Optionals2;
             if (op.Count == 0)
             {

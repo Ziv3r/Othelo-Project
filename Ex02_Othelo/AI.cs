@@ -17,7 +17,7 @@ namespace Ex02_Othelo
                 Board child = i_Board.Clone();
                 child.TryUpdateMatrix(option, 1);
                 child.GetScores(out score1, out score2);
-                int valOfMove = minMax(false, 4, child, score1, score2, i_Sign);
+                int valOfMove = minMax(false, 3, child, score1, score2, i_Sign);
 
                 if (valOfMove > maxVal)
                 {

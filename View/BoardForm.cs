@@ -10,26 +10,29 @@ namespace View
 {
     public partial class BoardForm : Form
     {
+        private const char k_FirstPlayerSign = 'X';
+        private const char k_SecPlayerSign = 'O';
+        private const char k_EmptyPointSign = ' ';
         private const int k_ImageWidthAndHeight = 50;
         private const int k_ButtonsHeightAndWidth = 55;
         public const string k_TopBarMessage = "Othello - {0}'s Turn";
+        private readonly Bitmap r_RedImage = new Bitmap(Properties.Resources.CoinRed, new Size(k_ImageWidthAndHeight, k_ImageWidthAndHeight));
+        private readonly Bitmap r_YellowImage = new Bitmap(Properties.Resources.CoinYellow, new Size(k_ImageWidthAndHeight, k_ImageWidthAndHeight));
         private int m_MatrixSize;
         private PictureBox[,] m_Buttons;
-        readonly Bitmap r_RedImage = new Bitmap(Properties.Resources.CoinRed, new Size(k_ImageWidthAndHeight, k_ImageWidthAndHeight));
-        readonly Bitmap r_YellowImage = new Bitmap(Properties.Resources.CoinYellow, new Size(k_ImageWidthAndHeight, k_ImageWidthAndHeight));
 
-        public event Action<Point> OnClick;
+        public event Action<Point> OnButtonClick;
 
         public BoardForm()
         {
+            Application.EnableVisualStyles();
             InitializeComponent();
         }
-
 
         public void AddButtons(int i_MatrixSize)
         {
             m_Buttons = new PictureBox[i_MatrixSize, i_MatrixSize];
-            this.ClientSize = new Size(i_MatrixSize * k_ButtonsHeightAndWidth + 50, i_MatrixSize * k_ButtonsHeightAndWidth + 50);
+            this.ClientSize = new Size((i_MatrixSize * k_ButtonsHeightAndWidth) + 50, (i_MatrixSize * k_ButtonsHeightAndWidth) + 50);
 
             m_MatrixSize = i_MatrixSize;
 
@@ -42,8 +45,8 @@ namespace View
                     newPic.Click += new EventHandler(picBox_Click);
                     newPic.Paint += new PaintEventHandler(pictureBox_Paint);
                     m_Buttons[i, j] = newPic;
-                    m_Buttons[i, j].Top = 25 + i * k_ButtonsHeightAndWidth;
-                    m_Buttons[i, j].Left = 25 + j * k_ButtonsHeightAndWidth;
+                    m_Buttons[i, j].Top = 25 + (i * k_ButtonsHeightAndWidth);
+                    m_Buttons[i, j].Left = 25 + (j * k_ButtonsHeightAndWidth);
                     this.Controls.Add(newPic);
                 }
             }
@@ -52,7 +55,7 @@ namespace View
         private void picBox_Click(object sender, EventArgs e)
         {
             Point coords = getPointFromButton(sender as PictureBox);
-            OnClick(coords);
+            OnButtonClick(coords);
         }
 
         private Point getPointFromButton(PictureBox i_CurrentButton)
@@ -97,6 +100,29 @@ namespace View
             }
         }
 
+        public void OnUpdateCell(Point i_ToUpdate, char i_Sign)
+        {
+            int col = i_ToUpdate.X;
+            int row = i_ToUpdate.Y;
+            PictureBox currentButton = m_Buttons[col, row];
+            if (i_Sign == k_EmptyPointSign)
+            {
+                currentButton.Text = string.Empty;
+                currentButton.BackgroundImage = null;
+            }
+            else if (i_Sign == k_FirstPlayerSign)
+            {
+                m_Buttons[col, row].BackgroundImage = r_RedImage;
+            }
+            else
+            {
+                m_Buttons[col, row].BackgroundImage = r_YellowImage;
+            }
+
+            currentButton.BackColor = default(Color);
+            currentButton.Enabled = false;
+        }
+
         private void updateMatrix(char[,] i_LogicMatrix)
         {
             for (int i = 0; i < m_MatrixSize; i++)
@@ -104,12 +130,12 @@ namespace View
                 for (int j = 0; j < m_MatrixSize; j++)
                 {
                     PictureBox currentButton = m_Buttons[i, j];
-                    if (i_LogicMatrix[i, j] == ' ')
+                    if (i_LogicMatrix[i, j] == k_EmptyPointSign)
                     {
                         currentButton.Text = string.Empty;
                         currentButton.BackgroundImage = null;
                     }
-                    else if (i_LogicMatrix[i, j] == 'X')
+                    else if (i_LogicMatrix[i, j] == k_FirstPlayerSign)
                     {
                         m_Buttons[i, j].BackgroundImage = r_RedImage;
                     }
@@ -126,7 +152,6 @@ namespace View
 
         private void BoardForm_Load(object sender, EventArgs e)
         {
-
         }
     }
 }

@@ -23,9 +23,16 @@ namespace View
         public bool ExitOrContinue(int i_WinnerScore, int i_LoserScore, string i_WinnersColor, int[] i_GamesPoint)
         {
             bool result = false;
-            string message = string.Format(@"{0} Won !! ({1}/{2}) ({3}/{4})
-Would you like another round?", i_WinnersColor, i_WinnerScore, i_LoserScore, i_GamesPoint[0], i_GamesPoint[1]);
-            if (MessageBox.Show(message,
+            string message = string.Format(
+                @"{0} Won !! ({1}/{2}) ({3}/{4})
+Would you like another round?",
+                i_WinnersColor,
+                i_WinnerScore,
+                i_LoserScore,
+                i_GamesPoint[0],
+                i_GamesPoint[1]);
+            if (MessageBox.Show(
+                message,
                 "Othello",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning,

@@ -10,9 +10,16 @@ namespace Controller
 {
     internal class Controller
     {
-        private Game m_Game = new Game();
-        private UI m_UI = new UI();
-        private bool m_GameRunning = true;
+        private UI m_UI;
+        private Game m_Game;
+        private bool m_GameRunning;
+
+        public Controller()
+        {
+            m_UI = new UI();
+            m_Game = new Game();
+            m_GameRunning = true;
+        }
 
         public void GameLoop()
         {
@@ -42,6 +49,7 @@ namespace Controller
             {
                 m_Game.IsComputerPlaying = false;
             }
+
             m_UI.BoardForm.AddButtons(m_UI.SettingForm.BoardSize);
 
             startGame();
@@ -57,7 +65,7 @@ namespace Controller
         {
             m_UI.SettingForm.OnePlayerButton.Click += new EventHandler(SetGamePlayers);
             m_UI.SettingForm.TwoPlayersButton.Click += new EventHandler(SetGamePlayers);
-            m_UI.BoardForm.OnClick += HandelButtonClicked;
+            m_UI.BoardForm.OnButtonClick += HandelButtonClicked;
         }
 
         public void HandelButtonClicked(Point i_ClickedBtn)
@@ -102,6 +110,5 @@ namespace Controller
                 points[1]++;
             }
         }
-
     }
 }
